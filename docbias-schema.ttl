@@ -1,0 +1,1276 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix mls: <http://www.w3.org/ns/mls#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix doam: <https://www.openriskmanual.org/ns/doam#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nobias-project: <https://nobias-project.eu/> .
+@base <http://nobias-project.eu/> .
+
+<http://nobias-project.eu/> rdf:type owl:Ontology ;
+                             owl:versionIRI <urn:absolute:version0.1> ;
+                             rdfs:comment "DocBias, an ontology to document fake news classification pipelines."@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/citation
+<http://purl.org/dc/elements/1.1/citation> rdf:type owl:AnnotationProperty ;
+                                           <http://purl.org/dc/elements/1.1/identifier> "citation"@en .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/identifier
+<http://purl.org/dc/elements/1.1/identifier> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#comment
+<http://www.w3.org/2004/02/skos/core#comment> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+<http://www.w3.org/2004/02/skos/core#definition> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/dc/terms/Creator
+dct:Creator rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain dcat:Dataset ;
+            rdfs:range foaf:Person ;
+            rdfs:comment "defines creator of the Dataset" .
+
+
+###  http://purl.org/dc/terms/language
+dct:language rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain dcat:Dataset ;
+             rdfs:range dct:LinguisticSystem ;
+             rdfs:comment "defines the language used in Dataset" .
+
+
+###  http://purl.org/dc/terms/publisher
+dct:publisher rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain dcat:Dataset ;
+              rdfs:range foaf:Agent ;
+              rdfs:comment "defines publisher of the Dataset" .
+
+
+###  http://purl.org/dc/terms/temporal
+dct:temporal rdf:type owl:ObjectProperty ;
+             rdfs:domain dcat:Dataset ;
+             rdfs:range dct:PeriodOfTime ;
+             rdfs:comment "defines the period of time from which news is collected" .
+
+
+###  http://www.w3.org/ns/dcat#theme
+dcat:theme rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain dcat:Dataset ;
+           rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+           rdfs:comment "defines genre of the Dataset" .
+
+
+###  http://www.w3.org/ns/dqv#computedOn
+dqv:computedOn rdf:type owl:ObjectProperty ;
+               rdfs:domain dcat:Dataset ;
+               rdfs:range dqv:QualityMeasurement ;
+               rdfs:comment "defines measure of metric which is computed on dataset" .
+
+
+###  http://www.w3.org/ns/dqv#hasQualityAnnotation
+dqv:hasQualityAnnotation rdf:type owl:ObjectProperty ;
+                         rdfs:domain dcat:Dataset ;
+                         rdfs:range dqv:QualityAnnotation ;
+                         rdfs:comment "defines annotations related to quality that Dataset has" .
+
+
+###  http://www.w3.org/ns/dqv#inCategory
+dqv:inCategory rdf:type owl:ObjectProperty ;
+               rdfs:domain dqv:Dimension ;
+               rdfs:range dqv:Category ;
+               rdfs:comment "defines Category that given Dimension belongs to" .
+
+
+###  http://www.w3.org/ns/dqv#inDimension
+dqv:inDimension rdf:type owl:ObjectProperty ;
+                rdfs:domain dqv:Metric ;
+                rdfs:range dqv:Dimension ;
+                rdfs:comment "defines Dimension who has given Metric" .
+
+
+###  http://www.w3.org/ns/dqv#isMeasurementOf
+dqv:isMeasurementOf rdf:type owl:ObjectProperty ;
+                    rdfs:domain dqv:QualityMeasurement ;
+                    rdfs:range dqv:Metric ;
+                    rdfs:comment "defines metric which is measured" .
+
+
+###  http://www.w3.org/ns/mls#executes
+mls:executes rdf:type owl:ObjectProperty ;
+             rdfs:domain mls:Run ;
+             rdfs:range nobias-project:Classifier ;
+             rdfs:comment "defines the algorithm that is executed by the Run" .
+
+
+###  http://www.w3.org/ns/mls#hasInput
+mls:hasInput rdf:type owl:ObjectProperty ;
+             rdfs:domain mls:Run ;
+             rdfs:range dcat:Dataset ;
+             rdfs:comment "defines the Dataset which is used an input for the Run" .
+
+
+###  http://www.w3.org/ns/mls#realizes
+mls:realizes rdf:type owl:ObjectProperty ;
+             rdfs:domain mls:Run ;
+             rdfs:range mls:Model ;
+             rdfs:comment "defines the model that is realized by the Run" .
+
+
+###  http://www.w3.org/ns/odrl/2/target
+odrl:target rdf:type owl:ObjectProperty ;
+            rdfs:domain dqv:QualityPolicy ;
+            rdfs:range dcat:Dataset ;
+            rdfs:comment "defines dataset for which a quality policy is applicable for" .
+
+
+###  http://www.w3.org/ns/prov#used
+prov:used rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain prov:Activity ;
+          rdfs:range dcat:Dataset ;
+          rdfs:comment "defines the Dataset  that is used for provenance" .
+
+
+###  http://www.w3.org/ns/prov#wasGeneratedBy
+prov:wasGeneratedBy rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain nobias-project:Actor ;
+                    rdfs:range prov:Activity ;
+                    rdfs:comment "defines the provenance Activity that generates the Actor" .
+
+
+###  https://nobias-project.eu/checks
+nobias-project:checks rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdfs:domain nobias-project:FactChecker ;
+                      rdfs:range nobias-project:NewsSource ;
+                      rdfs:comment "defines Fact Checker checking a News" .
+
+
+###  https://nobias-project.eu/classifies
+nobias-project:classifies rdf:type owl:ObjectProperty ;
+                          rdfs:domain doam:Output ;
+                          rdfs:range nobias-project:NewsClassification ;
+                          rdfs:comment "defines class into which news is classified by the model" .
+
+
+###  https://nobias-project.eu/follows
+nobias-project:follows rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf owl:topObjectProperty ;
+                       rdfs:domain nobias-project:SocialMediaUser ;
+                       rdfs:range nobias-project:SocialMediaUser ;
+                       rdfs:comment "defines SocialMediaUser following another  SocialMediaUser" .
+
+
+###  https://nobias-project.eu/hasActorType
+nobias-project:hasActorType rdf:type owl:ObjectProperty ;
+                            rdfs:domain nobias-project:Actor ;
+                            rdfs:range nobias-project:ActorType ;
+                            rdfs:comment "defines Actor type: active or passive for Actor" .
+
+
+###  https://nobias-project.eu/hasArchitechture
+nobias-project:hasArchitechture rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf owl:topObjectProperty ;
+                                rdfs:domain mls:Model ;
+                                rdfs:range nobias-project:Architecture ;
+                                rdfs:comment "defines Architecture of the Model" .
+
+
+###  https://nobias-project.eu/hasBiasRecipient
+nobias-project:hasBiasRecipient rdf:type owl:ObjectProperty ;
+                                owl:inverseOf nobias-project:hasBiasSource ;
+                                rdfs:domain nobias-project:BiasSourceAgent ;
+                                rdfs:range nobias-project:BiasRecipientAgent ;
+                                rdfs:comment "describes the entity that has a bias recipient" .
+
+
+###  https://nobias-project.eu/hasBiasSource
+nobias-project:hasBiasSource rdf:type owl:ObjectProperty ;
+                             rdfs:domain nobias-project:BiasRecipientAgent ;
+                             rdfs:range nobias-project:BiasSourceAgent ;
+                             rdfs:comment "describes the entity that has a bias source" .
+
+
+###  https://nobias-project.eu/hasBiasType
+nobias-project:hasBiasType rdf:type owl:ObjectProperty ;
+                           rdfs:domain nobias-project:BiasEvent ;
+                           rdfs:range nobias-project:BiasType ;
+                           rdfs:comment "describes the type of bias detected during the Bias Event" .
+
+
+###  https://nobias-project.eu/hasClassifier
+nobias-project:hasClassifier rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf owl:topObjectProperty ;
+                             rdfs:domain mls:Model ;
+                             rdfs:range nobias-project:Classifier ;
+                             rdfs:comment "defines Classification algorithm used to  classify News" .
+
+
+###  https://nobias-project.eu/hasContentType
+nobias-project:hasContentType rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf owl:topObjectProperty ;
+                              rdfs:domain dcat:Dataset ;
+                              rdfs:range nobias-project:NewsContentType ;
+                              rdfs:comment "defines the type of content is used in news articles like text, images, videos etc." .
+
+
+###  https://nobias-project.eu/hasDetectionMethod
+nobias-project:hasDetectionMethod rdf:type owl:ObjectProperty ;
+                                  rdfs:domain nobias-project:BiasEvent ;
+                                  rdfs:range nobias-project:BiasDetectionMethod ;
+                                  rdfs:comment "describes the detection method for detecting bias during Bias Event" .
+
+
+###  https://nobias-project.eu/hasEvalMetrics
+nobias-project:hasEvalMetrics rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf owl:topObjectProperty ;
+                              rdfs:domain mls:ModelEvaluation ;
+                              rdfs:range mls:EvaluationProcedure ;
+                              rdfs:comment "defines the type of Metrics that is used to compare different Runs" .
+
+
+###  https://nobias-project.eu/hasHyperparameter
+nobias-project:hasHyperparameter rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf owl:topObjectProperty ;
+                                 rdfs:domain mls:Process ;
+                                 rdfs:range mls:HyperParameter ;
+                                 rdfs:comment "defines the weights need to be trained for classification" .
+
+
+###  https://nobias-project.eu/hasInput
+nobias-project:hasInput rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain mls:Model ;
+                        rdfs:range dcat:Dataset ;
+                        rdfs:comment "defines input to the Model in form of  Dataset" ,
+                                     "defines input to the Model in form of Datase" .
+
+
+###  https://nobias-project.eu/hasLearningMethod
+nobias-project:hasLearningMethod rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf owl:topObjectProperty ;
+                                 rdfs:domain mls:HyperParameter ;
+                                 rdfs:range nobias-project:LearningMethod ;
+                                 rdfs:comment "defines the method used to train or calculate the weights or hyperparameters" .
+
+
+###  https://nobias-project.eu/hasMediaPlatform
+nobias-project:hasMediaPlatform rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf owl:topObjectProperty ;
+                                rdfs:domain dcat:Dataset ;
+                                rdfs:range nobias-project:MediaPlatform ;
+                                rdfs:comment "defines Media Platform that is used by users who share news" .
+
+
+###  https://nobias-project.eu/hasModelComponents
+nobias-project:hasModelComponents rdf:type owl:ObjectProperty ;
+                                  rdfs:subPropertyOf owl:topObjectProperty ;
+                                  rdfs:domain doam:Predictive_Model ;
+                                  rdfs:range doam:Model_Components ;
+                                  rdfs:comment "defines components of Model based on doam ontology" .
+
+
+###  https://nobias-project.eu/hasModelType
+nobias-project:hasModelType rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf owl:topObjectProperty ;
+                            rdfs:domain mls:Model ;
+                            rdfs:range doam:Predictive_Model ;
+                            rdfs:comment "defines the type of Model based on doam ontology" .
+
+
+###  https://nobias-project.eu/hasOptimizer
+nobias-project:hasOptimizer rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf owl:topObjectProperty ;
+                            rdfs:domain nobias-project:Classifier ;
+                            rdfs:range nobias-project:OptimizationTechnique ;
+                            rdfs:comment "defines Optimization algorithm used to optimize Classifier results" .
+
+
+###  https://nobias-project.eu/hasOutput
+nobias-project:hasOutput rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdfs:domain mls:Model ,
+                                     mls:Run ;
+                         rdfs:range mls:ModelEvaluation ,
+                                    doam:Output ;
+                         rdfs:comment "defines output of the Model as doam:Output class" ,
+                                      "defines the output of the Model as a result of the Run" .
+
+
+###  https://nobias-project.eu/hasRating
+nobias-project:hasRating rdf:type owl:ObjectProperty ;
+                         rdfs:domain dcat:Dataset ;
+                         rdfs:range nobias-project:RatingScale ;
+                         rdfs:comment "defines Rating Scale is used to rate publishers" .
+
+
+###  https://nobias-project.eu/hasRecipientParticipant
+nobias-project:hasRecipientParticipant rdf:type owl:ObjectProperty ;
+                                       rdfs:domain nobias-project:BiasEvent ;
+                                       rdfs:range nobias-project:BiasRecipient ;
+                                       rdfs:comment "describes the recipient participant participating in a Bias Event" .
+
+
+###  https://nobias-project.eu/hasSource
+nobias-project:hasSource rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdfs:domain nobias-project:News ;
+                         rdfs:range nobias-project:NewsSource ;
+                         rdfs:comment "defines News Source  for a News" .
+
+
+###  https://nobias-project.eu/hasSourceParticipant
+nobias-project:hasSourceParticipant rdf:type owl:ObjectProperty ;
+                                    rdfs:subPropertyOf owl:topObjectProperty ;
+                                    rdfs:domain nobias-project:BiasEvent ;
+                                    rdfs:range nobias-project:BiasSource ;
+                                    rdfs:comment "describes the source participant participating in a Bias Event" .
+
+
+###  https://nobias-project.eu/hasTrainingProcess
+nobias-project:hasTrainingProcess rdf:type owl:ObjectProperty ;
+                                  rdfs:subPropertyOf owl:topObjectProperty ;
+                                  rdfs:domain mls:Model ;
+                                  rdfs:range mls:Process ;
+                                  rdfs:comment "defines the training process of training the model" .
+
+
+###  https://nobias-project.eu/isPartOf
+nobias-project:isPartOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain mls:Experiment ;
+                        rdfs:range mls:Study ;
+                        rdfs:comment "defines the Study which conducts the experiment on given Dataset" .
+
+
+###  https://nobias-project.eu/performsRecipientRole
+nobias-project:performsRecipientRole rdf:type owl:ObjectProperty ;
+                                     rdfs:domain mls:Model ,
+                                                 nobias-project:Actor ;
+                                     rdfs:range nobias-project:BiasRecipientAgent ;
+                                     rdfs:comment "describes the entity that performs recipient role for the recipient agent" .
+
+
+###  https://nobias-project.eu/performsSourceRole
+nobias-project:performsSourceRole rdf:type owl:ObjectProperty ;
+                                  rdfs:domain mls:Model ,
+                                              nobias-project:Actor ;
+                                  rdfs:range nobias-project:BiasSourceAgent ;
+                                  rdfs:comment "describes the entity that performs source role for the source agent" .
+
+
+###  https://nobias-project.eu/preparesData
+nobias-project:preparesData rdf:type owl:ObjectProperty ;
+                            rdfs:domain nobias-project:Pre-processing ;
+                            rdfs:range dcat:Dataset ;
+                            rdfs:comment "defines files that \\\\ are used in preparing the Data for training to be used by Model" .
+
+
+###  https://nobias-project.eu/providesRecipientRole
+nobias-project:providesRecipientRole rdf:type owl:ObjectProperty ;
+                                     rdfs:domain nobias-project:BiasRecipient ;
+                                     rdfs:range nobias-project:BiasRecipientAgent ;
+                                     rdfs:comment "describes the entity that provides recipient role for the recipient agent" .
+
+
+###  https://nobias-project.eu/providesSourceRole
+nobias-project:providesSourceRole rdf:type owl:ObjectProperty ;
+                                  rdfs:domain nobias-project:BiasSource ;
+                                  rdfs:range nobias-project:BiasSourceAgent ;
+                                  rdfs:comment "describes the entity that provides source role for the source agent" .
+
+
+###  https://nobias-project.eu/publishes
+nobias-project:publishes rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdfs:domain nobias-project:NewsSource ;
+                         rdfs:range nobias-project:News ;
+                         rdfs:comment "defines News published by a News Source" .
+
+
+###  https://nobias-project.eu/sharedBy
+nobias-project:sharedBy rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain nobias-project:News ;
+                        rdfs:range nobias-project:SharingBehaviour ;
+                        rdfs:comment "defines News that is  being shared" .
+
+
+###  https://nobias-project.eu/shares
+nobias-project:shares rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdfs:domain nobias-project:SocialMediaUser ;
+                      rdfs:range nobias-project:SharingBehaviour ;
+                      rdfs:comment "defines SocialMediaUser that shares the News" .
+
+
+###  https://www.openriskmanual.org/ns/doam#has_RuleSet
+doam:has_RuleSet rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:domain doam:Rule_Set_Model ;
+                 rdfs:range doam:Rule_Set ;
+                 rdfs:comment "defines the rules that Rule set model has" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/dc/terms/Issued
+dct:Issued rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdfs:domain dcat:Dataset ;
+           rdfs:range rdfs:Literal ;
+           rdfs:comment "defines date on which Dataset is published" .
+
+
+###  http://purl.org/dc/terms/description
+dct:description rdf:type owl:DatatypeProperty ;
+                rdfs:domain dcat:Dataset ;
+                rdfs:range rdfs:Literal ;
+                rdfs:comment "gives description of dataset" .
+
+
+###  http://purl.org/dc/terms/modified
+dct:modified rdf:type owl:DatatypeProperty ;
+             rdfs:domain dcat:Dataset ;
+             rdfs:range rdfs:Literal ;
+             rdfs:comment "defines date on which Dataset is modified" .
+
+
+###  http://purl.org/dc/terms/title
+dct:title rdf:type owl:DatatypeProperty ;
+          rdfs:domain dcat:Dataset ;
+          rdfs:range rdfs:Literal ;
+          rdfs:comment "defines title of the Dataset" .
+
+
+###  http://www.w3.org/ns/dcat#Keyword
+dcat:Keyword rdf:type owl:DatatypeProperty ;
+             rdfs:domain dcat:Dataset ;
+             rdfs:range rdfs:Literal ;
+             rdfs:comment "defines Keywords describing the Dataset" .
+
+
+###  http://www.w3.org/ns/dqv#ExpectedDatatype
+dqv:ExpectedDatatype rdf:type owl:DatatypeProperty ;
+                     rdfs:domain dqv:Metric ;
+                     rdfs:range rdfs:Literal ;
+                     rdfs:comment "defines expected datatype of metric" .
+
+
+###  http://www.w3.org/ns/dqv#Value
+dqv:Value rdf:type owl:DatatypeProperty ;
+          rdfs:domain dqv:QualityMeasurement ;
+          rdfs:range rdfs:Literal ;
+          rdfs:comment "defines value of the metric measured" .
+
+
+###  https://nobias-project.eu/TotalStories
+nobias-project:TotalStories rdf:type owl:DatatypeProperty ;
+                            rdfs:domain dcat:Dataset ;
+                            rdfs:range xsd:integer ;
+                            rdfs:comment "defines total number of news stories in  Dataset" .
+
+
+###  https://nobias-project.eu/hasBiasScore
+nobias-project:hasBiasScore rdf:type owl:DatatypeProperty ;
+                            rdfs:domain nobias-project:BiasEvent ;
+                            rdfs:range xsd:float ;
+                            rdfs:comment "stores the measure of bias calculated during detection method" .
+
+
+###  https://nobias-project.eu/hasCredibilityClass
+nobias-project:hasCredibilityClass rdf:type owl:DatatypeProperty ;
+                                   rdfs:subPropertyOf owl:topDataProperty ;
+                                   rdfs:domain nobias-project:NewsSource ;
+                                   rdfs:range xsd:string ;
+                                   rdfs:comment "defines Credibility Class of News Source given by" .
+
+
+###  https://nobias-project.eu/hasCredibilityScore
+nobias-project:hasCredibilityScore rdf:type owl:DatatypeProperty ;
+                                   rdfs:subPropertyOf owl:topDataProperty ;
+                                   rdfs:domain nobias-project:NewsSource ;
+                                   rdfs:range xsd:float ;
+                                   rdfs:comment "defines Credibility Score of News Source given by Factchecker" .
+
+
+###  https://nobias-project.eu/hasFactCheckerUrl
+nobias-project:hasFactCheckerUrl rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf owl:topDataProperty ;
+                                 rdfs:domain nobias-project:FactChecker ;
+                                 rdfs:range xsd:string ;
+                                 rdfs:comment "defines URL of the Fact-checking website or organization" .
+
+
+###  https://nobias-project.eu/hasGoal
+nobias-project:hasGoal rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf owl:topDataProperty ;
+                       rdfs:domain mls:Model ;
+                       rdfs:range xsd:string ;
+                       rdfs:comment "defines goal of the Model" .
+
+
+###  https://nobias-project.eu/hasGroundTruth
+nobias-project:hasGroundTruth rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf owl:topDataProperty ;
+                              rdfs:domain nobias-project:News ;
+                              rdfs:range xsd:int ;
+                              rdfs:comment "defines the ground truth of news whether it is fake or real" .
+
+
+###  https://nobias-project.eu/hasLabel
+nobias-project:hasLabel rdf:type owl:DatatypeProperty ;
+                        rdfs:domain nobias-project:NewsClassification ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "defines News Label which is classified by the model" .
+
+
+###  https://nobias-project.eu/hasLimitation
+nobias-project:hasLimitation rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf owl:topDataProperty ;
+                             rdfs:domain mls:Model ;
+                             rdfs:range xsd:string ;
+                             rdfs:comment "defines Limitations of the Model" .
+
+
+###  https://nobias-project.eu/hasMeasureValue
+nobias-project:hasMeasureValue rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf owl:topDataProperty ;
+                               rdfs:domain mls:EvaluationProcedure ;
+                               rdfs:range xsd:float ;
+                               rdfs:comment "defines value of specific Evaluation Procedure" .
+
+
+###  https://nobias-project.eu/hasNewsContent
+nobias-project:hasNewsContent rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf owl:topDataProperty ;
+                              rdfs:domain nobias-project:News ;
+                              rdfs:range xsd:string ;
+                              rdfs:comment "define News content  in text form" .
+
+
+###  https://nobias-project.eu/hasNewsID
+nobias-project:hasNewsID rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain nobias-project:News ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "defines unique News Identifier" .
+
+
+###  https://nobias-project.eu/hasNewsScore
+nobias-project:hasNewsScore rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf owl:topDataProperty ;
+                            rdfs:domain doam:Output ;
+                            rdfs:range xsd:int ;
+                            rdfs:comment "defines score given by Model to the News which is classified" .
+
+
+###  https://nobias-project.eu/hasNewsTitle
+nobias-project:hasNewsTitle rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf owl:topDataProperty ;
+                            rdfs:domain nobias-project:News ;
+                            rdfs:range xsd:string ;
+                            rdfs:comment "defines News Title" .
+
+
+###  https://nobias-project.eu/hasNewsUrl
+nobias-project:hasNewsUrl rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf owl:topDataProperty ;
+                          rdfs:domain nobias-project:News ;
+                          rdfs:range xsd:string ;
+                          rdfs:comment "defines News URL" .
+
+
+###  https://nobias-project.eu/hasSocialMediaUrl
+nobias-project:hasSocialMediaUrl rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf owl:topDataProperty ;
+                                 rdfs:domain nobias-project:SocialMediaUser ;
+                                 rdfs:range xsd:string ;
+                                 rdfs:comment "defines URL of Social Media that a User uses" .
+
+
+###  https://nobias-project.eu/hasSpontaneity
+nobias-project:hasSpontaneity rdf:type owl:DatatypeProperty ;
+                              rdfs:domain dcat:Dataset ;
+                              rdfs:range xsd:boolean ;
+                              rdfs:comment "defines whether dataset was spontaneously collected from Media Platforms or computer-generated" .
+
+
+###  https://nobias-project.eu/isAvailable
+nobias-project:isAvailable rdf:type owl:DatatypeProperty ;
+                           rdfs:domain dcat:Dataset ;
+                           rdfs:range xsd:boolean ;
+                           rdfs:comment "defines whether dataset is publicly available" .
+
+
+###  https://nobias-project.eu/sourceUrl
+nobias-project:sourceUrl rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain nobias-project:NewsSource ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "defines URL for News Source" .
+
+
+###  https://nobias-project.eu/specificationDescription
+nobias-project:specificationDescription rdf:type owl:DatatypeProperty ;
+                                        rdfs:domain mls:EvaluationProcedure ;
+                                        rdfs:range xsd:string ;
+                                        rdfs:comment "defines the specification of the measured value in Evaluation Procedure" .
+
+
+###  https://nobias-project.eu/timesShared
+nobias-project:timesShared rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf owl:topDataProperty ;
+                           rdfs:domain nobias-project:SharingBehaviour ;
+                           rdfs:range xsd:int ;
+                           rdfs:comment "defines how many times a news is shared by a given user" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/dc/terms/LinguisticSystem
+dct:LinguisticSystem rdf:type owl:Class ;
+                     rdfs:comment "Language is the language used in news content."@en ;
+                     rdfs:label "Language" .
+
+
+###  http://purl.org/dc/terms/PeriodOfTime
+dct:PeriodOfTime rdf:type owl:Class ;
+                 rdfs:comment "Time period during which news from the dataset are published"@en ;
+                 rdfs:label "Time Period" .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+<http://www.w3.org/2004/02/skos/core#Concept> rdf:type owl:Class ;
+                                              rdfs:comment "Theme class represent the genre or the theme of Dataset"@en ;
+                                              rdfs:label "Theme" .
+
+
+###  http://www.w3.org/ns/dcat#Catalogue
+dcat:Catalogue rdf:type owl:Class ;
+               rdfs:subClassOf dcat:Dataset ;
+               rdfs:comment "dcat:Catalogue represents a catalogue, which is a dataset in which each individual item is a metadata record describing some resource; the scope of dcat:Catalog is collections of metadata about datasets or data"@en ;
+               rdfs:label "Catalogue" .
+
+
+###  http://www.w3.org/ns/dcat#Dataset
+dcat:Dataset rdf:type owl:Class ;
+             rdfs:comment "Dataset is a collection of data, published or curated by a publishing agent. It contains data in many forms including text, photos, videos and links etc"@en ;
+             rdfs:label "Dataset" .
+
+
+###  http://www.w3.org/ns/dqv#Category
+dqv:Category rdf:type owl:Class ;
+             rdfs:comment "Category is a group of quality dimensions in which a common type of information is used as quality indicator"@en ;
+             rdfs:label "Category" .
+
+
+###  http://www.w3.org/ns/dqv#Dimension
+dqv:Dimension rdf:type owl:Class ;
+              rdfs:comment "Dimension is a criteria relevant for assessing quality. Each dimension is part of a broader category of Data Quality Assessment"@en ;
+              rdfs:label "Dimension" .
+
+
+###  http://www.w3.org/ns/dqv#Metric
+dqv:Metric rdf:type owl:Class ;
+           rdfs:comment "Metric is a standard to measure a quality dimension. An observation(instance of dqv:QualityMeasurement) assigns a value in a given unit to a Metric."@en ;
+           rdfs:label "Metric" .
+
+
+###  http://www.w3.org/ns/dqv#QualityAnnotation
+dqv:QualityAnnotation rdf:type owl:Class ;
+                      rdfs:comment "Quality Annotation is a quality annotations, including ratings, quality certificates or feedback that can be associated to datasets"@en ;
+                      rdfs:label "QualityAnnotation" .
+
+
+###  http://www.w3.org/ns/dqv#QualityCertificate
+dqv:QualityCertificate rdf:type owl:Class ;
+                       rdfs:subClassOf dqv:QualityAnnotation ;
+                       rdfs:comment "Quality Certificate is subclass of QualityAnnotation. It associates a dataset to a document that	certifies the data quality according to a set of quality assessment rules"@en ;
+                       rdfs:label "QualityCertificate" .
+
+
+###  http://www.w3.org/ns/dqv#QualityMeasurement
+dqv:QualityMeasurement rdf:type owl:Class ;
+                       rdfs:comment "Quality Measurement is the evaluation of a given dataset a specific quality metric."@en ;
+                       rdfs:label "QualityMeasurement" .
+
+
+###  http://www.w3.org/ns/dqv#QualityPolicy
+dqv:QualityPolicy rdf:type owl:Class ;
+                  rdfs:comment "Quality Policy is a policy or agreement that is chiefly governed by data quality concerns"@en ;
+                  rdfs:label "QualityPolicy" .
+
+
+###  http://www.w3.org/ns/mls#EvaluationProcedure
+mls:EvaluationProcedure rdf:type owl:Class ;
+                        rdfs:comment "Evaluation Procedure is the procedure that is followed to judge the output of any particular Run. For example an Output of Run by calculating its accuracy, Precision, Recall and F1 score can be evaluated."@en ;
+                        rdfs:label "EvaluationProcedure" .
+
+
+###  http://www.w3.org/ns/mls#Experiment
+mls:Experiment rdf:type owl:Class ;
+               rdfs:subClassOf mls:Process ;
+               rdfs:comment "The training process of fake news detection model consists of several experiments that are subclasses of the Process and they are part of a Study(research project). Each Experiment is done for a specific goal decided by the study it is part of."@en ;
+               rdfs:label "Experiment" .
+
+
+###  http://www.w3.org/ns/mls#HyperParameter
+mls:HyperParameter rdf:type owl:Class ;
+
+                   rdfs:comment "A hyperparameter is a parameter that is set before the learning process begins. These parameters are tunable and can directly affect how well a model trains."@en ,
+                                "In PSL, a hyperparameter is the weight that is calculated while training the model so that in the testing phase a score for given news input is computed with the help of this weight and it is classified as fake or real."@en ;
+
+                   rdfs:label "Hyperparameter" .
+
+
+###  http://www.w3.org/ns/mls#Model
+mls:Model rdf:type owl:Class ;
+          rdfs:comment "Model is class for the fake news classification model. It takes input from the dataset and gives output in form of NewsClassification and NewsScore. It has a model type, architecture, process and algorithm for classification as classifier."@en ;
+          rdfs:label "Model" .
+
+
+###  http://www.w3.org/ns/mls#ModelEvaluation
+mls:ModelEvaluation rdf:type owl:Class ;
+                    rdfs:comment "Model Evaluation is the result of the Run, It stores the output from the execution of an algorithm of a model over some input. It is the subclass of doam:Output, which is the model output. All the evaluation of model output is conducted over the results stored in this class."@en ;
+                    rdfs:label "Model Evaluation" .
+
+
+###  http://www.w3.org/ns/mls#Process
+mls:Process rdf:type owl:Class ;
+            rdfs:comment "Process class represents  the process that is to be followed for training the fake news detection model. It has several hyperparameters that are needed to be carefully selected and trained."@en ;
+            rdfs:label "Process" .
+
+
+###  http://www.w3.org/ns/mls#Run
+mls:Run rdf:type owl:Class ;
+        rdfs:subClassOf mls:Experiment ;
+        rdfs:comment "Run is the execution of classification algorithm and it realizes the model. It is limited in time and has a starting and end point. It has training and test input and gives output in form of ModelEvaluation. There are several runs in an experiment."@en ;
+        rdfs:label "Run" .
+
+
+###  http://www.w3.org/ns/mls#Study
+mls:Study rdf:type owl:Class ;
+          rdfs:comment "Study is the reason why an experiment is being conducted. It is usually trying to prove a hypotheses or run experiments to gather some data for research purposes."@en ;
+          rdfs:label "Study" .
+
+
+###  http://www.w3.org/ns/prov#Activity
+prov:Activity rdf:type owl:Class ;
+              rdfs:comment "Provenance Activity provides provenance to the entities described in this pattern using a data source/dataset that is available and used for implementation of the Actor"@en ;
+              rdfs:label "ProvenanceActivity" .
+
+
+###  http://xmlns.com/foaf/0.1/Agent
+foaf:Agent rdf:type owl:Class ;
+           rdfs:comment "Publisher of the Dataset is a person or an organization that publishes the given Dataset." ;
+           rdfs:label "Dataset Publisher" .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+foaf:Person rdf:type owl:Class ;
+            rdfs:comment "Creator is the person who creates the dataset." ;
+            rdfs:label "Creator" .
+
+
+###  https://nobias-project.eu/ActivityBias
+nobias-project:ActivityBias rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:InteractionBias ;
+                            <http://purl.org/dc/elements/1.1/citation> """Baeza-Yates, R. 2020. Biases on Social Media Data: (Keynote). In Companion Proceedings of the Web Conference 2020 (WWW ’20Companion), April 20–24, 2020, Taipei, Taiwan.ACM, New York, NY, USA,2 pages. 
+https://doi.org/10.1145/3366424.3383564"""@en ;
+                            <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                            rdfs:label "ActivityBias"@en ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "ActivityBias is bias due to differences in social habits of users. Example: not all people are active all the time in social media (90% are lurkers), and how a select few are responsible for creating more than 50% of content."@en .
+
+
+###  https://nobias-project.eu/Actor
+nobias-project:Actor rdf:type owl:Class ;
+                     rdfs:comment "Actors are the main elements of the fake news ecosystem. Their interaction is recorded as a bias event as they can influence bias, carry bias within themselves and can potentially propagate bias to other elements of fake news ecosystem." ;
+                     rdfs:label "Actor" .
+
+
+###  https://nobias-project.eu/ActorType
+nobias-project:ActorType rdf:type owl:Class ;
+                         rdfs:comment "ActorType is the type of relationship an actor has with bias. An active type of actor itself influences the bias while a passive type of actor can only carry bias from its source and itself has no influence on increasing or decreasing bias. It can only transfer bias."@en ;
+                         rdfs:label "ActorType" .
+
+
+###  https://nobias-project.eu/AnnotatorBias
+nobias-project:AnnotatorBias rdf:type owl:Class ;
+                             rdfs:subClassOf nobias-project:StatisticalBias ;
+                             <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                             rdfs:label "AnnotatorBias"@en ;
+                             <http://www.w3.org/2004/02/skos/core#definition> "Annotator bias is associated to data labelled or/and annotated by humans, and it refers to how every annotator has its own habit to label the data, as well as motivations (i.e. financial)."@en .
+
+
+###  https://nobias-project.eu/Architecture
+nobias-project:Architecture rdf:type owl:Class ;
+                            rdfs:comment "Architecture class describes the technique by which fake news detection problem is solved by the fake news detection model."@en ;
+                            rdfs:label "Architecture" .
+
+
+###  https://nobias-project.eu/BeliefBias
+nobias-project:BeliefBias rdf:type owl:Class ;
+                          rdfs:subClassOf nobias-project:CognitiveBias ;
+                          <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                          rdfs:label "BeliefBias"@en ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "Belief bias is the tendency to judge the strength of arguments based on the plausibility of their conclusion rather than how strongly they support that conclusion. A person is more likely to accept an argument that supports a conclusion that aligns with their values, beliefs and prior knowledge, while rejecting counter arguments to the conclusion."@en .
+
+
+###  https://nobias-project.eu/BiasDetectionMethod
+nobias-project:BiasDetectionMethod rdf:type owl:Class ;
+                                   rdfs:comment "Bias Detection Method  defines the method that is being used to detect bias. For example: word embeddings, evaluation metrics, quality metrics etc."@en ;
+                                   rdfs:label "Detection Method" .
+
+
+###  https://nobias-project.eu/BiasEvent
+nobias-project:BiasEvent rdf:type owl:Class ;
+                         rdfs:comment "Bias Event is an event entity that hosts the bias event when Source and Recipient participates and provides measure of bias using data property hasBiasScore."@en ;
+                         rdfs:label "Bias Event" .
+
+
+###  https://nobias-project.eu/BiasRecipient
+nobias-project:BiasRecipient rdf:type owl:Class ;
+                             rdfs:comment "Bias Recipient is the participant entity that participates as a recipient in a Bias Event."@en ;
+                             rdfs:label "Bias Recipient" .
+
+
+###  https://nobias-project.eu/BiasRecipientAgent
+nobias-project:BiasRecipientAgent rdf:type owl:Class ;
+                                  rdfs:comment "Bias Recipient Agent acts as an agent between entities that provide recipient role and the ones that are performing that role."@en ;
+                                  rdfs:label "Recipient Agent" .
+
+
+###  https://nobias-project.eu/BiasSource
+nobias-project:BiasSource rdf:type owl:Class ;
+                          rdfs:comment "Bias Source is the participant entity that participates as source in a Bias Event."@en ;
+                          rdfs:label "Bias Source" .
+
+
+###  https://nobias-project.eu/BiasSourceAgent
+nobias-project:BiasSourceAgent rdf:type owl:Class ;
+                               rdfs:comment "Bias Source Agent acts as an agent between entities that provide source role and the ones that are performing that role."@en ;
+                               rdfs:label "Source Agent" .
+
+
+###  https://nobias-project.eu/BiasType
+nobias-project:BiasType rdf:type owl:Class ;
+                        <http://purl.org/dc/elements/1.1/citation> "Pitoura, E. 2020. Social-minded Measures of Data Quality: Fairness, Diversity, and Lack of Bias. J. Data and Information Quality 12, 3, Article 12 (July 2020), 8 pages."@en ;
+                        <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                        rdfs:comment "BiasType class is defined to create an object of a particular type of bias. It is classified into Societal Bias, Behavioural Bias, Cognitive Bias, Functional Bias and Statistical Bias." ;
+                        rdfs:label "Bias"@en ,
+                                   "Bias Type" ;
+                        <http://www.w3.org/2004/02/skos/core#definition> "Bias is an inclination, or prejudice for, or against one person, or group, especially in a way considered to be unfair and “a concentration on, or interest in one particular area, or subject.”"@en .
+
+
+###  https://nobias-project.eu/Classifier
+nobias-project:Classifier rdf:type owl:Class ;
+                          rdfs:comment "Classifier is the type of classification algorithm that is used by the fake news detection model for classification of news into Real News and Fake News. There are different type of classifiers for example: Convolutional Neural Networks, Hinge-Loss Markov Random Fields(HL-HRF), Support Vector Machines and so on."@en ;
+                          rdfs:label "Classifier" .
+
+
+###  https://nobias-project.eu/CognitiveBias
+nobias-project:CognitiveBias rdf:type owl:Class ;
+                             rdfs:subClassOf nobias-project:BiasType ;
+                             <http://purl.org/dc/elements/1.1/citation> "Manoogian J, Benson B (2017) Cognitive bias codex.https://betterhumans.pub/cognitive-bias-cheat-sheet-55a472476b18"@en ,
+                                                                        "https://en.wikipedia.org/wiki/Cognitive_bias"@en ;
+                             <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                             rdfs:label "CognitiveBias"@en ;
+                             <http://www.w3.org/2004/02/skos/core#comment> "Cognitive biases can sometimes lead to perceptual distortion, inaccurate judgment, illogical interpretation, or what is broadly called irrationality."@en ;
+                             <http://www.w3.org/2004/02/skos/core#definition> "Cognitive biases are systematic patterns of deviation from norm and/or rationality in judgment."@en .
+
+
+###  https://nobias-project.eu/ConfirmationBias
+nobias-project:ConfirmationBias rdf:type owl:Class ;
+                                rdfs:subClassOf nobias-project:CognitiveBias ;
+                                <http://purl.org/dc/elements/1.1/citation> """Farkas, J. & Schou, J. (2018) Fake News as a Floating Signifier: Hegemony, Antagonism and the Politics of Falsehood, Javnost - The Public, 25:3, 298-314, DOI:
+10.1080/13183222.2018.1463047"""@en ,
+                                                                           "Manoogian J, Benson B (2017) Cognitive bias codex.https://betterhumans.pub/cognitive-bias-cheat-sheet-55a472476b18"@en ;
+                                <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                                rdfs:label "ConfirmationBias"@en ;
+                                <http://www.w3.org/2004/02/skos/core#comment> "Disconfirmation bias or motivated skepticism works the same concept but in opposite direction and is what gives way to polarization within the context of disinformation, fake news and political convictions."@en ;
+                                <http://www.w3.org/2004/02/skos/core#definition> "Confirmation bias is the tendency to search for, interpret, favor, and recall information in a way that confirms or supports one's prior beliefs or values."@en .
+
+
+###  https://nobias-project.eu/CoverageBias
+nobias-project:CoverageBias rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:StatisticalBias ;
+                            <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                            rdfs:label "CoverageBias"@en ;
+                            <http://www.w3.org/2004/02/skos/core#comment> "Upon data acquisition, data scientist or machine learning engineer must ensure  that there are enough entries in the datasets for each object category. Concept closely linked to diversity."@en ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "Coverage bias in survey research means that a research sample is not representative and that a number of people in the population have zero chance of being included in the sample."@en .
+
+
+###  https://nobias-project.eu/CredibilityBased
+nobias-project:CredibilityBased rdf:type owl:Class ;
+                                rdfs:subClassOf nobias-project:Architecture ;
+                                rdfs:comment "Credibility Based architecture uses the available credibility score provided by fact checkers for publishers and users. By jointly estimating the credibility of these actors fake news can be detected by detection models"@en ;
+                                rdfs:label "Credibility based" .
+
+
+###  https://nobias-project.eu/DataCleaning
+nobias-project:DataCleaning rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:Pre-processing ;
+                            rdfs:comment "Method used for data cleaning"@en ;
+                            rdfs:label "Data Cleaning" .
+
+
+###  https://nobias-project.eu/DataIntegration
+nobias-project:DataIntegration rdf:type owl:Class ;
+                               rdfs:subClassOf nobias-project:Pre-processing ;
+                               rdfs:comment "Method used for data integration"@en ;
+                               rdfs:label "Data Integration" .
+
+
+###  https://nobias-project.eu/DataTransformation
+nobias-project:DataTransformation rdf:type owl:Class ;
+                                  rdfs:subClassOf nobias-project:Pre-processing ;
+                                  rdfs:comment "Method used for data transformation"@en ;
+                                  rdfs:label "Data Transformation" .
+
+
+###  https://nobias-project.eu/DatarReduction
+nobias-project:DatarReduction rdf:type owl:Class ;
+                              rdfs:subClassOf nobias-project:Pre-processing ;
+                              rdfs:comment "Method used for data reduction"@en ;
+                              rdfs:label "Data Reduction" .
+
+
+###  https://nobias-project.eu/ExposureBias
+nobias-project:ExposureBias rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:FunctionalBias ;
+                            <http://purl.org/dc/elements/1.1/citation> "Baeza-Yates, R. 2019. Bias in Search and Recommender Systems: (Keynote)."@en ;
+                            <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                            rdfs:label "ExposureBias"@en ;
+                            <http://www.w3.org/2004/02/skos/core#comment> "Another related term 'echo chamber', which refers to situations in which beliefs are amplified or reinforced by communication and repetition inside a closed system and insulated from rebuttal."@en ,
+                                                                          "Related term is 'Filter Bubble', which is a phenomenon that limits an individual’s exposure to a full spectrum of news and other information on the internet by algorithmically prioritizing content that matches a user’s demographic profile and online history or excluding content that does not."@en ,
+                                                                          "The term filter bubble was coined by internet activist Eli Pariser in his book, \"The Filter Bubble: What the Internet Is Hiding from You\" (2011)."@en ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "ExposureBias refers to the type of content that is shown or exposed to Social Media platform users."@en .
+
+
+###  https://nobias-project.eu/FactChecker
+nobias-project:FactChecker rdf:type owl:Class ;
+                           rdfs:subClassOf nobias-project:Actor ;
+                           rdfs:comment "Fact-Checker can be an organization or a website that factually verifies the veracity and correctness of the reported news."@en ;
+                           rdfs:label "FactChecker" .
+
+
+###  https://nobias-project.eu/FunctionalBias
+nobias-project:FunctionalBias rdf:type owl:Class ;
+                              rdfs:subClassOf nobias-project:BiasType ;
+                              <http://purl.org/dc/elements/1.1/citation> "Olteanu A, Castillo C, Diaz F and Kıcıman E (2019) Social Data: Biases, Methodological Pitfalls, and Ethical Boundaries. Front. Big Data 2:13. doi: 10.3389/fdata.2019.00013"@en ;
+                              <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                              rdfs:label "FunctionalBias"@en ;
+                              <http://www.w3.org/2004/02/skos/core#definition> "Functional Biases are a result of platform-specific mechanisms or affordances, that is, the possible actions within each system or environment."@en .
+
+
+###  https://nobias-project.eu/GeographicalBias
+nobias-project:GeographicalBias rdf:type owl:Class ;
+                                rdfs:subClassOf nobias-project:StatisticalBias ;
+                                <http://purl.org/dc/elements/1.1/citation> "Ricardo Baeza-Yates. 2018. Bias on the web. Commun. ACM 61, 6 (June 2018), 54–61. DOI:https://doi.org/10.1145/3209581"@en ;
+                                <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                                rdfs:label "GeographicalBias"@en ;
+                                <http://www.w3.org/2004/02/skos/core#definition> "When false assumptions are made based on locale, or failure to account for regional differences. This type of bias can manifest itself in dfifferent ways: absense of data from certain location, major locations are overrepresented, failure to detect regional disparities or singularties, among others."@en .
+
+
+###  https://nobias-project.eu/IngroupBias
+nobias-project:IngroupBias rdf:type owl:Class ;
+                           rdfs:subClassOf nobias-project:CognitiveBias ;
+                           <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                           rdfs:label "IngroupBias"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "Ingroup Bias is a bias in which people tend to favor people who exist in similar groups as them. These groups could be formed by gender, race, ethnicity, favorite sports team, political convictions."@en .
+
+
+###  https://nobias-project.eu/InteractionBias
+nobias-project:InteractionBias rdf:type owl:Class ;
+                               rdfs:subClassOf nobias-project:BiasType ;
+                               <http://purl.org/dc/elements/1.1/citation> "Olteanu A, Castillo C, Diaz F and Kıcıman E (2019) Social Data: Biases, Methodological Pitfalls, and Ethical Boundaries. Front. Big Data 2:13. doi: 10.3389/fdata.2019.00013"@en ;
+                               <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                               rdfs:label "BehavioralBias"@en ;
+                               <http://www.w3.org/2004/02/skos/core#definition> "Behavioral Bias is systematic distortion in user behavior across platforms or contexts, or across users represented in different datasets that arise due the user interaction with the platform."@en .
+
+
+###  https://nobias-project.eu/KnowledgeBased
+nobias-project:KnowledgeBased rdf:type owl:Class ;
+                              rdfs:subClassOf nobias-project:Architecture ;
+                              rdfs:comment "Knowledge Based architecture assesses news authenticity by comparing knowledge extracted from news content with known facts(true knowledge). True knowledge could be taken manually, by experts or by existing Knowledge Graphs like DBpedia"@en ;
+                              rdfs:label "Knowledge based" .
+
+
+###  https://nobias-project.eu/LanguageBias
+nobias-project:LanguageBias rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:StatisticalBias ;
+                            <http://purl.org/dc/elements/1.1/citation> "Baeza-Yates, R. 2019. Bias in Search and Recommender Systems: (Keynote)."@en ;
+                            <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                            rdfs:label "LanguageBias"@en ;
+                            <http://www.w3.org/2004/02/skos/core#comment> "In relation to web content creation,  there is a significant skew towards the English language when it comes to language used by users in the Internet and the language of websites."@en ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "The over representation of a particular language in content creation."@en .
+
+
+###  https://nobias-project.eu/LearningMethod
+nobias-project:LearningMethod rdf:type owl:Class ;
+                              rdfs:comment "Learning Method is the method by which weights are decided and hyperparameters are tuned in the fake news detection model. Random Grid Search, Bayesian Optimization, Evolutionary Algorithms are some examples of learning methods."@en ;
+                              rdfs:label "Learning Method" .
+
+
+###  https://nobias-project.eu/LinkingBias
+nobias-project:LinkingBias rdf:type owl:Class ;
+                           rdfs:subClassOf nobias-project:InteractionBias ;
+                           <http://purl.org/dc/elements/1.1/citation> "Olteanu A, Castillo C, Diaz F and Kıcıman E (2019) Social Data: Biases, Methodological Pitfalls, and Ethical Boundaries. Front. Big Data 2:13. doi: 10.3389/fdata.2019.00013"@en ;
+                           <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                           rdfs:label "LinkingBias"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "Behavioral biases that are expressed as differences in the attributes of networks obtained from user connections, interactions or activity."@en .
+
+
+###  https://nobias-project.eu/Measurable
+nobias-project:Measurable rdf:type owl:Class ;
+                          rdfs:subClassOf nobias-project:BiasDetectionMethod ;
+                          rdfs:comment "Measurable class that defines a  bias that is measurable."@en ;
+                          rdfs:label "Measurable" .
+
+
+###  https://nobias-project.eu/MediaBias
+nobias-project:MediaBias rdf:type owl:Class ;
+                         rdfs:subClassOf nobias-project:SocietalBias ;
+                         <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                         rdfs:label "MediaBias"@en ;
+                         <http://www.w3.org/2004/02/skos/core#comment> "It commonly refers to how a reporter, news organisation, or TV show covers a political candidate or a policy issue."@en ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "Media bias is the bias or perceived bias of journalists and news producers within the mass media in the selection of events, the stories that are reported, and how they are covered."@en .
+
+
+###  https://nobias-project.eu/MediaPlatform
+nobias-project:MediaPlatform rdf:type owl:Class ;
+                             rdfs:comment "Media Platform is the type of Media used to share news for example mainstream media or social media like Facebook, Twitter etc."@en ;
+                             rdfs:label "Media Platform" .
+
+
+###  https://nobias-project.eu/NetworkBias
+nobias-project:NetworkBias rdf:type owl:Class ;
+                           rdfs:subClassOf nobias-project:FunctionalBias ;
+                           rdfs:label "NetworkBias"@en .
+
+
+###  https://nobias-project.eu/News
+nobias-project:News rdf:type owl:Class ;
+                    rdfs:subClassOf nobias-project:Actor ;
+                    rdfs:comment "News is the record of information on current events in form of a report. It is provided through various mass media for example print, broadcast or through the internet websites." ;
+                    rdfs:label "News" .
+
+
+###  https://nobias-project.eu/NewsClassification
+nobias-project:NewsClassification rdf:type owl:Class ;
+                                  rdfs:comment "News Classification is the class that stored the stores news classification prediction."@en ;
+                                  rdfs:label "NewsClassification" .
+
+
+###  https://nobias-project.eu/NewsContentType
+nobias-project:NewsContentType rdf:type owl:Class ;
+                               rdfs:comment "News Content Type is the type of content news article has. For example, text, videos, audio, photos etc."@en ;
+                               rdfs:label "News Content Type" .
+
+
+###  https://nobias-project.eu/NewsSource
+nobias-project:NewsSource rdf:type owl:Class ;
+                          rdfs:subClassOf nobias-project:Actor ;
+                          rdfs:comment "News Source is the source of news report. It is usually a publishing company or a media house which publishes the news using mass media."@en ;
+                          rdfs:label "NewsSource" .
+
+
+###  https://nobias-project.eu/Non-Measurable
+nobias-project:Non-Measurable rdf:type owl:Class ;
+                              rdfs:subClassOf nobias-project:BiasDetectionMethod ;
+                              rdfs:comment "Non Measurable class defines whether bias detection class is non measurable. For example, when a bias arising from a human subject i.e. cognitive bias, it is not possible to quatify it."@en ;
+                              rdfs:label "Non Measurable" .
+
+
+###  https://nobias-project.eu/ObserverBias
+nobias-project:ObserverBias rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:StatisticalBias ;
+                            <http://purl.org/dc/elements/1.1/citation> "Catalogue of Bias Collaboration. Mahtani K, Spencer EA, Brassey J,  Observer bias. In: Catalogue Of Bias 2017:   https://www.catalogofbias.org/biases/observer-bias"@en ;
+                            rdfs:label "ObserverBias"@en ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "Observer bias is a form of detection bias originating at a study's stage of observing or recording information. Different observers may assess subjective criteria differently, and cognitive biases can affect how a subject is assessed."@en .
+
+
+###  https://nobias-project.eu/OptimizationTechnique
+nobias-project:OptimizationTechnique rdf:type owl:Class ;
+                                     rdfs:comment "OptimizationTechnique is the technique used by classifiers for optimizing their results. For example, Alternating Direction Method of Multipliers(ADMM), Gradient Descent, Adaptive Optimizers like Adagrad, RMDprop etc. are some optimizers used for classification tasks."@en ;
+                                     rdfs:label "Optimization Technique" .
+
+
+###  https://nobias-project.eu/PartisanBias
+nobias-project:PartisanBias rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:SocietalBias ;
+                            <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                            rdfs:label "PartisanBias"@en ;
+                            <http://www.w3.org/2004/02/skos/core#comment> "also known as Political bias"@en ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "Political bias is a bias or perceived bias involving the slanting or altering of information to make a political position or political candidate seem more attractive."@en .
+
+
+###  https://nobias-project.eu/PopularityBias
+nobias-project:PopularityBias rdf:type owl:Class ;
+                              rdfs:subClassOf nobias-project:FunctionalBias ;
+                              <http://purl.org/dc/elements/1.1/citation> "Baeza-Yates, R. 2019. Bias in Search and Recommender Systems: (Keynote)."@en ;
+                              <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                              rdfs:label "PopularityBias"@en ;
+                              <http://www.w3.org/2004/02/skos/core#definition> "Popularity bias refers to a characteristic of recommenders where due to algorithmic optimization, popular items are recommended frequently while less popular, niche products, are recommended rarely or not at all."@en .
+
+
+###  https://nobias-project.eu/Pre-processing
+nobias-project:Pre-processing rdf:type owl:Class ;
+                              rdfs:comment "Pre-processing class defines the method by which Pre-procesing is done. Typically it has the files used for data pre-processing. There are many ways to do pre-processing like data reduction, data cleaning, data integration and data transformation which are the subclasses of Pre-processing class."@en ;
+                              rdfs:label "Pre-processing" .
+
+
+###  https://nobias-project.eu/PropagationBased
+nobias-project:PropagationBased rdf:type owl:Class ;
+                                rdfs:subClassOf nobias-project:Architecture ;
+                                rdfs:comment "Propagation Based architecture uses the social context between entities in news propagation such relationships can be between users of social media platform, publisher of news or frequency of news being shared with users"@en ;
+                                rdfs:label "Propagation based" .
+
+
+###  https://nobias-project.eu/RankingBias
+nobias-project:RankingBias rdf:type owl:Class ;
+                           rdfs:subClassOf nobias-project:InteractionBias ;
+                           <http://purl.org/dc/elements/1.1/citation> <https://ntent.com/fake-news-and-the-power-of-algorithms/> ,
+                                                                      "Baeza-Yates, R. 2019. Bias in Search and Recommender Systems: (Keynote)."@en ;
+                           rdfs:label "RankingBias"@en ;
+                           <http://www.w3.org/2004/02/skos/core#comment> "Associated to self-selection bias, confirmation bias, position bias."@en ,
+                                                                         "Example: When an article is written, one of the sources guiding the research/investigation may be referencing to the top results on a search engine. \"When the article is published again on the Web, it in turn affects the ranking of the results. Thus, the concentration on a few sources is strengthened, new content is influenced in that direction, and the search engines regard it as correct.\""@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "RankingBias refers to a characteristic of recommenders where due to algorithmic optimization some items are better positioned than others, leading to users in social media platforms  to assume that higher-ranked items are better choices."@en .
+
+
+###  https://nobias-project.eu/RatingScale
+nobias-project:RatingScale rdf:type owl:Class ;
+                           rdfs:comment "Rating Scale is the scale that defines truthfulness of news items. For example, credibility of user or credibility of publisher."@en ;
+                           rdfs:label "Rating Scale" .
+
+
+###  https://nobias-project.eu/SharingBehaviour
+nobias-project:SharingBehaviour rdf:type owl:Class ;
+                                rdfs:comment "Sharing Behaviour describes the behaviour of the user that shares the news and how many times it is being shared."@en ;
+                                rdfs:label "SharingBehaviour" .
+
+
+###  https://nobias-project.eu/SocialMediaUser
+nobias-project:SocialMediaUser rdf:type owl:Class ;
+                               rdfs:subClassOf nobias-project:Actor ;
+                               rdfs:comment "SocialMediaUser is the individual user of social media websites like Facebook, Twitter or Instagram. Users can share news on their platform with their network, comment on it and propagate it. Users follow other users and create their networks and communities online based on their shared interests and opinions."@en ;
+                               rdfs:label "SocialMediaUser" .
+
+
+###  https://nobias-project.eu/SocietalBias
+nobias-project:SocietalBias rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:BiasType ;
+                            <http://purl.org/dc/elements/1.1/citation> """Pitoura, E. 2020. Social-minded Measures of Data Quality: Fairness, Diversity, and Lack of Bias. J. Data and Information Quality 12, 3, Article 12 (July 2020), 8 pages. 
+https://doi.org/10.1145/3404193"""@en ;
+                            <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                            rdfs:label "SocietalBias"@en ;
+                            <http://www.w3.org/2004/02/skos/core#comment> "Related to Cultural biases"@en ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "Societal Bias occurs due to objectionable social structures, human biases, and preferences that are reflected in data or, when designing, implementing, evaluating and using algorithms and systems."@en .
+
+
+###  https://nobias-project.eu/StatisticalBias
+nobias-project:StatisticalBias rdf:type owl:Class ;
+                               rdfs:subClassOf nobias-project:BiasType ;
+                               <http://purl.org/dc/elements/1.1/citation> "Olteanu A, Castillo C, Diaz F and Kıcıman E (2019) Social Data: Biases, Methodological Pitfalls, and Ethical Boundaries. Front. Big Data 2:13. doi: 10.3389/fdata.2019.00013"^^xsd:string ,
+                                                                          """Pitoura, E. 2020. Social-minded Measures of Data Quality: Fairness, Diversity, and Lack of Bias. J. Data and Information Quality 12, 3, Article 12 (July 2020), 8 pages. 
+https://doi.org/10.1145/3404193"""@en ;
+                               <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                               rdfs:label "StatisticalBias"@en ;
+                               <http://www.w3.org/2004/02/skos/core#comment> "Could also be called 'Data Bias': A systematic distortion in the sampled data that compromises its representativeness."@en ,
+                                                                             "One of many quality issues that can attributed to data."@en ;
+                               <http://www.w3.org/2004/02/skos/core#definition> "Statistical biases mostly refer to non-representative sampling and errors in measurements."@en .
+
+
+###  https://nobias-project.eu/StyleBased
+nobias-project:StyleBased rdf:type owl:Class ;
+                          rdfs:subClassOf nobias-project:Architecture ;
+                          rdfs:comment "Style Based architecture compares the writing style of news content with a fake news style. This fake news style is a set of machine learning features that represent fake news. They can be textual(linguistic) style features or visual style features"@en ;
+                          rdfs:label "Style based" .
+
+
+###  https://nobias-project.eu/TemporalBias
+nobias-project:TemporalBias rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:StatisticalBias ;
+                            <http://purl.org/dc/elements/1.1/citation> "Olteanu A, Castillo C, Diaz F and Kıcıman E (2019) Social Data: Biases, Methodological Pitfalls, and Ethical Boundaries. Front. Big Data 2:13. doi: 10.3389/fdata.2019.00013"@en ;
+                            <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
+                            rdfs:label "TemporalBias" ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "Systematic distortions across user populations or behaviors over time."@en .
+
+
+###  https://nobias-project.eu/test_ind
+nobias-project:test_ind rdf:type owl:Class ;
+                        rdfs:subClassOf dcat:Dataset ;
+                        rdfs:comment "test_ind is the class that represents the information about individuals that are being used in testing the model. It is a subclass of dcat:Dataset class."@en ;
+                        rdfs:label "Testing set" .
+
+
+###  https://nobias-project.eu/train_ind
+nobias-project:train_ind rdf:type owl:Class ;
+                         rdfs:subClassOf dcat:Dataset ;
+                         rdfs:comment "train_ind is the class that represents the information about individuals that are being used in training the model. It is a subclass of dcat:Dataset class."@en ;
+                         rdfs:label "Training set" .
+
+
+###  https://www.openriskmanual.org/ns/doam#Model_Components
+doam:Model_Components rdf:type owl:Class ;
+                      rdfs:comment "Model Components are the components of predictive model in use. Different types of predictive model have different components. For example, a Bayesian Network Model will have components like Bayesian Network Nodes, a Rule Set Model will have Rule Set as components and Neural Network Model will have Neural Layer, Neural Inputs/Outputs as modelling components."@en ;
+                      rdfs:label "Model Components" .
+
+
+###  https://www.openriskmanual.org/ns/doam#Output
+doam:Output rdf:type owl:Class ;
+            rdfs:comment "doam:Output is the output of the fake news detection model, it has a NewsScore and a subclass NewsClassification which has news label whether it is Fake News or Real News."@en ;
+            rdfs:label "Output" .
+
+
+###  https://www.openriskmanual.org/ns/doam#Predictive_Model
+doam:Predictive_Model rdf:type owl:Class ;
+                      rdfs:comment "Predictive Model is the type of mathematical or machine learning Model used in the prediction task. Using a method or algorithm the model trains and then calculates the prediction for testing inputs."@en ;
+                      rdfs:label "Predictive Model" .
+
+
+###  https://www.openriskmanual.org/ns/doam#Rule_Set
+doam:Rule_Set rdf:type owl:Class ;
+              rdfs:subClassOf doam:Model_Components ;
+              rdfs:label "Rule Set"@en .
+
+
+###  https://www.openriskmanual.org/ns/doam#Rule_Set_Model
+doam:Rule_Set_Model rdf:type owl:Class ;
+                    rdfs:subClassOf doam:Predictive_Model ;
+                    rdfs:label "Rule set model"@en .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
