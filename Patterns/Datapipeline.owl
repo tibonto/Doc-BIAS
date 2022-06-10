@@ -1,0 +1,468 @@
+@prefix : <https://nobias-project.eu/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix mls: <http://www.w3.org/ns/mls#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nobias-project: <https://nobias-project.eu/> .
+@base <https://nobias-project.eu/> .
+
+<https://nobias-project.eu/> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/dc/terms/Creator
+dct:Creator rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain dcat:Dataset ;
+            rdfs:range foaf:Person ;
+            rdfs:comment "defines creator of the Dataset" .
+
+
+###  http://purl.org/dc/terms/language
+dct:language rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain dcat:Dataset ;
+             rdfs:range dct:LinguisticSystem ;
+             rdfs:comment "defines the language used in Dataset" .
+
+
+###  http://purl.org/dc/terms/publisher
+dct:publisher rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain dcat:Dataset ;
+              rdfs:range foaf:Agent ;
+              rdfs:comment "defines publisher of the Dataset" .
+
+
+###  http://purl.org/dc/terms/temporal
+dct:temporal rdf:type owl:ObjectProperty ;
+             rdfs:domain dcat:Dataset ;
+             rdfs:range dct:PeriodOfTime ;
+             rdfs:comment "defines the period of time from which news is collected" .
+
+
+###  http://www.w3.org/ns/dcat#theme
+dcat:theme rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain dcat:Dataset ;
+           rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+           rdfs:comment "defines genre of the Dataset" .
+
+
+###  http://www.w3.org/ns/dqv#computedOn
+dqv:computedOn rdf:type owl:ObjectProperty ;
+               rdfs:domain dcat:Dataset ;
+               rdfs:range dqv:QualityMeasurement ;
+               rdfs:comment "defines measure of metric which is computed on dataset" .
+
+
+###  http://www.w3.org/ns/dqv#hasQualityAnnotation
+dqv:hasQualityAnnotation rdf:type owl:ObjectProperty ;
+                         rdfs:domain dcat:Dataset ;
+                         rdfs:range dqv:QualityAnnotation ;
+                         rdfs:comment "defines annotations related to quality that Dataset has" .
+
+
+###  http://www.w3.org/ns/dqv#inCategory
+dqv:inCategory rdf:type owl:ObjectProperty ;
+               rdfs:domain dqv:Dimension ;
+               rdfs:range dqv:Category ;
+               rdfs:comment "defines Category that given Dimension belongs to" .
+
+
+###  http://www.w3.org/ns/dqv#inDimension
+dqv:inDimension rdf:type owl:ObjectProperty ;
+                rdfs:domain dqv:Metric ;
+                rdfs:range dqv:Dimension ;
+                rdfs:comment "defines Dimension who has given Metric" .
+
+
+###  http://www.w3.org/ns/dqv#isMeasurementOf
+dqv:isMeasurementOf rdf:type owl:ObjectProperty ;
+                    rdfs:domain dqv:QualityMeasurement ;
+                    rdfs:range dqv:Metric ;
+                    rdfs:comment "defines metric which is measured" .
+
+
+###  http://www.w3.org/ns/odrl/2/target
+odrl:target rdf:type owl:ObjectProperty ;
+            rdfs:domain dqv:QualityPolicy ;
+            rdfs:range dcat:Dataset ;
+            rdfs:comment "defines dataset for which a quality policy is applicable for" .
+
+
+###  https://nobias-project.eu/hasContentType
+nobias-project:hasContentType rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf owl:topObjectProperty ;
+                              rdfs:domain dcat:Dataset ;
+                              rdfs:range nobias-project:NewsContentType ;
+                              rdfs:comment "defines the type of content is used in news articles like text, images, videos etc." .
+
+
+###  https://nobias-project.eu/hasInput
+nobias-project:hasInput rdf:type owl:ObjectProperty ;
+                        rdfs:domain mls:Model ;
+                        rdfs:range dcat:Dataset ;
+                        rdfs:comment "defines input to the Model in form of Datase" .
+
+
+###  https://nobias-project.eu/hasMediaPlatform
+nobias-project:hasMediaPlatform rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf owl:topObjectProperty ;
+                                rdfs:domain dcat:Dataset ;
+                                rdfs:range nobias-project:MediaPlatform ;
+                                rdfs:comment "defines Media Platform that is used by users who share news" .
+
+
+###  https://nobias-project.eu/hasRating
+nobias-project:hasRating rdf:type owl:ObjectProperty ;
+                         rdfs:domain dcat:Dataset ;
+                         rdfs:range nobias-project:RatingScale ;
+                         rdfs:comment "defines Rating Scale is used to rate publishers" .
+
+
+###  https://nobias-project.eu/preparesData
+nobias-project:preparesData rdf:type owl:ObjectProperty ;
+                            rdfs:domain nobias-project:Pre-processing ;
+                            rdfs:range dcat:Dataset ;
+                            rdfs:comment "defines files that \\\\ are used in preparing the Data for training to be used by Model" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/dc/terms/Issued
+dct:Issued rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdfs:domain dcat:Dataset ;
+           rdfs:range rdfs:Literal ;
+           rdfs:comment "defines date on which Dataset is published" .
+
+
+###  http://purl.org/dc/terms/description
+dct:description rdf:type owl:DatatypeProperty ;
+                rdfs:domain dcat:Dataset ;
+                rdfs:range rdfs:Literal ;
+                rdfs:comment "gives description of dataset" .
+
+
+###  http://purl.org/dc/terms/modified
+dct:modified rdf:type owl:DatatypeProperty ;
+             rdfs:domain dcat:Dataset ;
+             rdfs:range rdfs:Literal ;
+             rdfs:comment "defines date on which Dataset is modified" .
+
+
+###  http://purl.org/dc/terms/title
+dct:title rdf:type owl:DatatypeProperty ;
+          rdfs:domain dcat:Dataset ;
+          rdfs:range rdfs:Literal ;
+          rdfs:comment "defines title of the Dataset" .
+
+
+###  http://www.w3.org/ns/dcat#Keyword
+dcat:Keyword rdf:type owl:DatatypeProperty ;
+             rdfs:domain dcat:Dataset ;
+             rdfs:range rdfs:Literal ;
+             rdfs:comment "defines Keywords describing the Dataset" .
+
+
+###  http://www.w3.org/ns/dqv#ExpectedDatatype
+dqv:ExpectedDatatype rdf:type owl:DatatypeProperty ;
+                     rdfs:domain dqv:Metric ;
+                     rdfs:range rdfs:Literal ;
+                     rdfs:comment "defines expected datatype of metric" .
+
+
+###  http://www.w3.org/ns/dqv#Value
+dqv:Value rdf:type owl:DatatypeProperty ;
+          rdfs:domain dqv:QualityMeasurement ;
+          rdfs:range rdfs:Literal ;
+          rdfs:comment "defines value of the metric measured" .
+
+
+###  https://nobias-project.eu/TotalStories
+nobias-project:TotalStories rdf:type owl:DatatypeProperty ;
+                            rdfs:domain dcat:Dataset ;
+                            rdfs:range xsd:integer ;
+                            rdfs:comment "defines total number of news stories in  Dataset" .
+
+
+###  https://nobias-project.eu/hasSpontaneity
+nobias-project:hasSpontaneity rdf:type owl:DatatypeProperty ;
+                              rdfs:domain dcat:Dataset ;
+                              rdfs:range xsd:boolean ;
+                              rdfs:comment "defines whether dataset was spontaneously collected from \\\\ Media Platforms or computer-generated" .
+
+
+###  https://nobias-project.eu/isAvailable
+nobias-project:isAvailable rdf:type owl:DatatypeProperty ;
+                           rdfs:domain dcat:Dataset ;
+                           rdfs:range xsd:boolean ;
+                           rdfs:comment "defines whether dataset is publicly available" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/dc/terms/LinguisticSystem
+dct:LinguisticSystem rdf:type owl:Class ;
+                     rdfs:comment "describes which language is the news content in" ;
+                     rdfs:label "Language" .
+
+
+###  http://purl.org/dc/terms/PeriodOfTime
+dct:PeriodOfTime rdf:type owl:Class ;
+                 rdfs:comment "Time period during which news from the dataset are published" ;
+                 rdfs:label "Time Period" .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+<http://www.w3.org/2004/02/skos/core#Concept> rdf:type owl:Class ;
+                                              rdfs:comment "describes the theme of Dataset" ;
+                                              rdfs:label "Theme" .
+
+
+###  http://www.w3.org/ns/dcat#Catalogue
+dcat:Catalogue rdf:type owl:Class ;
+               rdfs:subClassOf dcat:Dataset ;
+               rdfs:comment "dcat:Catalogue represents a catalogue, which is a dataset in which each individual item is a metadata record describing some resource; the scope of dcat:Catalog is collections of metadata about datasets or data" ;
+               rdfs:label "Catalogue" .
+
+
+###  http://www.w3.org/ns/dcat#Dataset
+dcat:Dataset rdf:type owl:Class ;
+             rdfs:comment "This represents a dataset which is a collection of data, published or curated by a publishing agent. It contains data in many forms including text, photos, videos and links etc" ;
+             rdfs:label "Dataset" .
+
+
+###  http://www.w3.org/ns/dqv#Category
+dqv:Category rdf:type owl:Class ;
+             rdfs:comment "Category is a group of quality dimensions in which a common type of information is used as quality indicator" ;
+             rdfs:label "Category" .
+
+
+###  http://www.w3.org/ns/dqv#Dimension
+dqv:Dimension rdf:type owl:Class ;
+              rdfs:comment "Dimension is a criteria relevant for assessing quality. Each dimension is part of a broader category of Data Quality Assessment" ;
+              rdfs:label "Dimension" .
+
+
+###  http://www.w3.org/ns/dqv#Metric
+dqv:Metric rdf:type owl:Class ;
+           rdfs:comment "Metric is a standard to measure a quality dimension. An observation(instance of dqv:QualityMeasurement) assigns a value in a given unit to a Metric." ;
+           rdfs:label "Metric" .
+
+
+###  http://www.w3.org/ns/dqv#QualityAnnotation
+dqv:QualityAnnotation rdf:type owl:Class ;
+                      rdfs:comment "QualityAnnotation is a quality annotations, including ratings, quality certificates or feedback that can be associated to datasets" ;
+                      rdfs:label "QualityAnnotation" .
+
+
+###  http://www.w3.org/ns/dqv#QualityCertificate
+dqv:QualityCertificate rdf:type owl:Class ;
+                       rdfs:subClassOf dqv:QualityAnnotation ;
+                       rdfs:comment "QualityCertificate is subclass of QualityAnnotation. It associates a dataset to a document that	certifies the data quality according to a set of quality assessment rules" ;
+                       rdfs:label "QualityCertificate" .
+
+
+###  http://www.w3.org/ns/dqv#QualityMeasurement
+dqv:QualityMeasurement rdf:type owl:Class ;
+                       rdfs:comment "QualityMeasurement is the evaluation of a given dataset a specific quality metric." ;
+                       rdfs:label "QualityMeasurement" .
+
+
+###  http://www.w3.org/ns/dqv#QualityPolicy
+dqv:QualityPolicy rdf:type owl:Class ;
+                  rdfs:comment "QualityPolicy is a policy or agreement that is chiefly governed by data quality concerns" ;
+                  rdfs:label "QualityPolicy" .
+
+
+###  http://www.w3.org/ns/mls#Model
+mls:Model rdf:type owl:Class ;
+          rdfs:comment "This is the class for the fake news detection model. It takes input from dataset and gives output in form of NewsClassification and NewsScore. It has a model type, architecture, process and algorithm for classification as classifier. It classifies News in two group Fake News and Real News." ;
+          rdfs:label "Model" .
+
+
+###  http://xmlns.com/foaf/0.1/Agent
+foaf:Agent rdf:type owl:Class ;
+           rdfs:comment "Publisher of the Dataset" ;
+           rdfs:label "Dataset Publisher" .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+foaf:Person rdf:type owl:Class ;
+            rdfs:comment "creator of the dataset" ;
+            rdfs:label "Creator" .
+
+
+###  https://nobias-project.eu/DataCleaning
+nobias-project:DataCleaning rdf:type owl:Class ;
+                            rdfs:subClassOf nobias-project:Pre-processing ;
+                            rdfs:comment "method used for data cleaning" ;
+                            rdfs:label "Data Cleaning" .
+
+
+###  https://nobias-project.eu/DataIntegration
+nobias-project:DataIntegration rdf:type owl:Class ;
+                               rdfs:subClassOf nobias-project:Pre-processing ;
+                               rdfs:comment "method used for data integration" ;
+                               rdfs:label "Data Integration" .
+
+
+###  https://nobias-project.eu/DataTransformation
+nobias-project:DataTransformation rdf:type owl:Class ;
+                                  rdfs:subClassOf nobias-project:Pre-processing ;
+                                  rdfs:comment "method used for data transformation" ;
+                                  rdfs:label "Data Transformation" .
+
+
+###  https://nobias-project.eu/DatarReduction
+nobias-project:DatarReduction rdf:type owl:Class ;
+                              rdfs:subClassOf nobias-project:Pre-processing ;
+                              rdfs:comment "method used for data reduction" ;
+                              rdfs:label "Data Reduction" .
+
+
+###  https://nobias-project.eu/MediaPlatform
+nobias-project:MediaPlatform rdf:type owl:Class ;
+                             rdfs:comment "MediaPlatform is the type of Media used to share news for example mainstream media or social media like Facebook, Twitter etc." ;
+                             rdfs:label "Media Platform" .
+
+
+###  https://nobias-project.eu/NewsContentType
+nobias-project:NewsContentType rdf:type owl:Class ;
+                               rdfs:comment "NewsContentType is the type of content news article has. For example, text, videos, audio, photos etc." ;
+                               rdfs:label "News Content Type" .
+
+
+###  https://nobias-project.eu/Pre-processing
+nobias-project:Pre-processing rdf:type owl:Class ;
+                              rdfs:comment "Pre-processing class defines the method by which Pre-procesing is done. Typically it stores the files used for data pre-processing. There are many ways to do pre-processing like data reduction, data cleaning, data integration and data transformation which are the subclasses of Pre-processing class." ;
+                              rdfs:label "Pre-processing" .
+
+
+###  https://nobias-project.eu/RatingScale
+nobias-project:RatingScale rdf:type owl:Class ;
+                           rdfs:comment "RatingScale is the scale that defines truthfulness of news items. For example, credibility of user or credibility of publisher." ;
+                           rdfs:label "Rating Scale" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://nobias-project.eu/Buzzfeed_Dataset
+nobias-project:Buzzfeed_Dataset rdf:type owl:NamedIndividual ,
+                                         dcat:Dataset ;
+                                dct:Creator nobias-project:Shu_et_al ;
+                                dct:language nobias-project:English ;
+                                dct:publisher nobias-project:github.com ;
+                                dct:temporal nobias-project:NewsTimePeriod ;
+                                dcat:theme nobias-project:Fake_Detection ;
+                                dqv:computedOn nobias-project:measurement1 ;
+                                nobias-project:hasContentType nobias-project:Text ;
+                                nobias-project:hasMediaPlatform nobias-project:mainstream ;
+                                nobias-project:hasRating <https://nobias-project.eu/3_values> ;
+                                dct:description "Contains data about real and fake news from Buzzfeed news articles" ;
+                                dct:modified 2018 ;
+                                dct:title "Buzzfeed" ;
+                                nobias-project:TotalStories 182 ;
+                                nobias-project:hasSpontaneity "true"^^xsd:boolean ;
+                                nobias-project:isAvailable "true"^^xsd:boolean .
+
+
+###  https://nobias-project.eu/English
+nobias-project:English rdf:type owl:NamedIndividual ,
+                                dct:LinguisticSystem .
+
+
+###  https://nobias-project.eu/FakeNewsNet
+nobias-project:FakeNewsNet rdf:type owl:NamedIndividual ,
+                                    dcat:Catalogue .
+
+
+###  https://nobias-project.eu/Fake_Detection
+nobias-project:Fake_Detection rdf:type owl:NamedIndividual ,
+                                       <http://www.w3.org/2004/02/skos/core#Concept> .
+
+
+###  https://nobias-project.eu/General_pol_buzz.py
+nobias-project:General_pol_buzz.py rdf:type owl:NamedIndividual ,
+                                            nobias-project:Pre-processing ;
+                                   nobias-project:preparesData nobias-project:Buzzfeed_Dataset .
+
+
+###  https://nobias-project.eu/NewsTimePeriod
+nobias-project:NewsTimePeriod rdf:type owl:NamedIndividual ,
+                                       dct:PeriodOfTime .
+
+
+###  https://nobias-project.eu/PSL_Model
+nobias-project:PSL_Model rdf:type owl:NamedIndividual ,
+                                  mls:Model ;
+                         nobias-project:hasInput nobias-project:Buzzfeed_Dataset .
+
+
+###  https://nobias-project.eu/Representation
+nobias-project:Representation rdf:type owl:NamedIndividual ,
+                                       dqv:Category .
+
+
+###  https://nobias-project.eu/Shu_et_al
+nobias-project:Shu_et_al rdf:type owl:NamedIndividual ,
+                                  foaf:Person .
+
+
+###  https://nobias-project.eu/Text
+nobias-project:Text rdf:type owl:NamedIndividual ,
+                             nobias-project:NewsContentType .
+
+
+###  https://nobias-project.eu/Understandability
+nobias-project:Understandability rdf:type owl:NamedIndividual ,
+                                          dqv:Dimension ;
+                                 dqv:inCategory nobias-project:Representation .
+
+
+###  https://nobias-project.eu/github.com
+nobias-project:github.com rdf:type owl:NamedIndividual ,
+                                   foaf:Agent .
+
+
+###  https://nobias-project.eu/labelUnderstandabilityMetric
+nobias-project:labelUnderstandabilityMetric rdf:type owl:NamedIndividual ,
+                                                     dqv:Metric ;
+                                            dqv:inDimension nobias-project:Understandability .
+
+
+###  https://nobias-project.eu/mainstream
+nobias-project:mainstream rdf:type owl:NamedIndividual ,
+                                   nobias-project:MediaPlatform .
+
+
+###  https://nobias-project.eu/measurement1
+nobias-project:measurement1 rdf:type owl:NamedIndividual ,
+                                     dqv:QualityMeasurement ;
+                            dqv:isMeasurementOf nobias-project:labelUnderstandabilityMetric .
+
+
+###  https://nobias-project.eu/3_values
+<https://nobias-project.eu/3_values> rdf:type owl:NamedIndividual ,
+                                              nobias-project:RatingScale .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

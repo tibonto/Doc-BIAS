@@ -1,0 +1,336 @@
+@prefix : <https://nobias-project.eu/> .
+@prefix mls: <http://www.w3.org/ns/mls#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nobias-project: <https://nobias-project.eu/> .
+@base <https://nobias-project.eu/> .
+
+<https://nobias-project.eu/> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.w3.org/ns/prov#used
+prov:used rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain prov:Activity ;
+          rdfs:range dcat:Dataset ;
+          rdfs:comment "defines the Dataset  that is used for provenance" .
+
+
+###  http://www.w3.org/ns/prov#wasGeneratedBy
+prov:wasGeneratedBy rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain nobias-project:Actor ;
+                    rdfs:range prov:Activity ;
+                    rdfs:comment "defines the provenance Activity that generates the Actor" .
+
+
+###  https://nobias-project.eu/checks
+nobias-project:checks rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdfs:domain nobias-project:FactChecker ;
+                      rdfs:range nobias-project:NewsSource ;
+                      rdfs:comment "defines Fact Checker checking a News" .
+
+
+###  https://nobias-project.eu/follows
+nobias-project:follows rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf owl:topObjectProperty ;
+                       rdfs:domain nobias-project:SocialMediaUser ;
+                       rdfs:range nobias-project:SocialMediaUser ;
+                       rdfs:comment "defines SocialMediaUser following another  SocialMediaUser" .
+
+
+###  https://nobias-project.eu/hasActorType
+nobias-project:hasActorType rdf:type owl:ObjectProperty ;
+                            rdfs:domain nobias-project:Actor ;
+                            rdfs:range nobias-project:ActorType ;
+                            rdfs:comment "defines Actor type: active or passive for Actor" .
+
+
+###  https://nobias-project.eu/hasSource
+nobias-project:hasSource rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdfs:domain nobias-project:News ;
+                         rdfs:range nobias-project:NewsSource ;
+                         rdfs:comment "defines News Source  for a News" .
+
+
+###  https://nobias-project.eu/publishes
+nobias-project:publishes rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdfs:domain nobias-project:NewsSource ;
+                         rdfs:range nobias-project:News ;
+                         rdfs:comment "defines News published by a News Source" .
+
+
+###  https://nobias-project.eu/sharedBy
+nobias-project:sharedBy rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain nobias-project:News ;
+                        rdfs:range nobias-project:SharingBehaviour ;
+                        rdfs:comment "defines News that is  being shared" .
+
+
+###  https://nobias-project.eu/shares
+nobias-project:shares rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdfs:domain nobias-project:SocialMediaUser ;
+                      rdfs:range nobias-project:SharingBehaviour ;
+                      rdfs:comment "defines SocialMediaUser that shares the News" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://nobias-project.eu/hasCredibilityClass
+nobias-project:hasCredibilityClass rdf:type owl:DatatypeProperty ;
+                                   rdfs:subPropertyOf owl:topDataProperty ;
+                                   rdfs:domain nobias-project:NewsSource ;
+                                   rdfs:range xsd:string ;
+                                   rdfs:comment "defines Credibility Class of News Source given by" .
+
+
+###  https://nobias-project.eu/hasCredibilityScore
+nobias-project:hasCredibilityScore rdf:type owl:DatatypeProperty ;
+                                   rdfs:subPropertyOf owl:topDataProperty ;
+                                   rdfs:domain nobias-project:NewsSource ;
+                                   rdfs:range xsd:float ;
+                                   rdfs:comment "defines Credibility Score of News Source given by Factchecker" .
+
+
+###  https://nobias-project.eu/hasFactCheckerUrl
+nobias-project:hasFactCheckerUrl rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf owl:topDataProperty ;
+                                 rdfs:domain nobias-project:FactChecker ;
+                                 rdfs:range xsd:string ;
+                                 rdfs:comment "defines URL of the Fact-checking website or organization" .
+
+
+###  https://nobias-project.eu/hasGroundTruth
+nobias-project:hasGroundTruth rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf owl:topDataProperty ;
+                              rdfs:domain nobias-project:News ;
+                              rdfs:range xsd:int ;
+                              rdfs:comment "defines the ground truth of news whether it is fake or real" .
+
+
+###  https://nobias-project.eu/hasNewsContent
+nobias-project:hasNewsContent rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf owl:topDataProperty ;
+                              rdfs:domain nobias-project:News ;
+                              rdfs:range xsd:string ;
+                              rdfs:comment "define News content  in text form" .
+
+
+###  https://nobias-project.eu/hasNewsID
+nobias-project:hasNewsID rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain nobias-project:News ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "defines unique News Identifier" .
+
+
+###  https://nobias-project.eu/hasNewsTitle
+nobias-project:hasNewsTitle rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf owl:topDataProperty ;
+                            rdfs:domain nobias-project:News ;
+                            rdfs:range xsd:string ;
+                            rdfs:comment "defines News Title" .
+
+
+###  https://nobias-project.eu/hasNewsUrl
+nobias-project:hasNewsUrl rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf owl:topDataProperty ;
+                          rdfs:domain nobias-project:News ;
+                          rdfs:range xsd:string ;
+                          rdfs:comment "defines News URL" .
+
+
+###  https://nobias-project.eu/hasSocialMediaUrl
+nobias-project:hasSocialMediaUrl rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf owl:topDataProperty ;
+                                 rdfs:domain nobias-project:SocialMediaUser ;
+                                 rdfs:range xsd:string ;
+                                 rdfs:comment "defines URL of Social Media that a User uses" .
+
+
+###  https://nobias-project.eu/sourceUrl
+nobias-project:sourceUrl rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain nobias-project:NewsSource ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "defines URL for News Source" .
+
+
+###  https://nobias-project.eu/timesShared
+nobias-project:timesShared rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf owl:topDataProperty ;
+                           rdfs:domain nobias-project:SharingBehaviour ;
+                           rdfs:range xsd:int ;
+                           rdfs:comment "defines how many times a news is shared by a given user" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.w3.org/ns/dcat#Dataset
+dcat:Dataset rdf:type owl:Class ;
+             rdfs:comment "This represents a dataset which is a collection of data, published or curated by a publishing agent. It contains data in many forms including text, photos, videos and links etc." ;
+             rdfs:label "Dataset" .
+
+
+###  http://www.w3.org/ns/prov#Activity
+prov:Activity rdf:type owl:Class ;
+              rdfs:comment "This is an activity that provides provenance to the entities described in this pattern using a data source/dataset that is available and used for implementation of the Actor" ;
+              rdfs:label "ProvenanceActivity" .
+
+
+###  https://nobias-project.eu/Actor
+nobias-project:Actor rdf:type owl:Class ;
+                     rdfs:comment "Actors are the main elements of the fake news ecosystem. Their interaction is recorded as a bias event as they can influence bias, carry bias within themselves and can potentially propagate bias to other elements of fake news ecosystem." ;
+                     rdfs:label "Actor" .
+
+
+###  https://nobias-project.eu/ActorType
+nobias-project:ActorType rdf:type owl:Class ;
+                         rdfs:comment "This is the type of relationship an actor has with bias. An active type of actor itself influences the bias while a passive type of actor can only carry bias from its source and itself has no influence on increasing or decreasing bias. It can only transfer bias." ;
+                         rdfs:label "ActorType" .
+
+
+###  https://nobias-project.eu/FactChecker
+nobias-project:FactChecker rdf:type owl:Class ;
+                           rdfs:subClassOf nobias-project:Actor .
+
+
+###  https://nobias-project.eu/News
+nobias-project:News rdf:type owl:Class ;
+                    rdfs:subClassOf nobias-project:Actor ;
+                    rdfs:comment "News is the record of information on current events in form of a report. It is provided through various mass media for example print, broadcast or through the internet websites." ;
+                    rdfs:label "News" .
+
+
+###  https://nobias-project.eu/NewsSource
+nobias-project:NewsSource rdf:type owl:Class ;
+                          rdfs:subClassOf nobias-project:Actor ;
+                          rdfs:comment "NewsSource is the source of news report. It is usually a publishing company or a media house which publishes the news using mass media." ;
+                          rdfs:label "NewsSource" .
+
+
+###  https://nobias-project.eu/SharingBehaviour
+nobias-project:SharingBehaviour rdf:type owl:Class ;
+                                rdfs:comment "SharingBehaviour describes the behaviour of the user that shares the news and how many times it is being shared." ;
+                                rdfs:label "SharingBehaviour" .
+
+
+###  https://nobias-project.eu/SocialMediaUser
+nobias-project:SocialMediaUser rdf:type owl:Class ;
+                               rdfs:subClassOf nobias-project:Actor ;
+                               rdfs:comment "They are the individual users of social media websites like Facebook, Twitter or Instagram. They can share news on their platform with their network, comment on it and propagate it. Users follow other users and create their networks and communities online based on their shared interests and opinions." ;
+                               rdfs:label "SocialMediaUser" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://nobias-project.eu/Active
+nobias-project:Active rdf:type owl:NamedIndividual ,
+                               nobias-project:ActorType .
+
+
+###  https://nobias-project.eu/BuzzFeed_Fake_1
+nobias-project:BuzzFeed_Fake_1 rdf:type owl:NamedIndividual ,
+                                        nobias-project:News ;
+                               prov:wasGeneratedBy nobias-project:ProvenanceActivity ;
+                               nobias-project:hasActorType nobias-project:Passive ;
+                               nobias-project:hasSource nobias-project:Publisher_3 ;
+                               nobias-project:sharedBy nobias-project:BuzzFeed_fake_1-User141 ;
+                               nobias-project:hasGroundTruth "1"^^xsd:int ;
+                               nobias-project:hasNewsContent """I woke up this morning ....
+.....
+.....
+..... Miller/Getty Images."""^^xsd:string ;
+                               nobias-project:hasNewsID "BuuzFeed_Fake_1"^^xsd:string ;
+                               nobias-project:hasNewsTitle "Proof The Mainstream Media Is Manipulating The Election By Taking Bill Clinton Out Of Context"^^xsd:string ;
+                               nobias-project:hasNewsUrl "http://addictinginfo.org/2016/09/19/proof-the-mainstream-media-is-manipulating-the-election-by-takeing-bill-clinton-out-of-context/"^^xsd:string .
+
+
+###  https://nobias-project.eu/BuzzFeed_fake_1-User141
+nobias-project:BuzzFeed_fake_1-User141 rdf:type owl:NamedIndividual ,
+                                                nobias-project:SharingBehaviour ;
+                                       nobias-project:timesShared "1"^^xsd:int .
+
+
+###  https://nobias-project.eu/Buzzfeed
+nobias-project:Buzzfeed rdf:type owl:NamedIndividual ,
+                                 dcat:Dataset .
+
+
+###  https://nobias-project.eu/FactChecker
+nobias-project:FactChecker rdf:type owl:NamedIndividual ,
+                                    nobias-project:FactChecker ;
+                           prov:wasGeneratedBy nobias-project:ProvenanceActivity ;
+                           nobias-project:checks nobias-project:Publisher_3 ;
+                           nobias-project:hasActorType nobias-project:Active ;
+                           nobias-project:hasFactCheckerUrl "https://mediabiasfactcheck.com"^^xsd:string .
+
+
+###  https://nobias-project.eu/Passive
+nobias-project:Passive rdf:type owl:NamedIndividual ,
+                                nobias-project:ActorType .
+
+
+###  https://nobias-project.eu/ProvenanceActivity
+nobias-project:ProvenanceActivity rdf:type owl:NamedIndividual ,
+                                           prov:Activity ;
+                                  prov:used nobias-project:Buzzfeed .
+
+
+###  https://nobias-project.eu/Publisher_3
+nobias-project:Publisher_3 rdf:type owl:NamedIndividual ,
+                                    nobias-project:NewsSource ;
+                           prov:wasGeneratedBy nobias-project:ProvenanceActivity ;
+                           nobias-project:hasActorType nobias-project:Active ;
+                           nobias-project:publishes nobias-project:BuzzFeed_Fake_1 ;
+                           nobias-project:hasCredibilityClass "unknown"^^xsd:string ;
+                           nobias-project:hasCredibilityScore "0.0"^^xsd:float ;
+                           nobias-project:sourceUrl "http://addictinginfo.org"^^xsd:string .
+
+
+###  https://nobias-project.eu/User141
+nobias-project:User141 rdf:type owl:NamedIndividual ,
+                                nobias-project:SocialMediaUser ;
+                       prov:wasGeneratedBy nobias-project:ProvenanceActivity ;
+                       nobias-project:follows nobias-project:User4 ;
+                       nobias-project:hasActorType nobias-project:Active ;
+                       nobias-project:shares nobias-project:BuzzFeed_fake_1-User141 ;
+                       nobias-project:hasSocialMediaUrl "https://twitter.com/"^^xsd:string .
+
+
+###  https://nobias-project.eu/User4
+nobias-project:User4 rdf:type owl:NamedIndividual ,
+                              nobias-project:SocialMediaUser ;
+                     prov:wasGeneratedBy nobias-project:ProvenanceActivity ;
+                     nobias-project:hasActorType nobias-project:Active ;
+                     nobias-project:hasSocialMediaUrl "https://twitter.com/"^^xsd:string .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+nobias-project:FactChecker rdfs:comment "FactChecker can be an organization or a website that factually verifies the veracity and correctness of the reported news." ;
+                           rdfs:label "FactChecker" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
