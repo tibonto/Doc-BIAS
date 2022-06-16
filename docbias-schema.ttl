@@ -662,6 +662,13 @@ dqv:Value rdf:type owl:DatatypeProperty ;
           rdfs:domain dqv:QualityMeasurement ;
           rdfs:range rdfs:Literal ;
           rdfs:comment "defines value of the metric measured" .
+		  
+###  https://github.com/tibonto/Doc-BIAS/hasModelOutput
+<https://github.com/tibonto/Doc-BIAS/hasModelOutput> rdf:type owl:ObjectProperty ;
+                                                      rdfs:subPropertyOf owl:topObjectProperty ;
+                                                      rdfs:domain <https://github.com/tibonto/Doc-BIAS/News> ;
+                                                      rdfs:range <https://github.com/tibonto/Doc-BIAS/NewsClassification> ;
+                                                      rdfs:comment "defines output of model for given news" .
 
 
 #################################################################
