@@ -25,7 +25,7 @@
                                       <http://purl.org/dc/terms/created> "2022-06-10" ;
                                       <http://purl.org/dc/terms/language> "en" ;
                                       <http://purl.org/dc/elements/1.1/title> "Doc-Bias Ontology"@en ;
-                                      <http://purl.org/dc/elements/1.1/description> """DocBias, an ontology to document fake news classification pipelines.										
+                                      <http://purl.org/dc/elements/1.1/description> "DocBias, an ontology to document fake news classification pipelines".										
 
 #################################################################
 #    Annotation properties
@@ -683,8 +683,7 @@ dct:PeriodOfTime rdf:type owl:Class ;
 ###  https://github.com/tibonto/Doc-BIAS/ActivityBias
 <https://github.com/tibonto/Doc-BIAS/ActivityBias> rdf:type owl:Class ;
                                                             rdfs:subClassOf <https://github.com/tibonto/Doc-BIAS/InteractionBias> ;
-                                                            <http://purl.org/dc/elements/1.1/citation> """Baeza-Yates, R. 2020. Biases on Social Media Data: (Keynote). In Companion Proceedings of the Web Conference 2020 (WWW ’20Companion), April 20–24, 2020, Taipei, Taiwan.ACM, New York, NY, USA,2 pages. 
-https://doi.org/10.1145/3366424.3383564"""@en ;
+                                                            <http://purl.org/dc/elements/1.1/citation> "Baeza-Yates R. 2020. Biases on Social Media Data: (Keynote). In Companion Proceedings of the Web Conference 2020 (WWW ’20Companion), April 20–24, 2020, Taipei, Taiwan.ACM, New York, NY, USA,2 pages, https://doi.org/10.1145/3366424.3383564."@en ;
                                                             <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
                                                             rdfs:label "ActivityBias"@en ;
                                                             <http://www.w3.org/2004/02/skos/core#definition> "ActivityBias is bias due to differences in social habits of users. Example: not all people are active all the time in social media (90% are lurkers), and how a select few are responsible for creating more than 50% of content."@en .
@@ -778,8 +777,7 @@ https://doi.org/10.1145/3366424.3383564"""@en ;
 ###  https://github.com/tibonto/Doc-BIAS/ConfirmationBias
 <https://github.com/tibonto/Doc-BIAS/ConfirmationBias> rdf:type owl:Class ;
                                                                 rdfs:subClassOf <https://github.com/tibonto/Doc-BIAS/CognitiveBias> ;
-                                                                <http://purl.org/dc/elements/1.1/citation> """Farkas, J. & Schou, J. (2018) Fake News as a Floating Signifier: Hegemony, Antagonism and the Politics of Falsehood, Javnost - The Public, 25:3, 298-314, DOI:
-10.1080/13183222.2018.1463047"""@en ,
+                                                                <http://purl.org/dc/elements/1.1/citation> "Farkas, J. & Schou, J. (2018) Fake News as a Floating Signifier: Hegemony, Antagonism and the Politics of Falsehood, Javnost - The Public, 25:3, 298-314, DOI:10.1080/13183222.2018.1463047."@en ,
                                                                                                            "Manoogian J, Benson B (2017) Cognitive bias codex.https://betterhumans.pub/cognitive-bias-cheat-sheet-55a472476b18"@en ;
                                                                 <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
                                                                 rdfs:label "ConfirmationBias"@en ;
@@ -1049,8 +1047,7 @@ https://doi.org/10.1145/3366424.3383564"""@en ;
 ###  https://github.com/tibonto/Doc-BIAS/SocietalBias
 <https://github.com/tibonto/Doc-BIAS/SocietalBias> rdf:type owl:Class ;
                                                             rdfs:subClassOf <https://github.com/tibonto/Doc-BIAS/BiasType> ;
-                                                            <http://purl.org/dc/elements/1.1/citation> """Pitoura, E. 2020. Social-minded Measures of Data Quality: Fairness, Diversity, and Lack of Bias. J. Data and Information Quality 12, 3, Article 12 (July 2020), 8 pages. 
-https://doi.org/10.1145/3404193"""@en ;
+                                                            <http://purl.org/dc/elements/1.1/citation> "Pitoura, E. 2020. Social-minded Measures of Data Quality: Fairness, Diversity, and Lack of Bias. J. Data and Information Quality 12, 3, Article 12 (July 2020), 8 pages. https://doi.org/10.1145/3404193"@en ;
                                                             <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
                                                             rdfs:label "SocietalBias"@en ;
                                                             <http://www.w3.org/2004/02/skos/core#comment> "Related to Cultural biases"@en ;
@@ -1061,8 +1058,7 @@ https://doi.org/10.1145/3404193"""@en ;
 <https://github.com/tibonto/Doc-BIAS/StatisticalBias> rdf:type owl:Class ;
                                                                rdfs:subClassOf <https://github.com/tibonto/Doc-BIAS/BiasType> ;
                                                                <http://purl.org/dc/elements/1.1/citation> "Olteanu A, Castillo C, Diaz F and Kıcıman E (2019) Social Data: Biases, Methodological Pitfalls, and Ethical Boundaries. Front. Big Data 2:13. doi: 10.3389/fdata.2019.00013"^^xsd:string ,
-                                                                                                          """Pitoura, E. 2020. Social-minded Measures of Data Quality: Fairness, Diversity, and Lack of Bias. J. Data and Information Quality 12, 3, Article 12 (July 2020), 8 pages. 
-https://doi.org/10.1145/3404193"""@en ;
+                                                                                                          "Pitoura, E. 2020. Social-minded Measures of Data Quality: Fairness, Diversity, and Lack of Bias. J. Data and Information Quality 12, 3, Article 12 (July 2020), 8 pages. https://doi.org/10.1145/3404193"@en ;
                                                                <http://purl.org/dc/elements/1.1/creator> "russoma"@en ;
                                                                rdfs:label "StatisticalBias"@en ;
                                                                <http://www.w3.org/2004/02/skos/core#comment> "Could also be called 'Data Bias': A systematic distortion in the sampled data that compromises its representativeness."@en ,
