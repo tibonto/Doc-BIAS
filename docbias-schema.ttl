@@ -947,6 +947,7 @@ dct:PeriodOfTime rdf:type owl:Class ;
 ###  https://github.com/tibonto/Doc-BIAS/NetworkBias
 <https://github.com/tibonto/Doc-BIAS/NetworkBias> rdf:type owl:Class ;
                                                            rdfs:subClassOf <https://github.com/tibonto/Doc-BIAS/FunctionalBias> ;
+														   rdfs:comment "Also known as the Matthew Effect, and pertaining to the study of networks. Network bias describes the preferential growth of some nodes in social networks, and how their popularity attracts more connections at a higher rate, than other less visible ones."@en ;
                                                            rdfs:label "NetworkBias"@en .
 
 
