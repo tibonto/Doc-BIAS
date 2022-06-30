@@ -82,10 +82,11 @@ prefix nobias: <https://github.com/tibonto/Doc-BIAS/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 
-select ?groundTruth ?newsLabel ?consistencyCheck
+select ?groundTruth ?newsLabel ?consistencyCheck ?user ?timesShared
 where{
 	?news 			rdf:type 		nobias:News;
        				nobias:hasGroundTruth 	?groundTruth;
+           			nobias:sharedby         ?SharingBehaviour;
        				nobias:hasModelOutput 	?newsClassification.
 
   	?newsClassification 	nobias:hasLabel 	?newsLabel.
@@ -93,6 +94,11 @@ where{
   	BIND( if(((?groundTruth = "1"^^xsd:int && ?newsLabel = "Fake News"^^xsd:string) 
           || (?groundTruth = "0"^^xsd:int && ?newsLabel = "Real News"^^xsd:string))
           , "consistent", "inconsistent")   AS ?consistencyCheck)
+  
+	?user			nobias:shares		?SharingBehaviour.
+	
+	?SharingBehaviour 	nobias:timesShared    	?timesShared.
+  
 }
 
 ```

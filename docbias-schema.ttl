@@ -9,6 +9,7 @@
 @prefix doam: <https://www.openriskmanual.org/ns/doam#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix nobias: <https://github.com/tibonto/Doc-BIAS/> .
@@ -1091,14 +1092,14 @@ dct:PeriodOfTime rdf:type owl:Class ;
 
 
 ###  https://github.com/tibonto/Doc-BIAS/test_ind
-<https://github.com/tibonto/Doc-BIAS/test_ind> rdf:type owl:Class ;
+<https://github.com/tibonto/Doc-BIAS/TestingSet> rdf:type owl:Class ;
                                                         rdfs:subClassOf dcat:Dataset ;
                                                         rdfs:comment "test_ind is the class that represents the information about individuals that are being used in testing the model. It is a subclass of dcat:Dataset class."@en ;
                                                         rdfs:label "Testing set" .
 
 
 ###  https://github.com/tibonto/Doc-BIAS/train_ind
-<https://github.com/tibonto/Doc-BIAS/train_ind> rdf:type owl:Class ;
+<https://github.com/tibonto/Doc-BIAS/TrainingSet> rdf:type owl:Class ;
                                                          rdfs:subClassOf dcat:Dataset ;
                                                          rdfs:comment "train_ind is the class that represents the information about individuals that are being used in training the model. It is a subclass of dcat:Dataset class."@en ;
                                                          rdfs:label "Training set" .
