@@ -1,278 +1,284 @@
-@prefix : <https://nobias-project.eu/> .
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
 @prefix mls: <http://www.w3.org/ns/mls#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <https://nobias-project.eu/> .
+@prefix nobias: <https://github.com/tibonto/Doc-BIAS/> .
+@base <https://github.com/tibonto/Doc-BIAS/> .
 
-<https://nobias-project.eu/> rdf:type owl:Ontology .
+<https://github.com/tibonto/Doc-BIAS/> rdf:type owl:Ontology ;
+                                        <http://purl.org/dc/elements/1.1/creator> "Maria-Esther Vidal"@en ,
+                                                                                  "Mayra Russo"@en ,
+                                                                                  "Yukti Sharma"@en ;
+                                        rdfs:comment "An Ontology Design Pattern to Document Bias Events in Machine Learning Pipelines"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://ontologydesignpatterns.org/opla-sd#entityPosition
+<http://ontologydesignpatterns.org/opla-sd#entityPosition> rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-sd#entityPositionX
+<http://ontologydesignpatterns.org/opla-sd#entityPositionX> rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-sd#entityPositionY
+<http://ontologydesignpatterns.org/opla-sd#entityPositionY> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
 
 #################################################################
 #    Object Properties
 #################################################################
 
-###  https://nobias-project.eu/hasActorType
+###  https://github.com/tibonto/Doc-BIAS/hasActorType
 :hasActorType rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
               rdfs:domain :Actor ;
               rdfs:range :ActorType ;
-              rdfs:comment "defines Actor type: active or passive for Actor" .
+              rdfs:comment "Describes Actor type: active or passive for Actor" .
 
 
-###  https://nobias-project.eu/hasBiasRecipient
+###  https://github.com/tibonto/Doc-BIAS/hasBiasRecipient
 :hasBiasRecipient rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
                   owl:inverseOf :hasBiasSource ;
                   rdfs:domain :BiasSourceAgent ;
                   rdfs:range :BiasRecipientAgent ;
-                  rdfs:comment "describes the entity that has a bias recipient" .
+                  rdfs:comment "Describes the relationship that has a bias recipient" .
 
 
-###  https://nobias-project.eu/hasBiasSource
+###  https://github.com/tibonto/Doc-BIAS/hasBiasSource
 :hasBiasSource rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
                rdfs:domain :BiasRecipientAgent ;
                rdfs:range :BiasSourceAgent ;
-               rdfs:comment "describes the entity that has a bias source" .
+               rdfs:comment "Describes the relationship that has a bias source" .
 
 
-###  https://nobias-project.eu/hasBiasType
+###  https://github.com/tibonto/Doc-BIAS/hasBiasType
 :hasBiasType rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
              rdfs:domain :BiasEvent ;
              rdfs:range :BiasType ;
              rdfs:comment "describes the type of bias detected during the Bias Event" .
 
 
-###  https://nobias-project.eu/hasDetectionMethod
+###  https://github.com/tibonto/Doc-BIAS/hasDetectionMethod
 :hasDetectionMethod rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
                     rdfs:domain :BiasEvent ;
                     rdfs:range :BiasDetectionMethod ;
                     rdfs:comment "describes the detection method for detecting bias during Bias Event" .
 
 
-###  https://nobias-project.eu/hasRecipientParticipant
+###  https://github.com/tibonto/Doc-BIAS/hasImplication
+:hasImplication rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:domain :BiasEvent ;
+                rdfs:range <https://nobias-project.eu//Implication> ;
+                <http://purl.org/dc/elements/1.1/creator> "russo"^^xsd:string ;
+                rdfs:comment "Describes the relationship between implication and bias event."@en .
+
+
+###  https://github.com/tibonto/Doc-BIAS/hasRecipientParticipant
 :hasRecipientParticipant rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
                          rdfs:domain :BiasEvent ;
                          rdfs:range :BiasRecipient ;
-                         rdfs:comment "describes the recipient participant participating in a Bias Event" .
+                         rdfs:comment "Describes the relationship of participant participating in a Bias Event" .
 
 
-###  https://nobias-project.eu/hasSourceParticipant
+###  https://github.com/tibonto/Doc-BIAS/hasSourceParticipant
 :hasSourceParticipant rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf owl:topObjectProperty ;
                       rdfs:domain :BiasEvent ;
                       rdfs:range :BiasSource ;
-                      rdfs:comment "describes the source participant participating in a Bias Event" .
+                      rdfs:comment "Describes the relationship of source participant participating in a Bias Event" .
 
 
-###  https://nobias-project.eu/performsRecipientRole
+###  https://github.com/tibonto/Doc-BIAS/performsRecipientRole
 :performsRecipientRole rdf:type owl:ObjectProperty ;
-                       rdfs:domain mls:Model ,
-                                   :Actor ;
+                       rdfs:subPropertyOf owl:topObjectProperty ;
+                       rdfs:domain :Actor ;
                        rdfs:range :BiasRecipientAgent ;
-                       rdfs:comment "describes the entity that performs recipient role for the recipient agent" .
+                       rdfs:comment "Describes the relationship that performs recipient role for the recipient agent" .
 
 
-###  https://nobias-project.eu/performsSourceRole
+###  https://github.com/tibonto/Doc-BIAS/performsSourceRole
 :performsSourceRole rdf:type owl:ObjectProperty ;
-                    rdfs:domain mls:Model ,
-                                :Actor ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain :Actor ;
                     rdfs:range :BiasSourceAgent ;
-                    rdfs:comment "describes the entity that performs source role for the source agent" .
+                    rdfs:comment "Describes the relationship that performs source role for the source agent" .
 
 
-###  https://nobias-project.eu/providesRecipientRole
+###  https://github.com/tibonto/Doc-BIAS/providesRecipientRole
 :providesRecipientRole rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf owl:topObjectProperty ;
                        rdfs:domain :BiasRecipient ;
                        rdfs:range :BiasRecipientAgent ;
-                       rdfs:comment "describes the entity that provides recipient role for the recipient agent" .
+                       rdfs:comment "Describes the relationship that provides recipient role for the recipient agent" .
 
 
-###  https://nobias-project.eu/providesSourceRole
+###  https://github.com/tibonto/Doc-BIAS/providesSourceRole
 :providesSourceRole rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
                     rdfs:domain :BiasSource ;
                     rdfs:range :BiasSourceAgent ;
-                    rdfs:comment "describes the entity that provides source role for the source agent" .
+                    rdfs:comment "Describes the relationship that provides source role for the source agent" .
+
+
+###  http://www.w3.org/ns/prov#wasGeneratedBy
+<http://www.w3.org/ns/prov#wasGeneratedBy> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf owl:topObjectProperty ;
+                                           rdfs:domain :Actor ;
+                                           rdfs:range <http://www.w3.org/ns/prov#Activity> ;
+                                           rdfs:comment "defines the provenance Activity that generates the Actor"@en ;
+                                           rdfs:label "wasGeneratedBy"@en .
 
 
 #################################################################
 #    Data properties
 #################################################################
 
-###  https://nobias-project.eu/hasBiasScore
+###  https://github.com/tibonto/Doc-BIAS/hasBiasScore
 :hasBiasScore rdf:type owl:DatatypeProperty ;
               rdfs:domain :BiasEvent ;
               rdfs:range xsd:float ;
-              rdfs:comment "stores the measure of bias calculated during detection method" .
+              <http://ontologydesignpatterns.org/opla-sd#entityPosition> [ <http://ontologydesignpatterns.org/opla-sd#entityPositionX> "480.1929714774899"^^xsd:double ;
+                                                                           <http://ontologydesignpatterns.org/opla-sd#entityPositionY> "369.7674606469884"^^xsd:double ;
+                                                                           rdfs:comment "This is an entity positioning annotation generated by CoModIDE (https://comodide.com/). Removing this annotation will break rendering the CoModIDE schema diagram view."@en
+                                                                         ] ;
+              rdfs:comment "Represents the bias score calculated with bias detection method" .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://www.w3.org/ns/mls#Model
-mls:Model rdf:type owl:Class ;
-          rdfs:comment "This is the class for the fake news detection model. It takes input from dataset and gives output in form of NewsClassification and NewsScore. It has a model type, architecture, process and algorithm for classification as classifier. It classifies News in two group Fake News and Real News." ;
-          rdfs:label "Model" .
+###  https://github.com/tibonto/Doc-BIAS/ActiveActor
+:ActiveActor rdf:type owl:Class ;
+             rdfs:subClassOf :ActorType ;
+             <http://purl.org/dc/elements/1.1/creator> "russo"^^xsd:string ;
+             rdfs:label "ActiveActor"@en .
 
 
-###  https://nobias-project.eu/Actor
+###  https://github.com/tibonto/Doc-BIAS/Actor
 :Actor rdf:type owl:Class ;
-       rdfs:comment "Actors are the main elements of the fake news ecosystem. Their interaction is recorded as a bias event as they can influence bias, carry bias within themselves and can potentially propagate bias to other elements of fake news ecosystem." ;
-       rdfs:label "Actor" .
+       rdfs:comment "Actors are identified elements of a particular domain. The interaction with other actors  is recorded as a bias event. They can influence bias, carry bias \"with\" themselves, and/or can also potentially propagate bias to other elements in the domain."@en ;
+       rdfs:label "Actor"@en .
 
 
-###  https://nobias-project.eu/ActorType
+###  https://github.com/tibonto/Doc-BIAS/ActorType
 :ActorType rdf:type owl:Class ;
            rdfs:comment "This is the type of relationship an actor has with bias. An active type of actor itself influences the bias while a passive type of actor can only carry bias from its source and itself has no influence on increasing or decreasing bias. It can only transfer bias." ;
-           rdfs:label "ActorType" .
+           rdfs:label "ActorType"@en .
 
 
-###  https://nobias-project.eu/BiasDetectionMethod
+###  https://github.com/tibonto/Doc-BIAS/BiasDetectionMethod
 :BiasDetectionMethod rdf:type owl:Class ;
-                     rdfs:comment "BiasDetectionMethod class defines the method that is being used to detect bias. For example: word embeddings, evaluation metrics, quality metrics etc." ;
-                     rdfs:label "Detection Method" .
+                     rdfs:comment "The Class Bias Detection Method represents the method that was used to detect bias. For example, statistical analysis, expert assessment, quality metrics, etc."@en ;
+                     rdfs:label "BiasDetectionMethod"@en .
 
 
-###  https://nobias-project.eu/BiasEvent
+###  https://github.com/tibonto/Doc-BIAS/BiasEvent
 :BiasEvent rdf:type owl:Class ;
-           rdfs:comment "BiasEvent is an event entity that hosts the bias event when Source and Recipient participates and provides measure of bias using data property hasBiasScore." ;
-           rdfs:label "Bias Event" .
+           rdfs:comment "A Bias Event is a class that represents an event entity that materializes when source and recipient participate and a detection method is identified. "@en ;
+           rdfs:label "BiasEvent"@en .
 
 
-###  https://nobias-project.eu/BiasRecipient
+###  https://github.com/tibonto/Doc-BIAS/BiasRecipient
 :BiasRecipient rdf:type owl:Class ;
-               rdfs:comment "BiasRecipient is the participant entity that participates as a recipient in a Bias Event." ;
-               rdfs:label "Bias Recipient" .
+               rdfs:comment "A Bias Recipien is the participant entity that participates as a recipient in a bias event."@en ;
+               rdfs:label "BiasRecipient"@en .
 
 
-###  https://nobias-project.eu/BiasRecipientAgent
+###  https://github.com/tibonto/Doc-BIAS/BiasRecipientAgent
 :BiasRecipientAgent rdf:type owl:Class ;
-                    rdfs:comment "BiasRecipientAgent acts as an agent between entities that provide recipient role and the ones that are performing that role." ;
-                    rdfs:label "Recipient Agent" .
+                    rdfs:comment "A Bias Recipient Agent acts as an agent between entities that provide a recipient role and the ones that are performing that role."@en ;
+                    rdfs:label "BiasRecipientAgent"@en .
 
 
-###  https://nobias-project.eu/BiasSource
+###  https://github.com/tibonto/Doc-BIAS/BiasSource
 :BiasSource rdf:type owl:Class ;
-            rdfs:comment "BiasSource is the participant entity that participates as source in a Bias Event." ;
-            rdfs:label "Bias Source" .
+            rdfs:comment "A Bias Source is the participant entity that participates as a source in a bias event."@en ;
+            rdfs:label "BiasSource"@en .
 
 
-###  https://nobias-project.eu/BiasSourceAgent
+###  https://github.com/tibonto/Doc-BIAS/BiasSourceAgent
 :BiasSourceAgent rdf:type owl:Class ;
-                 rdfs:comment "BiasSourceAgent acts as an agent between entities that provide source role and the ones that are performing that role." ;
-                 rdfs:label "Source Agent" .
+                 rdfs:comment "A Bias Source Agent acts as an agent between entities that provide the source role and the ones that are performing that role."@en ;
+                 rdfs:label "BiasSourceAgent"@en .
 
 
-###  https://nobias-project.eu/BiasType
+###  https://github.com/tibonto/Doc-BIAS/BiasType
 :BiasType rdf:type owl:Class ;
-          rdfs:comment "BiasType class is defined to create an object of a particular type of bias. It is classified into Societal Bias, Behavioural Bias, Cognitive Bias, Functional Bias and Statistical Bias." ;
-          rdfs:label "Bias Type" .
+          rdfs:comment "This class represents the particular type of bias detected in a bias event. For example, it can be classified into social bias, behavioral bias, cognitive bias, functional bias, and statistical bias, among many other types of bias."@en ;
+          rdfs:label "BiasType"@en .
 
 
-###  https://nobias-project.eu/FactChecker
-:FactChecker rdf:type owl:Class ;
-             rdfs:subClassOf :Actor .
+###  https://github.com/tibonto/Doc-BIAS/EthicalImplication
+:EthicalImplication rdf:type owl:Class ;
+                    rdfs:subClassOf <https://nobias-project.eu//Implication> ;
+                    <http://purl.org/dc/elements/1.1/creator> "russo"^^xsd:string ;
+                    rdfs:comment "An ethical implication is an ethical consequence of a bias event. When evaluating this type of implication, moral considerations must be taken into account."@en ;
+                    rdfs:label "EthicalImplication"@en .
 
 
-###  https://nobias-project.eu/Measurable
+###  https://github.com/tibonto/Doc-BIAS/Measurable
 :Measurable rdf:type owl:Class ;
             rdfs:subClassOf :BiasDetectionMethod ;
             rdfs:comment "Measurable class defines the whether bias detection is measurable. For example, using quality/evaluation metrics." ;
-            rdfs:label "Measurable" .
+            rdfs:label "Measurable"@en .
 
 
-###  https://nobias-project.eu/News
-:News rdf:type owl:Class ;
-      rdfs:subClassOf :Actor .
+###  https://github.com/tibonto/Doc-BIAS/NonMeasurable
+:NonMeasurable rdf:type owl:Class ;
+               rdfs:subClassOf :BiasDetectionMethod ;
+               rdfs:comment "The NonMeasurable class represents a bias detection method that is not measurable. For example, cognitive biases." ;
+               rdfs:label "NonMeasurable"@en .
 
 
-###  https://nobias-project.eu/NewsSource
-:NewsSource rdf:type owl:Class ;
-            rdfs:subClassOf :Actor .
+###  https://github.com/tibonto/Doc-BIAS/PassiveActor
+:PassiveActor rdf:type owl:Class ;
+              rdfs:subClassOf :ActorType ;
+              <http://purl.org/dc/elements/1.1/creator> "russo"^^xsd:string ;
+              rdfs:label "PassiveActor"@en .
 
 
-###  https://nobias-project.eu/Non-Measurable
-:Non-Measurable rdf:type owl:Class ;
-                rdfs:subClassOf :BiasDetectionMethod ;
-                rdfs:comment "NonMeasurable class defines whether bias detection class is non measurable. For example, when human bias is involved as Annotator Bias or Social Bias it becomes very hard to quantify it." ;
-                rdfs:label "Non Measurable" .
+###  https://github.com/tibonto/Doc-BIAS/PracticalImplication
+:PracticalImplication rdf:type owl:Class ;
+                      rdfs:subClassOf <https://nobias-project.eu//Implication> ;
+                      <http://purl.org/dc/elements/1.1/creator> "russo"^^xsd:string ;
+                      rdfs:comment "A practical implication is the outcome or end result that occurs when a bias event takes place. Practical alludes to actual results that arise from the event."@en ;
+                      rdfs:label "PracticalImplication"@en .
 
 
-###  https://nobias-project.eu/SocialMediaUser
-:SocialMediaUser rdf:type owl:Class ;
-                 rdfs:subClassOf :Actor .
+###  https://github.com/tibonto/Doc-BIAS/SocialImplication
+:SocialImplication rdf:type owl:Class ;
+                   rdfs:subClassOf <https://nobias-project.eu//Implication> ;
+                   <http://purl.org/dc/elements/1.1/creator> "russo"^^xsd:string ;
+                   rdfs:comment "A social implication refers to the effects a bias event has on such variables as the values, demographics, or economic condition of an individual or group of people."@en ;
+                   rdfs:label "SocialImplication"@en .
 
 
-#################################################################
-#    Individuals
-#################################################################
-
-###  https://nobias-project.eu/Active
-:Active rdf:type owl:NamedIndividual ,
-                 :ActorType .
+###  http://www.w3.org/ns/prov#Activity
+<http://www.w3.org/ns/prov#Activity> rdf:type owl:Class ;
+                                     rdfs:comment "This is an activity that provides provenance to the entities described in this pattern using a data source/dataset that is available and used for implementation of the Actor."@en ;
+                                     rdfs:label "Activity"@en .
 
 
-###  https://nobias-project.eu/BiasEvent_1
-:BiasEvent_1 rdf:type owl:NamedIndividual ,
-                      :BiasEvent ;
-             :hasBiasType :PoliticalBias ;
-             :hasDetectionMethod :word_embedding ;
-             :hasRecipientParticipant :BiasRecipient_1 ;
-             :hasSourceParticipant :BiasSource_1 ;
-             :hasBiasScore "0.0"^^xsd:float .
-
-
-###  https://nobias-project.eu/BiasRecipientAgent_1
-:BiasRecipientAgent_1 rdf:type owl:NamedIndividual ,
-                               :BiasRecipientAgent ;
-                      :hasBiasSource :BiasSourceAgent_1 .
-
-
-###  https://nobias-project.eu/BiasRecipient_1
-:BiasRecipient_1 rdf:type owl:NamedIndividual ,
-                          :BiasRecipient ;
-                 :providesRecipientRole :BiasRecipientAgent_1 .
-
-
-###  https://nobias-project.eu/BiasSourceAgent_1
-:BiasSourceAgent_1 rdf:type owl:NamedIndividual ,
-                            :BiasSourceAgent ;
-                   :hasBiasRecipient :BiasRecipientAgent_1 .
-
-
-###  https://nobias-project.eu/BiasSource_1
-:BiasSource_1 rdf:type owl:NamedIndividual ,
-                       :BiasSource ;
-              :providesSourceRole :BiasSourceAgent_1 .
-
-
-###  https://nobias-project.eu/BuzzFeed_Fake_1
-:BuzzFeed_Fake_1 rdf:type owl:NamedIndividual ,
-                          :News ;
-                 :hasActorType :Passive ;
-                 :performsRecipientRole :BiasRecipientAgent_1 .
-
-
-###  https://nobias-project.eu/Passive
-:Passive rdf:type owl:NamedIndividual ,
-                  :ActorType .
-
-
-###  https://nobias-project.eu/PoliticalBias
-:PoliticalBias rdf:type owl:NamedIndividual ,
-                        :BiasType .
-
-
-###  https://nobias-project.eu/Publisher_3
-:Publisher_3 rdf:type owl:NamedIndividual ,
-                      :NewsSource ;
-             :hasActorType :Active ;
-             :performsSourceRole :BiasSourceAgent_1 .
-
-
-###  https://nobias-project.eu/word_embedding
-:word_embedding rdf:type owl:NamedIndividual ,
-                         :Measurable .
-
+###  https://nobias-project.eu//Implication
+<https://nobias-project.eu//Implication> rdf:type owl:Class ;
+                                         rdfs:comment "Effects or consequences that  arise or may arise from the event taking place."@en ;
+                                         rdfs:label "Implication"@en .
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
