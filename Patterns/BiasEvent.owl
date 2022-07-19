@@ -13,8 +13,9 @@
                                         <http://purl.org/dc/elements/1.1/creator> "Maria-Esther Vidal"@en ,
                                                                                   "Mayra Russo"@en ,
                                                                                   "Yukti Sharma"@en ;
-                                        <http://purl.org/dc/terms/ license> "GNU General Public License v3.0"@en ;
-                                        <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#coversRequirements> """1. Who were the participants in the Bias event? 
+<http://purl.org/dc/terms/license> "GNU General Public License v3.0"@en ;
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#coversRequirements> 
+"""1. Who were the participants in the Bias event? 
 2.  Who was involved as bias recipient in a bias event?
 3.  Who was involved as bias source in a  bias event? 
 4. What type of bias is documented?
@@ -56,7 +57,7 @@ learning pipeline, our use case is motivated by the surge of fake news classific
 
 
 ###  http://purl.org/dc/terms/ license
-<http://purl.org/dc/terms/ license> rdf:type owl:AnnotationProperty .
+<http://purl.org/dc/terms/license> rdf:type owl:AnnotationProperty .
 
 
 #################################################################
