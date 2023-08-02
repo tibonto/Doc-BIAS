@@ -1,10 +1,7 @@
 ## Ontology Competency Questions
 
-We designed a set of competency questions to reflect the main features of Doc-Bias.
 
-
-
-**_Q4:   What is the profile of the Actor in terms of diversity?_**
+**_Q1:   _**
 
 
 ```
@@ -31,3 +28,4 @@ where{
 ```
 
 
+**_Q2:   _**
