@@ -18,7 +18,7 @@
   a rr:TriplesMap;
 
   rml:logicalSource [
-	rml:source "/Users/russo/git/SDM-RDFizer/mappings/input/datasetFolks.csv";
+	rml:source "xxx.csv";
     rml:referenceFormulation ql:CSV
   ];
 
@@ -54,7 +54,7 @@
   a rr:TriplesMap;
 
   rml:logicalSource [
-	rml:source "/Users/russo/git/SDM-RDFizer/mappings/input/datasetFolks.csv";
+	rml:source "xxx.csv";
     rml:referenceFormulation ql:CSV
   ];
 
@@ -94,7 +94,7 @@
   a rr:TriplesMap;
 
   rml:logicalSource [
-	rml:source "/Users/russo/git/SDM-RDFizer/mappings/input/datasetFolks.csv";
+	rml:source "xxx.csv";
     rml:referenceFormulation ql:CSV
   ];
 
@@ -115,7 +115,7 @@
   a rr:TriplesMap;
     
   rml:logicalSource [
-    rml:source "/Users/russo/git/SDM-RDFizer/mappings/input/datasetFolks.csv";
+    rml:source "xxx.csv";
     rml:referenceFormulation ql:CSV
   ];
 
@@ -161,7 +161,7 @@
   a rr:TriplesMap;
     
   rml:logicalSource [
-    rml:source "/Users/russo/git/SDM-RDFizer/mappings/input/FL-merged.csv";
+    rml:source "xxx.csv";
     rml:referenceFormulation ql:CSV
   ];
 
@@ -182,7 +182,7 @@
   a rr:TriplesMap;
     
   rml:logicalSource [
-    rml:source "/Users/russo/git/SDM-RDFizer/mappings/input/CA-merged.csv";
+    rml:source "xxx.csv";
     rml:referenceFormulation ql:CSV
   ];
 
