@@ -1,0 +1,85 @@
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix mls: <http://www.w3.org/ns/mls#> . 
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix nobias: <https://nobias-project.eu/nobias/> .
+@base <https://nobias-project.eu/nobias/> .
+
+
+  
+<DataCoverage>
+  a rr:TriplesMap;
+
+  rml:logicalSource [
+	rml:source "/git/SDM-RDFizer/mappings/input/XXX.csv";
+    rml:referenceFormulation ql:CSV
+  ];
+
+  rr:subjectMap [
+  rr:template "https://nobias-project.eu/nobias/BiasEvaluation/{MeasureName}-{MeasureID}-Data-{ID}-{FeatureName}-{FeatureCategories}";
+  rr:class nobias:BiasEvaluation
+  ];  
+  
+  rr:predicateObjectMap [
+	  rr:predicate nobias:evaluatesWithMeasure;
+	  rr:objectMap [
+		  rr:template "https://nobias-project.eu/nobias/BiasMeasure/{MeasureName}-{MeasureID}";
+	  ]
+  ];  
+
+  rr:predicateObjectMap [
+	  rr:predicate nobias:evaluatesFeature;
+	  rr:objectMap [
+		  rr:template "https://nobias-project.eu/nobias/Feature/Data-{ID}-{FeatureName}";
+	  ]
+  ];  
+
+  rr:predicateObjectMap [
+	  rr:predicate nobias:evaluatesInDataset;
+	  rr:objectMap [
+		  rr:template "https://nobias-project.eu/nobias/Dataset/Data-{ID}";
+	  ]
+  ];  
+
+  rr:predicateObjectMap [
+	 rr:predicate nobias:biasClassification;
+	  rr:objectMap [
+		  rml:reference "MeasureValue"
+	  ]
+  ];
+
+  rr:predicateObjectMap [
+	 rr:predicate nobias:valueCount;
+	  rr:objectMap [
+		  rml:reference "MeasureCounts"
+	  ]
+  ]; 
+
+  rr:predicateObjectMap [
+	 rr:predicate nobias:featureSubGroup;
+	  rr:objectMap [
+		  rml:reference "FeatureCategories"
+	  ]
+  ]; 
+
+
+  rr:predicateObjectMap [
+	 rr:predicate nobias:biasThreshold;
+	  rr:objectMap [
+		  rml:reference "MeasureThreshold"
+	  ]
+  ].
+  
+  
+  
+
+
+
+
+
+

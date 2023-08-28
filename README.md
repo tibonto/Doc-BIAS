@@ -1,3 +1,2 @@
-# Doc-Bias, an ontology to support the documentation of bias in data
-
-
+# DocBiasO
+DocBiasO is an ontology-driven approach to support the documentation of bias in data.
