@@ -3124,6 +3124,7 @@
 
     <owl:Class rdf:about="http://www.w3.org/2000/10/swap/pim/contact#Person">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:label xml:lang="en">Person</rdfs:label>
     </owl:Class>
     
 
@@ -3141,6 +3142,7 @@
 
     <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#Collection">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:label xml:lang="en">Collection</rdfs:label>
     </rdf:Description>
     
 
@@ -3159,6 +3161,7 @@
 
     <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#ConceptScheme">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:label xml:lang="en">Concept Scheme</rdfs:label>
     </rdf:Description>
     
 
@@ -3230,7 +3233,7 @@
 
     <owl:Class rdf:about="http://www.w3.org/ns/dqv#QualityCertificate">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/dqv#QualityAnnotation"/>
-        <rdfs:comment>QualityCertificate is subclass of QualityAnnotation. It associates a dataset to a document that	certifies the data quality according to a set of quality assessment rules</rdfs:comment>
+        <rdfs:comment>Quality Certificate is subclass of Quality Annotation. It associates a dataset to a document that	certifies the data quality according to a set of quality assessment rules</rdfs:comment>
         <rdfs:label>QualityCertificate</rdfs:label>
     </owl:Class>
     
@@ -3240,7 +3243,7 @@
 
     <owl:Class rdf:about="http://www.w3.org/ns/dqv#QualityMeasurement">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-        <rdfs:comment>QualityMeasurement is the evaluation of a given dataset a specific quality metric.</rdfs:comment>
+        <rdfs:comment>Quality Measurement is the evaluation of a given dataset a specific quality metric.</rdfs:comment>
         <rdfs:label>QualityMeasurement</rdfs:label>
     </owl:Class>
     
@@ -3301,6 +3304,7 @@
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/mls#Data"/>
         <rdfs:isDefinedBy xml:lang="en">http://ml-schema.github.io/documentation/ML%20Schema.html#d4e197</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Dataset</rdfs:label>
+        <skos:definition xml:lang="en">A collection of data, published or curated by a single source, and available for access or download in one or more representations.</skos:definition>
     </owl:Class>
     
 
@@ -3548,13 +3552,24 @@
     
 
 
+    <!-- https://nobias-project.eu/nobias/Alienation -->
+
+    <owl:Class rdf:about="https://nobias-project.eu/nobias/Alienation">
+        <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
+        <rdfs:isDefinedBy xml:lang="en">https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&amp;utm_medium=PDF&amp;utm_campaign=PDFCoverPages</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en">Alienation</rdfs:label>
+        <skos:definition xml:lang="en">Denial of the relevance of socially meaningful categories.</skos:definition>
+    </owl:Class>
+    
+
+
     <!-- https://nobias-project.eu/nobias/Application -->
 
     <owl:Class rdf:about="https://nobias-project.eu/nobias/Application">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <owl:disjointWith rdf:resource="https://nobias-project.eu/nobias/Bias"/>
         <rdfs:label xml:lang="en">Application</rdfs:label>
-        <skos:definition xml:lang="en">We define App here</skos:definition>
+        <skos:definition xml:lang="en">The use, purpose or appliation of artificial intelligence technology.</skos:definition>
     </owl:Class>
     
 
@@ -3597,6 +3612,7 @@
     <owl:Class rdf:about="https://nobias-project.eu/nobias/BiasDocumentation">
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/DocumentationType"/>
         <rdfs:label xml:lang="en">BiasDocumentation</rdfs:label>
+        <rdfs:label xml:lang="en">This class represents the stage in the documentation pipeline that pertains to the capture of bias knowledge.</rdfs:label>
     </owl:Class>
     
 
@@ -3645,6 +3661,7 @@
         <rdfs:isDefinedBy xml:lang="en">https://doi.org/10.1145/3588433</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">DataCoverage</rdfs:label>
         <skos:definition xml:lang="en">To have enough similar entries (sub-categories) for a particular variable (categoy) in a dataset.</skos:definition>
+        <formalization xml:lang="en">cov(q,D) = |G_D(q)|, threshold value k, qu is covered iff cov (q, D) &gt; k.</formalization>
     </owl:Class>
     
 
@@ -3684,6 +3701,7 @@
     <owl:Class rdf:about="https://nobias-project.eu/nobias/DatasetDocumentation">
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/DocumentationType"/>
         <rdfs:label xml:lang="en">DatasetDocumentation</rdfs:label>
+        <rdfs:label xml:lang="en">This class represents the stage in the documentation pipeline that pertains to the capture of knowledge and metadata pertaining to the dataset.</rdfs:label>
     </owl:Class>
     
 
@@ -3693,6 +3711,7 @@
     <owl:Class rdf:about="https://nobias-project.eu/nobias/Dehumanization">
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
         <rdfs:label xml:lang="en">Dehumanization</rdfs:label>
+        <skos:definition xml:lang="en">The viewing and the treatment of other people as though they lack the mental capacities that are commonly attributed to human beings.</skos:definition>
     </owl:Class>
     
 
@@ -3731,10 +3750,33 @@ Dev et al., Findings 2022</rdfs:isDefinedBy>
     
 
 
+    <!-- https://nobias-project.eu/nobias/Denigration -->
+
+    <owl:Class rdf:about="https://nobias-project.eu/nobias/Denigration">
+        <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
+        <rdfs:isDefinedBy xml:lang="en">https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&amp;utm_medium=PDF&amp;utm_campaign=PDFCoverPages</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en">Denigration</rdfs:label>
+        <skos:definition xml:lang="en">A harm that arises when a system applies a label that has a long history of being purposefully used to denigrate and demean people.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- https://nobias-project.eu/nobias/Disparagement -->
+
+    <owl:Class rdf:about="https://nobias-project.eu/nobias/Disparagement">
+        <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
+        <rdfs:isDefinedBy xml:lang="en">https://aclanthology.org/2022.findings-aacl.24</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en">Disparagement</rdfs:label>
+        <skos:definition xml:lang="en">Disparagement encapsulates any behaviour by a model which reinforces the notion that certain groups are less valuable than others and less deserving of respect or resources.</skos:definition>
+    </owl:Class>
+    
+
+
     <!-- https://nobias-project.eu/nobias/DocumentationType -->
 
     <owl:Class rdf:about="https://nobias-project.eu/nobias/DocumentationType">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:comment xml:lang="en">This class represents the stage in the documentation pipeline.</rdfs:comment>
         <rdfs:label xml:lang="en">DocumentationType</rdfs:label>
     </owl:Class>
     
@@ -3745,8 +3787,10 @@ Dev et al., Findings 2022</rdfs:isDefinedBy>
     <owl:Class rdf:about="https://nobias-project.eu/nobias/Erasure">
         <owl:equivalentClass rdf:resource="https://nobias-project.eu/nobias/SocialInvisibility"/>
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
+        <rdfs:isDefinedBy xml:lang="en">https://aclanthology.org/2022.findings-aacl.24</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Erasure</rdfs:label>
         <skos:definition xml:lang="en">Erasure or social invisibility refers to a group of people in society that can be excluded or systematically ignored from resource allocation procedures or decision-making processes due to data collection practices or historical record keeping.</skos:definition>
+        <skos:definition xml:lang="en">Erasure refers to the lack of adequate representation of members of a particular social group, intentional or not.</skos:definition>
     </owl:Class>
     
 
@@ -3780,6 +3824,15 @@ In AAAI/ACM Conference on AI, Ethics, and Society (AIES ’23).
 August 8–10, 2023, Montréal,QC, Canada.</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Harm</rdfs:label>
         <skos:definition xml:lang="en">Adverse lived experiences resulting from an AI system’s deployment and operation in the world.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- https://nobias-project.eu/nobias/HatespeechDetection -->
+
+    <owl:Class rdf:about="https://nobias-project.eu/nobias/HatespeechDetection">
+        <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/SocialNLPModel"/>
+        <rdfs:label xml:lang="en">HatespeechDetection</rdfs:label>
     </owl:Class>
     
 
@@ -3840,7 +3893,18 @@ August 8–10, 2023, Montréal,QC, Canada.</rdfs:isDefinedBy>
 
     <owl:Class rdf:about="https://nobias-project.eu/nobias/LearningDocumentation">
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/DocumentationType"/>
+        <rdfs:comment xml:lang="en">This class represents the stage in the documentation pipeline that pertains to the capture of knowledge and metadata pertaining to the learning and training process.</rdfs:comment>
         <rdfs:label xml:lang="en">LearningDocumentation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://nobias-project.eu/nobias/MachineTranslation -->
+
+    <owl:Class rdf:about="https://nobias-project.eu/nobias/MachineTranslation">
+        <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/SocialNLPModel"/>
+        <rdfs:comment xml:lang="en">Automatically translate spoken language and textual content.</rdfs:comment>
+        <rdfs:label xml:lang="en">MachineTranslation</rdfs:label>
     </owl:Class>
     
 
@@ -3906,11 +3970,35 @@ August 8–10, 2023, Montréal,QC, Canada.</rdfs:isDefinedBy>
     
 
 
+    <!-- https://nobias-project.eu/nobias/PublicParticipation -->
+
+    <owl:Class rdf:about="https://nobias-project.eu/nobias/PublicParticipation">
+        <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
+        <rdfs:isDefinedBy xml:lang="en">https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&amp;utm_medium=PDF&amp;utm_campaign=PDFCoverPages</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en">PublicParticipation</rdfs:label>
+        <skos:definition xml:lang="en">When athe implementation of a systems results in diminishing the ability of a particular population to participate in public discourse.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- https://nobias-project.eu/nobias/QualityOfService -->
+
+    <owl:Class rdf:about="https://nobias-project.eu/nobias/QualityOfService">
+        <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
+        <rdfs:isDefinedBy xml:lang="en">https://aclanthology.org/2022.findings-aacl.24</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en">QualityOfService</rdfs:label>
+        <skos:definition xml:lang="en">Quality of service harms result from instances when a model fails to perform equitably for different groups.</skos:definition>
+    </owl:Class>
+    
+
+
     <!-- https://nobias-project.eu/nobias/RecommenderSystem -->
 
     <owl:Class rdf:about="https://nobias-project.eu/nobias/RecommenderSystem">
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Application"/>
+        <rdfs:comment xml:lang="en">Recommender system&apos;s are widely used in e-commerce platforms, i.e., Amazon, Netflix, to  generate product or content recommendations.</rdfs:comment>
         <rdfs:label xml:lang="en">RecommenderSystem</rdfs:label>
+        <skos:definition xml:lang="en">A recommendation system is developed with the objective of predicting the preference of a system&apos;s user for a particular item.</skos:definition>
     </owl:Class>
     
 
@@ -3919,7 +4007,9 @@ August 8–10, 2023, Montréal,QC, Canada.</rdfs:isDefinedBy>
 
     <owl:Class rdf:about="https://nobias-project.eu/nobias/Representation">
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
+        <rdfs:isDefinedBy xml:lang="en">https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&amp;utm_medium=PDF&amp;utm_campaign=PDFCoverPages</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Representation</rdfs:label>
+        <skos:definition xml:lang="en">Those harms which arise when a system represents some social groups in a less favorable light than others, demeans them, or fails to recognize their existence altogether.</skos:definition>
     </owl:Class>
     
 
@@ -3992,6 +4082,7 @@ August 8–10, 2023, Montréal,QC, Canada.</rdfs:isDefinedBy>
     <owl:Class rdf:about="https://nobias-project.eu/nobias/SocialInvisibility">
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
         <rdfs:label xml:lang="en">SocialInvisibility</rdfs:label>
+        <skos:definition xml:lang="en">Erasure or social invisibility refers to a group of people in society that can be excluded or systematically ignored from resource allocation procedures or decision-making processes due to data collection practices or historical record keeping.</skos:definition>
     </owl:Class>
     
 
@@ -4000,6 +4091,7 @@ August 8–10, 2023, Montréal,QC, Canada.</rdfs:isDefinedBy>
 
     <owl:Class rdf:about="https://nobias-project.eu/nobias/SocialNLPModel">
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Application"/>
+        <rdfs:comment xml:lang="en">NLP tasks break down human text and voice data to support the ability of computers to make sense of what it is ingesting.</rdfs:comment>
         <rdfs:label xml:lang="en">SocialNLPLModel</rdfs:label>
     </owl:Class>
     
@@ -4009,7 +4101,20 @@ August 8–10, 2023, Montréal,QC, Canada.</rdfs:isDefinedBy>
 
     <owl:Class rdf:about="https://nobias-project.eu/nobias/Stereotyping">
         <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
+        <rdfs:isDefinedBy xml:lang="en">https://aclanthology.org/2022.findings-aacl.24</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Stereotyping</rdfs:label>
+        <skos:definition xml:lang="en">Stereotypes are overgeneralized beliefs about the personal attributes of an individual as determined by their demographic group membership.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- https://nobias-project.eu/nobias/Stigmatization -->
+
+    <owl:Class rdf:about="https://nobias-project.eu/nobias/Stigmatization">
+        <rdfs:subClassOf rdf:resource="https://nobias-project.eu/nobias/Harm"/>
+        <rdfs:isDefinedBy xml:lang="en">https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&amp;utm_medium=PDF&amp;utm_campaign=PDFCoverPages</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en">Stigmatization</rdfs:label>
+        <skos:definition xml:lang="en">When systems e.g., NLP systems, treat some language varieties or practices as less grammatical, more offensive, or less appropriate for public consumption in comparison to others. This reproduces dominant language ideolegies.</skos:definition>
     </owl:Class>
     
 
@@ -5060,7 +5165,7 @@ August 8–10, 2023, Montréal,QC, Canada.</rdfs:isDefinedBy>
 
     <owl:Class rdf:about="https://www.openriskmanual.org/ns/doam#Output">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-        <rdfs:comment xml:lang="en">doam:Output is the output of classification model.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Output is the output of classification model.</rdfs:comment>
         <rdfs:label>Output</rdfs:label>
     </owl:Class>
     

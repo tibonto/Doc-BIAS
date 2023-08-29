@@ -2079,7 +2079,8 @@ obo:GSSO_005478 rdf:type owl:Class ;
 
 ###  http://www.w3.org/2000/10/swap/pim/contact#Person
 <http://www.w3.org/2000/10/swap/pim/contact#Person> rdf:type owl:Class ;
-                                                    rdfs:subClassOf owl:Thing .
+                                                    rdfs:subClassOf owl:Thing ;
+                                                    rdfs:label "Person"@en .
 
 
 ###  http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing
@@ -2089,7 +2090,8 @@ obo:GSSO_005478 rdf:type owl:Class ;
 
 
 ###  http://www.w3.org/2004/02/skos/core#Collection
-skos:Collection rdfs:subClassOf owl:Thing .
+skos:Collection rdfs:subClassOf owl:Thing ;
+                rdfs:label "Collection"@en .
 
 
 ###  http://www.w3.org/2004/02/skos/core#Concept
@@ -2100,7 +2102,8 @@ skos:Concept rdf:type owl:Class ;
 
 
 ###  http://www.w3.org/2004/02/skos/core#ConceptScheme
-skos:ConceptScheme rdfs:subClassOf owl:Thing .
+skos:ConceptScheme rdfs:subClassOf owl:Thing ;
+                   rdfs:label "Concept Scheme"@en .
 
 
 ###  http://www.w3.org/ns/dcat#Catalogue
@@ -2151,14 +2154,14 @@ skos:ConceptScheme rdfs:subClassOf owl:Thing .
 ###  http://www.w3.org/ns/dqv#QualityCertificate
 <http://www.w3.org/ns/dqv#QualityCertificate> rdf:type owl:Class ;
                                               rdfs:subClassOf <http://www.w3.org/ns/dqv#QualityAnnotation> ;
-                                              rdfs:comment "QualityCertificate is subclass of QualityAnnotation. It associates a dataset to a document that	certifies the data quality according to a set of quality assessment rules" ;
+                                              rdfs:comment "Quality Certificate is subclass of Quality Annotation. It associates a dataset to a document that	certifies the data quality according to a set of quality assessment rules" ;
                                               rdfs:label "QualityCertificate" .
 
 
 ###  http://www.w3.org/ns/dqv#QualityMeasurement
 <http://www.w3.org/ns/dqv#QualityMeasurement> rdf:type owl:Class ;
                                               rdfs:subClassOf owl:Thing ;
-                                              rdfs:comment "QualityMeasurement is the evaluation of a given dataset a specific quality metric." ;
+                                              rdfs:comment "Quality Measurement is the evaluation of a given dataset a specific quality metric." ;
                                               rdfs:label "QualityMeasurement" .
 
 
@@ -2201,7 +2204,8 @@ skos:ConceptScheme rdfs:subClassOf owl:Thing .
 <http://www.w3.org/ns/mls#Dataset> rdf:type owl:Class ;
                                    rdfs:subClassOf <http://www.w3.org/ns/mls#Data> ;
                                    rdfs:isDefinedBy "http://ml-schema.github.io/documentation/ML%20Schema.html#d4e197"@en ;
-                                   rdfs:label "Dataset"@en .
+                                   rdfs:label "Dataset"@en ;
+                                   skos:definition "A collection of data, published or curated by a single source, and available for access or download in one or more representations."@en .
 
 
 ###  http://www.w3.org/ns/mls#EvaluationMeasure
@@ -2373,12 +2377,20 @@ foaf:Person rdf:type owl:Class ;
      rdfs:subClassOf :DemographicDimension .
 
 
+###  https://nobias-project.eu/nobias/Alienation
+:Alienation rdf:type owl:Class ;
+            rdfs:subClassOf :Harm ;
+            rdfs:isDefinedBy "https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&utm_medium=PDF&utm_campaign=PDFCoverPages"@en ;
+            rdfs:label "Alienation"@en ;
+            skos:definition "Denial of the relevance of socially meaningful categories."@en .
+
+
 ###  https://nobias-project.eu/nobias/Application
 :Application rdf:type owl:Class ;
              rdfs:subClassOf owl:Thing ;
              owl:disjointWith :Bias ;
              rdfs:label "Application"@en ;
-             skos:definition "We define App here"@en .
+             skos:definition "The use, purpose or appliation of artificial intelligence technology."@en .
 
 
 ###  https://nobias-project.eu/nobias/Bias
@@ -2408,7 +2420,8 @@ foaf:Person rdf:type owl:Class ;
 ###  https://nobias-project.eu/nobias/BiasDocumentation
 :BiasDocumentation rdf:type owl:Class ;
                    rdfs:subClassOf :DocumentationType ;
-                   rdfs:label "BiasDocumentation"@en .
+                   rdfs:label "BiasDocumentation"@en ,
+                              "This class represents the stage in the documentation pipeline that pertains to the capture of bias knowledge."@en .
 
 
 ###  https://nobias-project.eu/nobias/BiasEvaluation
@@ -2442,7 +2455,8 @@ foaf:Person rdf:type owl:Class ;
                               ] ;
               rdfs:isDefinedBy "https://doi.org/10.1145/3588433"@en ;
               rdfs:label "DataCoverage"@en ;
-              skos:definition "To have enough similar entries (sub-categories) for a particular variable (categoy) in a dataset."@en .
+              skos:definition "To have enough similar entries (sub-categories) for a particular variable (categoy) in a dataset."@en ;
+              :formalization "cov(q,D) = |G_D(q)|, threshold value k, qu is covered iff cov (q, D) > k."@en .
 
 
 ###  https://nobias-project.eu/nobias/DataIntegration
@@ -2469,13 +2483,15 @@ foaf:Person rdf:type owl:Class ;
 ###  https://nobias-project.eu/nobias/DatasetDocumentation
 :DatasetDocumentation rdf:type owl:Class ;
                       rdfs:subClassOf :DocumentationType ;
-                      rdfs:label "DatasetDocumentation"@en .
+                      rdfs:label "DatasetDocumentation"@en ,
+                                 "This class represents the stage in the documentation pipeline that pertains to the capture of knowledge and metadata pertaining to the dataset."@en .
 
 
 ###  https://nobias-project.eu/nobias/Dehumanization
 :Dehumanization rdf:type owl:Class ;
                 rdfs:subClassOf :Harm ;
-                rdfs:label "Dehumanization"@en .
+                rdfs:label "Dehumanization"@en ;
+                skos:definition "The viewing and the treatment of other people as though they lack the mental capacities that are commonly attributed to human beings."@en .
 
 
 ###  https://nobias-project.eu/nobias/DemographicDimension
@@ -2502,9 +2518,26 @@ Dev et al., Findings 2022"""@en ;
                 skos:definition "Engaging in discriminatory behavior, holding negative attitudes toward, or otherwise having less favorable reactions toward people based on a demographic factor."@en .
 
 
+###  https://nobias-project.eu/nobias/Denigration
+:Denigration rdf:type owl:Class ;
+             rdfs:subClassOf :Harm ;
+             rdfs:isDefinedBy "https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&utm_medium=PDF&utm_campaign=PDFCoverPages"@en ;
+             rdfs:label "Denigration"@en ;
+             skos:definition "A harm that arises when a system applies a label that has a long history of being purposefully used to denigrate and demean people."@en .
+
+
+###  https://nobias-project.eu/nobias/Disparagement
+:Disparagement rdf:type owl:Class ;
+               rdfs:subClassOf :Harm ;
+               rdfs:isDefinedBy "https://aclanthology.org/2022.findings-aacl.24"@en ;
+               rdfs:label "Disparagement"@en ;
+               skos:definition "Disparagement encapsulates any behaviour by a model which reinforces the notion that certain groups are less valuable than others and less deserving of respect or resources."@en .
+
+
 ###  https://nobias-project.eu/nobias/DocumentationType
 :DocumentationType rdf:type owl:Class ;
                    rdfs:subClassOf owl:Thing ;
+                   rdfs:comment "This class represents the stage in the documentation pipeline."@en ;
                    rdfs:label "DocumentationType"@en .
 
 
@@ -2512,8 +2545,10 @@ Dev et al., Findings 2022"""@en ;
 :Erasure rdf:type owl:Class ;
          owl:equivalentClass :SocialInvisibility ;
          rdfs:subClassOf :Harm ;
+         rdfs:isDefinedBy "https://aclanthology.org/2022.findings-aacl.24"@en ;
          rdfs:label "Erasure"@en ;
-         skos:definition "Erasure or social invisibility refers to a group of people in society that can be excluded or systematically ignored from resource allocation procedures or decision-making processes due to data collection practices or historical record keeping."@en .
+         skos:definition "Erasure or social invisibility refers to a group of people in society that can be excluded or systematically ignored from resource allocation procedures or decision-making processes due to data collection practices or historical record keeping."@en ,
+                         "Erasure refers to the lack of adequate representation of members of a particular social group, intentional or not."@en .
 
 
 ###  https://nobias-project.eu/nobias/Gini_coefficient_of_the_in-degree_distribution
@@ -2539,6 +2574,12 @@ In AAAI/ACM Conference on AI, Ethics, and Society (AIES ’23).
 August 8–10, 2023, Montréal,QC, Canada."""@en ;
       rdfs:label "Harm"@en ;
       skos:definition "Adverse lived experiences resulting from an AI system’s deployment and operation in the world."@en .
+
+
+###  https://nobias-project.eu/nobias/HatespeechDetection
+:HatespeechDetection rdf:type owl:Class ;
+                     rdfs:subClassOf :SocialNLPModel ;
+                     rdfs:label "HatespeechDetection"@en .
 
 
 ###  https://nobias-project.eu/nobias/HistoricalBias
@@ -2581,7 +2622,15 @@ August 8–10, 2023, Montréal,QC, Canada."""@en ;
 ###  https://nobias-project.eu/nobias/LearningDocumentation
 :LearningDocumentation rdf:type owl:Class ;
                        rdfs:subClassOf :DocumentationType ;
+                       rdfs:comment "This class represents the stage in the documentation pipeline that pertains to the capture of knowledge and metadata pertaining to the learning and training process."@en ;
                        rdfs:label "LearningDocumentation"@en .
+
+
+###  https://nobias-project.eu/nobias/MachineTranslation
+:MachineTranslation rdf:type owl:Class ;
+                    rdfs:subClassOf :SocialNLPModel ;
+                    rdfs:comment "Automatically translate spoken language and textual content."@en ;
+                    rdfs:label "MachineTranslation"@en .
 
 
 ###  https://nobias-project.eu/nobias/NationalityBias
@@ -2627,16 +2676,36 @@ August 8–10, 2023, Montréal,QC, Canada."""@en ;
                 rdfs:label "Pre-processing"@en .
 
 
+###  https://nobias-project.eu/nobias/PublicParticipation
+:PublicParticipation rdf:type owl:Class ;
+                     rdfs:subClassOf :Harm ;
+                     rdfs:isDefinedBy "https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&utm_medium=PDF&utm_campaign=PDFCoverPages"@en ;
+                     rdfs:label "PublicParticipation"@en ;
+                     skos:definition "When athe implementation of a systems results in diminishing the ability of a particular population to participate in public discourse."@en .
+
+
+###  https://nobias-project.eu/nobias/QualityOfService
+:QualityOfService rdf:type owl:Class ;
+                  rdfs:subClassOf :Harm ;
+                  rdfs:isDefinedBy "https://aclanthology.org/2022.findings-aacl.24"@en ;
+                  rdfs:label "QualityOfService"@en ;
+                  skos:definition "Quality of service harms result from instances when a model fails to perform equitably for different groups."@en .
+
+
 ###  https://nobias-project.eu/nobias/RecommenderSystem
 :RecommenderSystem rdf:type owl:Class ;
                    rdfs:subClassOf :Application ;
-                   rdfs:label "RecommenderSystem"@en .
+                   rdfs:comment "Recommender system's are widely used in e-commerce platforms, i.e., Amazon, Netflix, to  generate product or content recommendations."@en ;
+                   rdfs:label "RecommenderSystem"@en ;
+                   skos:definition "A recommendation system is developed with the objective of predicting the preference of a system's user for a particular item."@en .
 
 
 ###  https://nobias-project.eu/nobias/Representation
 :Representation rdf:type owl:Class ;
                 rdfs:subClassOf :Harm ;
-                rdfs:label "Representation"@en .
+                rdfs:isDefinedBy "https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&utm_medium=PDF&utm_campaign=PDFCoverPages"@en ;
+                rdfs:label "Representation"@en ;
+                skos:definition "Those harms which arise when a system represents some social groups in a less favorable light than others, demeans them, or fails to recognize their existence altogether."@en .
 
 
 ###  https://nobias-project.eu/nobias/RepresentationBias
@@ -2688,19 +2757,31 @@ August 8–10, 2023, Montréal,QC, Canada."""@en ;
 ###  https://nobias-project.eu/nobias/SocialInvisibility
 :SocialInvisibility rdf:type owl:Class ;
                     rdfs:subClassOf :Harm ;
-                    rdfs:label "SocialInvisibility"@en .
+                    rdfs:label "SocialInvisibility"@en ;
+                    skos:definition "Erasure or social invisibility refers to a group of people in society that can be excluded or systematically ignored from resource allocation procedures or decision-making processes due to data collection practices or historical record keeping."@en .
 
 
 ###  https://nobias-project.eu/nobias/SocialNLPModel
 :SocialNLPModel rdf:type owl:Class ;
                 rdfs:subClassOf :Application ;
+                rdfs:comment "NLP tasks break down human text and voice data to support the ability of computers to make sense of what it is ingesting."@en ;
                 rdfs:label "SocialNLPLModel"@en .
 
 
 ###  https://nobias-project.eu/nobias/Stereotyping
 :Stereotyping rdf:type owl:Class ;
               rdfs:subClassOf :Harm ;
-              rdfs:label "Stereotyping"@en .
+              rdfs:isDefinedBy "https://aclanthology.org/2022.findings-aacl.24"@en ;
+              rdfs:label "Stereotyping"@en ;
+              skos:definition "Stereotypes are overgeneralized beliefs about the personal attributes of an individual as determined by their demographic group membership."@en .
+
+
+###  https://nobias-project.eu/nobias/Stigmatization
+:Stigmatization rdf:type owl:Class ;
+                rdfs:subClassOf :Harm ;
+                rdfs:isDefinedBy "https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&utm_medium=PDF&utm_campaign=PDFCoverPages"@en ;
+                rdfs:label "Stigmatization"@en ;
+                skos:definition "When systems e.g., NLP systems, treat some language varieties or practices as less grammatical, more offensive, or less appropriate for public consumption in comparison to others. This reproduces dominant language ideolegies."@en .
 
 
 ###  https://nobias-project.eu/nobias/UnderlyingDistributionSkew
@@ -3615,7 +3696,7 @@ August 8–10, 2023, Montréal,QC, Canada."""@en ;
 ###  https://www.openriskmanual.org/ns/doam#Output
 <https://www.openriskmanual.org/ns/doam#Output> rdf:type owl:Class ;
                                                 rdfs:subClassOf owl:Thing ;
-                                                rdfs:comment "doam:Output is the output of classification model."@en ;
+                                                rdfs:comment "Output is the output of classification model."@en ;
                                                 rdfs:label "Output" .
 
 
