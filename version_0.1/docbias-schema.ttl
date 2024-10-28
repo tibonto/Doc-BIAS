@@ -2068,6 +2068,15 @@ obo:GSSO_005478 rdf:type owl:Class ;
                                                                  rdfs:subClassOf <http://sbmi.tmc.uth.edu/ontology/foaf_plus#Christianity> .
 
 
+###  http://www.ontologydesignpatterns.org/bias/#Bias
+<http://www.ontologydesignpatterns.org/bias/#Bias> rdf:type owl:Class ;
+                                                   owl:equivalentClass :Bias ;
+                                                   rdfs:subClassOf owl:Thing ;
+                                                   dc:citation "Pitoura, E. 2020. Social-minded Measures of Data Quality: Fairness, Diversity, and Lack of Bias. J. Data and Information Quality 12, 3, Article 12 (July 2020), 8 pages."@en ;
+                                                   skos:definition "A concentration on, or interest in one particular area, or subject."@en ,
+                                                                   "Bias is an inclination, or prejudice for, or against one person, or group, especially in a way considered to be unfair."@en .
+
+
 ###  http://www.w3.org/2000/10/swap/pim/contact#Person
 <http://www.w3.org/2000/10/swap/pim/contact#Person> rdf:type owl:Class ;
                                                     rdfs:subClassOf owl:Thing ;
@@ -2368,31 +2377,6 @@ foaf:Person rdf:type owl:Class ;
      rdfs:subClassOf :DemographicDimension .
 
 
-###  https://nobias-project.eu/nobias/AgeBias
-:AgeBias rdf:type owl:Class ;
-         rdfs:subClassOf :DemographyBias ;
-         rdfs:label "Age Bias"@en .
-
-
-###  https://nobias-project.eu/nobias/Aggregation_Bias
-:Aggregation_Bias rdf:type owl:Class ;
-                  owl:equivalentClass <https://w3id.org/aio/Ecological_Fallacy_Bias> ;
-                  rdfs:subClassOf <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
-                  rdfs:isDefinedBy "https://doi.org/10.1145/3457607"@en ;
-                  rdfs:label "Aggregation Bias"@en ;
-                  skos:definition """Arises when false conclusions are
-drawn about individuals from observing the entire population."""@en .
-
-
-###  https://nobias-project.eu/nobias/Algorithmic_Bias
-:Algorithmic_Bias rdf:type owl:Class ;
-                  rdfs:subClassOf <https://w3id.org/aio/Computational_Bias> ;
-                  rdfs:isDefinedBy "https://doi.org/10.1145/3457607"@en ;
-                  rdfs:label "Algorithmic Bias"@en ;
-                  skos:definition """Algorithmic bias is when the bias is not present in the input data and is
-added purely by the algorithm"""@en .
-
-
 ###  https://nobias-project.eu/nobias/Alienation
 :Alienation rdf:type owl:Class ;
             rdfs:subClassOf :Harm ;
@@ -2455,16 +2439,24 @@ added purely by the algorithm"""@en .
              skos:definition "Bias measure corresponds to a quantitative metric or indicator that assesses the presence and extent of bias in a particular context."^^rdfs:Literal .
 
 
-###  https://nobias-project.eu/nobias/CrowdsourcingApplication
-:CrowdsourcingApplication rdf:type owl:Class ;
-                          rdfs:subClassOf :Application .
-
-
 ###  https://nobias-project.eu/nobias/DataCleaning
 :DataCleaning rdf:type owl:Class ;
               rdfs:subClassOf :Pre-processing ;
               rdfs:comment "method used for data cleaning" ;
               rdfs:label "DataCleaning"@en .
+
+
+###  https://nobias-project.eu/nobias/DataCoverage
+:DataCoverage rdf:type owl:Class ;
+              rdfs:subClassOf :BiasMeasure ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :measures ;
+                                owl:someValuesFrom :RepresentationBias
+                              ] ;
+              rdfs:isDefinedBy "https://doi.org/10.1145/3588433"@en ;
+              rdfs:label "DataCoverage"@en ;
+              skos:definition "To have enough similar entries (sub-categories) for a particular variable (categoy) in a dataset."@en ;
+              :formalization "cov(q,D) = |G_D(q)|, threshold value k, qu is covered iff cov (q, D) > k."@en .
 
 
 ###  https://nobias-project.eu/nobias/DataIntegration
@@ -2513,7 +2505,7 @@ Dev et al., Findings 2022"""@en ;
 
 ###  https://nobias-project.eu/nobias/DemographyBias
 :DemographyBias rdf:type owl:Class ;
-                rdfs:subClassOf <https://w3id.org/aio/Societal_Bias> ,
+                rdfs:subClassOf :Bias ,
                                 [ rdf:type owl:Restriction ;
                                   owl:onProperty :isAlignedWith ;
                                   owl:someValuesFrom :Dehumanization
@@ -2522,7 +2514,7 @@ Dev et al., Findings 2022"""@en ;
                                   owl:onProperty :isAlignedWith ;
                                   owl:someValuesFrom :Stereotyping
                                 ] ;
-                rdfs:label "Demography Bias"@en ;
+                rdfs:label "DemographyBias"@en ;
                 skos:definition "Engaging in discriminatory behavior, holding negative attitudes toward, or otherwise having less favorable reactions toward people based on a demographic factor."@en .
 
 
@@ -2532,19 +2524,6 @@ Dev et al., Findings 2022"""@en ;
              rdfs:isDefinedBy "https://scholarworks.umass.edu/dissertations_2/2092?utm_source=scholarworks.umass.edu%2Fdissertations_2%2F2092&utm_medium=PDF&utm_campaign=PDFCoverPages"@en ;
              rdfs:label "Denigration"@en ;
              skos:definition "A harm that arises when a system applies a label that has a long history of being purposefully used to denigrate and demean people."@en .
-
-
-###  https://nobias-project.eu/nobias/DirectDiscrimination
-:DirectDiscrimination rdf:type owl:Class ;
-                      rdfs:subClassOf :UnexplainableDiscrimination ;
-                      rdfs:label "Direct Discrimination"@en .
-
-
-###  https://nobias-project.eu/nobias/Discrimination
-:Discrimination rdf:type owl:Class ;
-                rdfs:isDefinedBy "https://doi.org/10.1145/3457607"@en ;
-                rdfs:label "Discrimination"@en ;
-                skos:definition "Discrimination can be considered as a source for unfairness that is due to human prejudice and stereotyping based on the sensitive attributes, which may happen intentionally or unintentionally."@en .
 
 
 ###  https://nobias-project.eu/nobias/Disparagement
@@ -2572,39 +2551,18 @@ Dev et al., Findings 2022"""@en ;
                          "Erasure refers to the lack of adequate representation of members of a particular social group, intentional or not."@en .
 
 
-###  https://nobias-project.eu/nobias/EthnicityBias
-:EthnicityBias rdf:type owl:Class ;
-               rdfs:subClassOf :DemographyBias ;
-               rdfs:label "Ethnicity Bias"@en ;
-               skos:definition "When models are partial towards certain ethnicity."@en .
-
-
-###  https://nobias-project.eu/nobias/ExplainableDiscrimination
-:ExplainableDiscrimination rdf:type owl:Class ;
-                           rdfs:subClassOf :Discrimination ;
-                           rdfs:label "Explainable Discrimination"@en .
-
-
-###  https://nobias-project.eu/nobias/ExtrinsicBias
-:ExtrinsicBias rdf:type owl:Class ;
-               rdfs:subClassOf <https://w3id.org/aio/Computational_Bias> ;
-               rdfs:label "Extrinsic Bias"@en .
-
-
-###  https://nobias-project.eu/nobias/GenderBias
-:GenderBias rdf:type owl:Class ;
-            rdfs:subClassOf <https://w3id.org/aio/Societal_Bias> ;
-            rdfs:label "Gender Bias" ;
-            skos:definition "Gender bias is the tendency to give preferential treatment to one gender over another."@en ;
-            skos:note """Identification as male/masculine, female/feminine or something else, and association with a (social) role or set of behavioral and cultural traits, clothing, etc; a category to which a person belongs on this basis. Gender is the result of a complex combination of gender role, gender expression, gender identity, and gender modality.
-
-http://purl.obolibrary.org/obo/NCIT_C17357"""@en .
-
-
-###  https://nobias-project.eu/nobias/GenderBiasMeasure
-:GenderBiasMeasure rdf:type owl:Class ;
-                   rdfs:subClassOf :SocioDemographicBiasMeasure ;
-                   rdfs:label "Gender Bias Measure"@en .
+###  https://nobias-project.eu/nobias/Gini_coefficient_of_the_in-degree_distribution
+:Gini_coefficient_of_the_in-degree_distribution rdf:type owl:Class ;
+                                                rdfs:subClassOf :BiasMeasure ,
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :measures ;
+                                                                  owl:someValuesFrom :PopularityBias
+                                                                ] ;
+                                                rdfs:comment "The criteria followed to determine if there is presence of bias is the higher the Gini coefficient, the more skewed or unequal the in-degree distribution across all nodes."@en ;
+                                                rdfs:isDefinedBy "https://doi.org/10.1145/3501247.3531583"@en ;
+                                                rdfs:label "Gini coefficient of the in-degree distribution"@en ;
+                                                skos:definition "The Gini coefficient allows to demonstrate whether popularity bias is exacerbated by recommendation algorithms regardless of the initial conditions of the network structure, or whether certain types of networks are exempt from this bias."@en ;
+                                                :formalization "Gini(π^in ) = {sum_of_all  (2_i − n − 1)π_i^in} / {sum_of_all  π_i^in}"@en .
 
 
 ###  https://nobias-project.eu/nobias/Harm
@@ -2624,9 +2582,21 @@ August 8–10, 2023, Montréal,QC, Canada."""@en ;
                      rdfs:label "HatespeechDetection"@en .
 
 
+###  https://nobias-project.eu/nobias/HistoricalBias
+:HistoricalBias rdf:type owl:Class ;
+                rdfs:subClassOf :Bias ,
+                                :RepresentationBias ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :isAlignedWith ;
+                                  owl:someValuesFrom :Representation
+                                ] ;
+                rdfs:label "HistoricalBias"@en ;
+                skos:definition "Historical bias is the already existing bias due to the socio-technical issues in the world."@en .
+
+
 ###  https://nobias-project.eu/nobias/Homophily
 :Homophily rdf:type owl:Class ;
-           rdfs:subClassOf <https://w3id.org/aio/Group_Bias> ,
+           rdfs:subClassOf :Bias ,
                            [ rdf:type owl:Restriction ;
                              owl:onProperty :isAssociatedTo ;
                              owl:someValuesFrom :RecommenderSystem
@@ -2636,29 +2606,17 @@ August 8–10, 2023, Montréal,QC, Canada."""@en ;
            skos:definition "The tendency to connect to similar users or people as oneself."@en .
 
 
-###  https://nobias-project.eu/nobias/IndirectDiscrimination
-:IndirectDiscrimination rdf:type owl:Class ;
-                        rdfs:subClassOf :UnexplainableDiscrimination ;
-                        rdfs:label "Indirect Discrimination"@en .
-
-
-###  https://nobias-project.eu/nobias/InductiveBias
-:InductiveBias rdf:type owl:Class ;
-               owl:equivalentClass :LearningBias ;
-               rdfs:subClassOf <https://w3id.org/aio/Computational_Bias> ;
-               rdfs:label "Inductive Bias"@en .
-
-
-###  https://nobias-project.eu/nobias/IntrinsicBias
-:IntrinsicBias rdf:type owl:Class ;
-               rdfs:subClassOf <https://w3id.org/aio/Computational_Bias> ;
-               rdfs:label "Intrinsic Bias"@en .
-
-
-###  https://nobias-project.eu/nobias/LearningBias
-:LearningBias rdf:type owl:Class ;
-              rdfs:subClassOf <https://w3id.org/aio/Computational_Bias> ;
-              rdfs:label "Learning Bias"@en .
+###  https://nobias-project.eu/nobias/In-group_links
+:In-group_links rdf:type owl:Class ;
+                rdfs:subClassOf :BiasMeasure ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :measures ;
+                                  owl:someValuesFrom :PopularityBias
+                                ] ;
+                rdfs:isDefinedBy "https://doi.org/10.1145/3501247.3531583"@en ;
+                rdfs:label "In-group links"@en ;
+                skos:definition "Measures the fraction of links within groups to determine what type of edges are being recommended more often by the recommendation algorithms."@en ;
+                :formalization "I_a = {e_aa} / {e_aa + e_ab}"@en .
 
 
 ###  https://nobias-project.eu/nobias/LearningDocumentation
@@ -2668,21 +2626,6 @@ August 8–10, 2023, Montréal,QC, Canada."""@en ;
                        rdfs:label "LearningDocumentation"@en .
 
 
-###  https://nobias-project.eu/nobias/LinkingBiasMeasure
-:LinkingBiasMeasure rdf:type owl:Class ;
-                    rdfs:subClassOf :BiasMeasure ;
-                    rdfs:label "Linking Bias Measure"@en .
-
-
-###  https://nobias-project.eu/nobias/Longitudinal_Data_Fallacy
-:Longitudinal_Data_Fallacy rdf:type owl:Class ;
-                           rdfs:subClassOf <https://w3id.org/aio/Use_And_Interpretation_Bias> ;
-                           rdfs:isDefinedBy "https://doi.org/10.1145/3457607"@en ;
-                           rdfs:label "Longitudinal Data Fallacy"@en ;
-                           skos:definition """Researchers analyzing temporal data must use longitudinal
-analysis to track cohorts over time to learn their behavior. Instead, temporal data is often modeled using cross-sectional analysis, which combines diverse cohorts at a single time point. The heterogeneous cohorts can bias cross-sectional analysis, leading to different conclusions than longitudinal analysis."""@en .
-
-
 ###  https://nobias-project.eu/nobias/MachineTranslation
 :MachineTranslation rdf:type owl:Class ;
                     rdfs:subClassOf :SocialNLPModel ;
@@ -2690,53 +2633,40 @@ analysis to track cohorts over time to learn their behavior. Instead, temporal d
                     rdfs:label "MachineTranslation"@en .
 
 
-###  https://nobias-project.eu/nobias/Modifiable_Areal_Unit_Problem
-:Modifiable_Areal_Unit_Problem rdf:type owl:Class ;
-                               rdfs:subClassOf <https://w3id.org/aio/Ecological_Fallacy_Bias> ;
-                               rdfs:isDefinedBy "https://doi.org/10.1145/3457607"@en ;
-                               rdfs:label "Modifiable Areal Unit Problem"@en ;
-                               skos:definition "A statistical bias in geospatial analysis, which arises when modeling data at different levels of spatial aggregation. This bias results in different trends learned when data is aggregated at different spatial scales."@en .
-
-
-###  https://nobias-project.eu/nobias/NamedEntityRecognitionSystem
-:NamedEntityRecognitionSystem rdf:type owl:Class ;
-                              rdfs:subClassOf :SocialNLPModel ;
-                              rdfs:label "NamedEntityRecognitionSystem"@en .
-
-
 ###  https://nobias-project.eu/nobias/NationalityBias
 :NationalityBias rdf:type owl:Class ;
-                 rdfs:subClassOf <https://w3id.org/aio/Societal_Bias> ,
+                 rdfs:subClassOf :Bias ,
+                                 :DemographyBias ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty :isAssociatedTo ;
                                    owl:someValuesFrom :SocialNLPModel
                                  ] ;
-                 rdfs:label "Nationality Bias"@en ;
+                 rdfs:label "NationalityBias"@en ;
                  skos:definition "Engaging in discriminatory behavior, holding negative attitudes toward, or otherwise having less favorable reactions toward people based on their nationality."@en .
 
 
-###  https://nobias-project.eu/nobias/NationalityBiasMeasure
-:NationalityBiasMeasure rdf:type owl:Class ;
-                        rdfs:subClassOf :SocioDemographicBiasMeasure ,
+###  https://nobias-project.eu/nobias/Nationality_Group_Bias
+:Nationality_Group_Bias rdf:type owl:Class ;
+                        rdfs:subClassOf :BiasMeasure ,
                                         [ rdf:type owl:Restriction ;
                                           owl:onProperty :measures ;
                                           owl:someValuesFrom :NationalityBias
                                         ] ;
-                        rdfs:label "Nationality Bias Measure"@en .
+                        rdfs:isDefinedBy "Nationality Bias in Text Generation https://aclanthology.org/2023.eacl-main.9,Narayanan Venkit et al., EACL 2023"@en ;
+                        rdfs:label "Nationality Group Bias"@en ;
+                        skos:definition "Demographic group bias is measured by using statistical inferences of different demographic synonym groups d_n and check for parity across all the groups and a standard control group C, using the story generation feature of the GPT-2 language model."@en .
 
 
-###  https://nobias-project.eu/nobias/Omitted_Variable_Bias
-:Omitted_Variable_Bias rdf:type owl:Class ;
-                       rdfs:subClassOf <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
-                       rdfs:isDefinedBy "https://doi.org/10.1145/3457607"@en ;
-                       rdfs:label "Omitted Variable Bias"@en ;
-                       skos:definition "Occurs when one or more important variables are left out of the model."@en .
-
-
-###  https://nobias-project.eu/nobias/PopularityBiasMeasure
-:PopularityBiasMeasure rdf:type owl:Class ;
-                       rdfs:subClassOf :BiasMeasure ;
-                       rdfs:label "Popularity Bias Measure"@en .
+###  https://nobias-project.eu/nobias/PopularityBias
+:PopularityBias rdf:type owl:Class ;
+                owl:equivalentClass <https://w3id.org/aio/Popularity_Bias> ;
+                rdfs:subClassOf :Bias ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :isAssociatedTo ;
+                                  owl:someValuesFrom :RecommenderSystem
+                                ] ;
+                rdfs:label "PopularityBias"@en ;
+                skos:definition "When collaborative filtering recommenders typically emphasize popular items (those with more ratings) over other “long-tail”, less popular ones that may only be popular among small groups of users."@en .
 
 
 ###  https://nobias-project.eu/nobias/Pre-processing
@@ -2744,14 +2674,6 @@ analysis to track cohorts over time to learn their behavior. Instead, temporal d
                 rdfs:subClassOf owl:Thing ;
                 rdfs:comment "Pre-processing class defines the method by which Pre-procesing is done. Typically it stores the files used for data pre-processing. There are many ways to do pre-processing like data reduction, data cleaning, data integration and data transformation which are the subclasses of Pre-processing class." ;
                 rdfs:label "Pre-processing"@en .
-
-
-###  https://nobias-project.eu/nobias/ProxyDiscrimination
-:ProxyDiscrimination rdf:type owl:Class ;
-                     rdfs:subClassOf :Discrimination ;
-                     rdfs:isDefinedBy "Niki Kilbertus, Mateo Rojas Carulla, Giambattista Parascandolo, Moritz Hardt, Dominik Janzing, and Bernhard Schölkopf. 2017. Avoiding discrimination through causal reasoning. In Proceedings of the International Conference on Advances in Neural Information Processing Systems."@en ;
-                     rdfs:label "Proxy Discrimination"@en ;
-                     skos:definition "A variable V in a causal graph exhibits potential proxy discrimination, if there exists a directed path from A to V that is blocked by a proxy variable and V itself is not a proxy."@en .
 
 
 ###  https://nobias-project.eu/nobias/PublicParticipation
@@ -2770,50 +2692,12 @@ analysis to track cohorts over time to learn their behavior. Instead, temporal d
                   skos:definition "Quality of service harms result from instances when a model fails to perform equitably for different groups."@en .
 
 
-###  https://nobias-project.eu/nobias/RaceBias
-:RaceBias rdf:type owl:Class ;
-          rdfs:subClassOf :DemographyBias ;
-          rdfs:label "Race Bias"@en ;
-          skos:altLabel "Racism"@en ;
-          skos:definition "When models are biased against certain races."@en .
-
-
-###  https://nobias-project.eu/nobias/Ranking_Bias
-:Ranking_Bias rdf:type owl:Class ;
-              rdfs:subClassOf <https://w3id.org/aio/Use_And_Interpretation_Bias> ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty :associatedTo ;
-                                owl:someValuesFrom :CrowdsourcingApplication
-                              ] ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty :associatedTo ;
-                                owl:someValuesFrom :RecommenderSystem
-                              ] ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty :associatedTo ;
-                                owl:someValuesFrom :SearchEngine
-                              ] ;
-              rdfs:isDefinedBy "https://doi.org/10.1145/3457607"@en ;
-              rdfs:label "Ranking Bias"@en ;
-              skos:definition """The idea that top-ranked results are the most relevant and important will
-result in attraction of more clicks than others."""@en .
-
-
 ###  https://nobias-project.eu/nobias/RecommenderSystem
 :RecommenderSystem rdf:type owl:Class ;
                    rdfs:subClassOf :Application ;
                    rdfs:comment "Recommender system's are widely used in e-commerce platforms, i.e., Amazon, Netflix, to  generate product or content recommendations."@en ;
                    rdfs:label "RecommenderSystem"@en ;
                    skos:definition "A recommendation system is developed with the objective of predicting the preference of a system's user for a particular item."@en .
-
-
-###  https://nobias-project.eu/nobias/ReportingBias
-:ReportingBias rdf:type owl:Class ;
-               owl:equivalentClass <https://w3id.org/aio/Measurement_Bias> ;
-               rdfs:subClassOf <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
-               rdfs:isDefinedBy "https://doi.org/10.1145/3457607"@en ;
-               rdfs:label "Reporting Bias"@en ;
-               skos:definition "Arises from how we choose, utilize, and measure particular features"@en .
 
 
 ###  https://nobias-project.eu/nobias/Representation
@@ -2824,43 +2708,50 @@ result in attraction of more clicks than others."""@en .
                 skos:definition "Those harms which arise when a system represents some social groups in a less favorable light than others, demeans them, or fails to recognize their existence altogether."@en .
 
 
-###  https://nobias-project.eu/nobias/RepresentationBiasMeasure
-:RepresentationBiasMeasure rdf:type owl:Class ;
-                           rdfs:subClassOf :BiasMeasure ,
-                                           [ rdf:type owl:Restriction ;
-                                             owl:onProperty :measures ;
-                                             owl:someValuesFrom <https://w3id.org/aio/Representation_Bias>
-                                           ] ;
-                           rdfs:label "Representation Bias Measure"@en .
+###  https://nobias-project.eu/nobias/RepresentationBias
+:RepresentationBias rdf:type owl:Class ;
+                    rdfs:subClassOf :Bias ;
+                    rdfs:label "RepresentationBias"@en ;
+                    skos:definition "Representation bias occurs when the development sample underrepresents some part of the population, and subsequently fails to generalize well for a subset of the use population."@en .
 
 
-###  https://nobias-project.eu/nobias/SearchEngine
-:SearchEngine rdf:type owl:Class ;
-              rdfs:subClassOf :Application .
+###  https://nobias-project.eu/nobias/RepresentationRate
+:RepresentationRate rdf:type owl:Class ;
+                    rdfs:subClassOf :BiasMeasure ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :measures ;
+                                      owl:someValuesFrom :RepresentationBias
+                                    ] ;
+                    rdfs:isDefinedBy "https://doi.org/10.1145/3588433"@en ;
+                    rdfs:label "RepresentationRate"@en ;
+                    skos:definition "An equal base rate is defined as having an equal number of objects for different subgroups in the dataset."@en .
+
+
+###  https://nobias-project.eu/nobias/SamplingBias
+:SamplingBias rdf:type owl:Class ;
+              owl:equivalentClass :Self-SelectionBias ,
+                                  <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
+              rdfs:subClassOf :Bias ;
+              rdfs:label "SamplingBias"@en ;
+              skos:definition "When the sampling method only reaches a portion of the population or the population of interest has changed or is distinct from the population used during model training."@en .
+
+
+###  https://nobias-project.eu/nobias/SelectionBias
+:SelectionBias rdf:type owl:Class ;
+               owl:equivalentClass :Self-SelectionBias ,
+                                   <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
+               rdfs:subClassOf :Bias ,
+                               :RepresentationBias ;
+               rdfs:isDefinedBy "https://doi.org/10.1145/3588433"@en ;
+               rdfs:label "SelectionBias"@en ;
+               skos:definition "When the sampling method only reaches a portion of the population or the population of interest has changed or is distinct from the population used during model training."@en .
 
 
 ###  https://nobias-project.eu/nobias/Self-SelectionBias
 :Self-SelectionBias rdf:type owl:Class ;
-                    rdfs:subClassOf <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
+                    rdfs:subClassOf :Bias ;
                     rdfs:label "Self-SelectionBias"@en ;
                     skos:definition "When the sampling method only reaches a portion of the population or the population of interest has changed or is distinct from the population used during model training."@en .
-
-
-###  https://nobias-project.eu/nobias/Sex_Bias
-:Sex_Bias rdf:type owl:Class ;
-          rdfs:subClassOf :DemographyBias ;
-          rdfs:isDefinedBy "https://en.wikipedia.org/wiki/Sexism"@en ;
-          rdfs:label "Sex bias"@en ;
-          skos:altLabel "Sexism"@en ;
-          skos:definition "Prejudice or discrimination based on one's sex or gender."@en ;
-          skos:note """Sex is, according to medical databases, classification of studied subjects as male or female according to their reproductive organs and functions assigned by sets of chromosomes. Sex is related to reproductive organs anatomy and physiology.
-http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
-
-
-###  https://nobias-project.eu/nobias/SimpsonsParadoxMeasure
-:SimpsonsParadoxMeasure rdf:type owl:Class ;
-                        rdfs:subClassOf :BiasMeasure ;
-                        rdfs:label "Simpsons Paradox Measure"@en .
 
 
 ###  https://nobias-project.eu/nobias/SocialInvisibility
@@ -2875,18 +2766,6 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
                 rdfs:subClassOf :Application ;
                 rdfs:comment "NLP tasks break down human text and voice data to support the ability of computers to make sense of what it is ingesting."@en ;
                 rdfs:label "SocialNLPLModel"@en .
-
-
-###  https://nobias-project.eu/nobias/SocioDemographicBiasMeasure
-:SocioDemographicBiasMeasure rdf:type owl:Class ;
-                             rdfs:subClassOf :BiasMeasure ;
-                             rdfs:label "Socio-Demographic Bias Measure"@en .
-
-
-###  https://nobias-project.eu/nobias/StatisticalDiscrimination
-:StatisticalDiscrimination rdf:type owl:Class ;
-                           rdfs:subClassOf :Discrimination ;
-                           rdfs:label "Statistical Discrimination"@en .
 
 
 ###  https://nobias-project.eu/nobias/Stereotyping
@@ -2905,41 +2784,24 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
                 skos:definition "When systems e.g., NLP systems, treat some language varieties or practices as less grammatical, more offensive, or less appropriate for public consumption in comparison to others. This reproduces dominant language ideolegies."@en .
 
 
-###  https://nobias-project.eu/nobias/SystemicDiscrimination
-:SystemicDiscrimination rdf:type owl:Class ;
-                        rdfs:subClassOf :Discrimination ;
-                        rdfs:label "Systemic Discrimination"@en .
+###  https://nobias-project.eu/nobias/UnderlyingDistributionSkew
+:UnderlyingDistributionSkew rdf:type owl:Class ;
+                            rdfs:subClassOf :Bias ;
+                            rdfs:label "UnderlyingDistributionSkew"@en ;
+                            skos:definition "The underlying distribution that data is collected from may lack an equal ratio or sufficient representation for all of its subpopulations. In such cases, the underlying distribution is inherently skewed, and there are no discriminatory motives behind it."@en .
 
 
-###  https://nobias-project.eu/nobias/UnderlyingDistributionSkewMeasure
-:UnderlyingDistributionSkewMeasure rdf:type owl:Class ;
-                                   rdfs:subClassOf :RepresentationBiasMeasure .
-
-
-###  https://nobias-project.eu/nobias/Underlying_Distribution_Skew
-:Underlying_Distribution_Skew rdf:type owl:Class ;
-                              rdfs:subClassOf <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
-                              rdfs:label "UnderlyingDistributionSkew"@en ;
-                              skos:definition "The underlying distribution that data is collected from may lack an equal ratio or sufficient representation for all of its subpopulations. In such cases, the underlying distribution is inherently skewed, and there are no discriminatory motives behind it."@en .
-
-
-###  https://nobias-project.eu/nobias/UnexplainableDiscrimination
-:UnexplainableDiscrimination rdf:type owl:Class ;
-                             rdfs:subClassOf :Discrimination ;
-                             rdfs:label "Unexplainable Discrimination"@en .
-
-
-###  https://nobias-project.eu/nobias/UnresolvedDiscrimination
-:UnresolvedDiscrimination rdf:type owl:Class ;
-                          rdfs:subClassOf :Discrimination ;
-                          rdfs:isDefinedBy "Niki Kilbertus, Mateo Rojas Carulla, Giambattista Parascandolo, Moritz Hardt, Dominik Janzing, and Bernhard Schölkopf. 2017. Avoiding discrimination through causal reasoning. In Proceedings of the International Conference on Advances in Neural Information Processing Systems."@en ;
-                          rdfs:label "Unresolved Discrimination"@en ;
-                          skos:definition "A variable V in a causal graph exhibits unresolved discrimination if there exists a directed path from A to V that is not blocked by a resolving variable, and V itself is non-resolving"@en .
-
-
-###  https://nobias-project.eu/nobias/UserInterface
-:UserInterface rdf:type owl:Class ;
-               rdfs:subClassOf :Application .
+###  https://nobias-project.eu/nobias/Visibility_of_the_minority_group
+:Visibility_of_the_minority_group rdf:type owl:Class ;
+                                  rdfs:subClassOf :BiasMeasure ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :measures ;
+                                                    owl:someValuesFrom :PopularityBias
+                                                  ] ;
+                                  rdfs:isDefinedBy "https://doi.org/10.1145/3501247.3531583"@en ;
+                                  rdfs:label "Visibility of the minority group"@en ;
+                                  skos:definition "Change in visibility by computing prediction{f_m} after and before the recommendations to verify whether the minority group is gaining or losing visibility."@en ;
+                                  :formalization "delta function_fm = prediction{f_m (after)} − prediction{f_m (before)}"@en .
 
 
 ###  https://w3id.org/aio/Activity_Bias
@@ -3045,7 +2907,15 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
 
 ###  https://w3id.org/aio/Bias
 <https://w3id.org/aio/Bias> rdf:type owl:Class ;
+                            obo:IAO_0000115 "Systematic error introduced into sampling or testing by selecting or encouraging one outcome or answer over others."^^xsd:string ;
                             rdfs:label "Bias"^^xsd:string .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <https://w3id.org/aio/Bias> ;
+   owl:annotatedProperty obo:IAO_0000115 ;
+   owl:annotatedTarget "Systematic error introduced into sampling or testing by selecting or encouraging one outcome or answer over others."^^xsd:string ;
+   oboInOwl:hasDbXref "https://www.merriam-webster.com/dictionary/bias"^^xsd:string
+ ] .
 
 
 ###  https://w3id.org/aio/Cognitive_Bias
@@ -3064,7 +2934,7 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
 
 ###  https://w3id.org/aio/Computational_Bias
 <https://w3id.org/aio/Computational_Bias> rdf:type owl:Class ;
-                                          rdfs:subClassOf :Bias ;
+                                          rdfs:subClassOf <https://w3id.org/aio/Bias> ;
                                           obo:IAO_0000115 "A systematic tendency which causes differences between results and facts. The bias exists in numbers of the process of data analysis, including the source of the data, the estimator chosen, and the ways the data was analyzed."^^xsd:string ;
                                           oboInOwl:hasExactSynonym "Statistical Bias"^^xsd:string ;
                                           rdfs:label "Computational Bias"^^xsd:string .
@@ -3223,11 +3093,7 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
 
 ###  https://w3id.org/aio/Emergent_Bias
 <https://w3id.org/aio/Emergent_Bias> rdf:type owl:Class ;
-                                     rdfs:subClassOf <https://w3id.org/aio/Use_And_Interpretation_Bias> ,
-                                                     [ rdf:type owl:Restriction ;
-                                                       owl:onProperty :associatedTo ;
-                                                       owl:someValuesFrom :UserInterface
-                                                     ] ;
+                                     rdfs:subClassOf <https://w3id.org/aio/Use_And_Interpretation_Bias> ;
                                      obo:IAO_0000115 "Emergent bias is the result of the use and reliance on algorithms across new or unanticipated contexts."^^xsd:string ;
                                      rdfs:label "Emergent Bias"^^xsd:string .
 
@@ -3346,7 +3212,7 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
 
 ###  https://w3id.org/aio/Historical_Bias
 <https://w3id.org/aio/Historical_Bias> rdf:type owl:Class ;
-                                       rdfs:subClassOf <https://w3id.org/aio/Systemic_Bias> ;
+                                       rdfs:subClassOf <https://w3id.org/aio/Bias> ;
                                        obo:IAO_0000115 "Referring to the long-standing biases encoded in society over time. Related to, but distinct from, biases in historical description, or the interpretation, analysis, and explanation of history. A common example of historical bias is the tendency to view the larger world from a Western or European view."^^xsd:string ;
                                        rdfs:label "Historical Bias"^^xsd:string .
 
@@ -3374,7 +3240,7 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
 
 ###  https://w3id.org/aio/Human_Bias
 <https://w3id.org/aio/Human_Bias> rdf:type owl:Class ;
-                                  rdfs:subClassOf :Bias ;
+                                  rdfs:subClassOf <https://w3id.org/aio/Bias> ;
                                   obo:IAO_0000115 "Systematic errors in human thought based on a limited number of heuristic principles and predicting values to simpler judgmental operations."^^xsd:string ;
                                   rdfs:label "Human Bias"^^xsd:string .
 
@@ -3417,7 +3283,7 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
 
 ###  https://w3id.org/aio/Individual_Bias
 <https://w3id.org/aio/Individual_Bias> rdf:type owl:Class ;
-                                       rdfs:subClassOf <https://w3id.org/aio/Human_Bias> ;
+                                       rdfs:subClassOf <https://w3id.org/aio/Bias> ;
                                        obo:IAO_0000115 "Individual bias is a persistent point of view or limited list of such points of view that one applies (\"parent\", \"academic\", \"professional\", or etc.)."^^xsd:string ;
                                        rdfs:label "Individual Bias"^^xsd:string .
 
@@ -3445,7 +3311,7 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
 
 ###  https://w3id.org/aio/Institutional_Bias
 <https://w3id.org/aio/Institutional_Bias> rdf:type owl:Class ;
-                                          rdfs:subClassOf <https://w3id.org/aio/Systemic_Bias> ;
+                                          rdfs:subClassOf <https://w3id.org/aio/Bias> ;
                                           obo:IAO_0000115 "In contrast to biases exhibited at the level of individual persons, institutional bias refers to a tendency exhibited at the level of entire institutions, where practices or norms result in the favoring or disadvantaging of certain social groups. Common examples include institutional racism and institutional sexism."^^xsd:string ;
                                           rdfs:label "Institutional Bias"^^xsd:string .
 
@@ -3543,17 +3409,8 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
 
 ###  https://w3id.org/aio/Popularity_Bias
 <https://w3id.org/aio/Popularity_Bias> rdf:type owl:Class ;
-                                       rdfs:subClassOf <https://w3id.org/aio/Selection_And_Sampling_Bias> ,
-                                                       [ rdf:type owl:Restriction ;
-                                                         owl:onProperty :associatedTo ;
-                                                         owl:someValuesFrom :RecommenderSystem
-                                                       ] ,
-                                                       [ rdf:type owl:Restriction ;
-                                                         owl:onProperty :associatedTo ;
-                                                         owl:someValuesFrom :SearchEngine
-                                                       ] ;
+                                       rdfs:subClassOf <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
                                        obo:IAO_0000115 "A form of selection bias that occurs when items that are more popular are more exposed and less popular items are under-represented."^^xsd:string ;
-                                       rdfs:comment "When collaborative filtering recommenders typically emphasize popular items (those with more ratings) over other “long-tail”, less popular ones that may only be popular among small groups of users."@en ;
                                        rdfs:label "Popularity Bias"^^xsd:string .
 
 [ rdf:type owl:Axiom ;
@@ -3567,16 +3424,13 @@ http://purl.obolibrary.org/obo/NCIT_C28421"""@en .
 ###  https://w3id.org/aio/Population_Bias
 <https://w3id.org/aio/Population_Bias> rdf:type owl:Class ;
                                        rdfs:subClassOf <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
-                                       obo:IAO_0000115 "A form of selection bias that occurs when items that are more popular are more exposed and less popular items are under-represented. Systematic distortions in demographics or other user characteristics between a population of users represented in a dataset or on a platform and some target population."^^xsd:string ;
-                                       rdfs:comment """Population bias arises when statistics, demographics, representatives, and
-user characteristics are different in the user population of the platform from the original target
-population"""@en ;
+                                       obo:IAO_0000115 "A form of selection bias that occurs when items that are more popular are more exposed and less popular items are under-represented.aSystematic distortions in demographics or other user characteristics between a population of users represented in a dataset or on a platform and some target population."^^xsd:string ;
                                        rdfs:label "Population Bias"^^xsd:string .
 
 [ rdf:type owl:Axiom ;
    owl:annotatedSource <https://w3id.org/aio/Population_Bias> ;
    owl:annotatedProperty obo:IAO_0000115 ;
-   owl:annotatedTarget "A form of selection bias that occurs when items that are more popular are more exposed and less popular items are under-represented. Systematic distortions in demographics or other user characteristics between a population of users represented in a dataset or on a platform and some target population."^^xsd:string ;
+   owl:annotatedTarget "A form of selection bias that occurs when items that are more popular are more exposed and less popular items are under-represented.aSystematic distortions in demographics or other user characteristics between a population of users represented in a dataset or on a platform and some target population."^^xsd:string ;
    oboInOwl:hasDbXref "https://doi.org/10.6028/NIST.SP.1270"^^xsd:string
  ] .
 
@@ -3661,8 +3515,6 @@ population"""@en ;
                                                    oboInOwl:hasExactSynonym "Sampling Bias"^^xsd:string ,
                                                                             "Selection Bias"^^xsd:string ,
                                                                             "Selection Effect"^^xsd:string ;
-                                                   rdfs:comment """When the sampling method only reaches a portion of the population or the population of interest has changed or is distinct from the population used during model training.
-https://doi.org/10.1145/3588433"""@en ;
                                                    rdfs:label "Selection And Sampling Bias"^^xsd:string .
 
 [ rdf:type owl:Axiom ;
@@ -3689,7 +3541,7 @@ https://doi.org/10.1145/3588433"""@en ;
 
 ###  https://w3id.org/aio/Societal_Bias
 <https://w3id.org/aio/Societal_Bias> rdf:type owl:Class ;
-                                     rdfs:subClassOf <https://w3id.org/aio/Systemic_Bias> ;
+                                     rdfs:subClassOf <https://w3id.org/aio/Bias> ;
                                      obo:IAO_0000115 "Can be positive or negative, and take a number of different forms, but is typically characterized as being for or against groups or individuals based on social identities, demographic factors, or immutable physical characteristics. Societal or social biases are often stereotypes. Common examples of societal or social biases are based on concepts like race, ethnicity, gender, sexual orientation, socioeconomic status, education, and more. Societal bias is often recognized and discussed in the context of NLP (Natural Language Processing) models."^^xsd:string ;
                                      oboInOwl:hasExactSynonym "Social Bias"^^xsd:string ;
                                      rdfs:label "Societal Bias"^^xsd:string .
@@ -3748,7 +3600,7 @@ https://doi.org/10.1145/3588433"""@en ;
 
 ###  https://w3id.org/aio/Systemic_Bias
 <https://w3id.org/aio/Systemic_Bias> rdf:type owl:Class ;
-                                     rdfs:subClassOf :Bias ;
+                                     rdfs:subClassOf <https://w3id.org/aio/Bias> ;
                                      obo:IAO_0000115 "Biases that result from procedures and practices of particular institutions that operate in ways which result in certain social groups being advantaged or favored and others being disadvantaged or devalued."^^xsd:string ;
                                      oboInOwl:hasExactSynonym "Institutional Bias"^^xsd:string ,
                                                               "Societal Bias"^^xsd:string ;
@@ -3821,7 +3673,7 @@ https://doi.org/10.1145/3588433"""@en ;
 
 ###  https://w3id.org/aio/Simpon's_Paradox_Bias
 <https://w3id.org/aio/Simpon's_Paradox_Bias> rdf:type owl:Class ;
-                                             rdfs:subClassOf <https://w3id.org/aio/Ecological_Fallacy_Bias> ;
+                                             rdfs:subClassOf <https://w3id.org/aio/Selection_And_Sampling_Bias> ;
                                              obo:IAO_0000115 "A statistical phenomenon where the marginal association between two categorical variables is qualitatively different from the partial association between the same two variables after controlling for one or more other variables. For example, the statistical association or correlation that has been detected between two variables for an entire population disappears or reverses when the population is divided into subgroups."^^xsd:string ;
                                              oboInOwl:hasExactSynonym "Simpson's Paradox"^^xsd:string ;
                                              rdfs:label "Simpon's Paradox Bias"^^xsd:string .
@@ -3846,251 +3698,6 @@ https://doi.org/10.1145/3588433"""@en ;
                                                 rdfs:subClassOf owl:Thing ;
                                                 rdfs:comment "Output is the output of classification model."@en ;
                                                 rdfs:label "Output" .
-
-
-#################################################################
-#    Individuals
-#################################################################
-
-###  https://nobias-project.eu/nobias/CausalRiskDifference
-:CausalRiskDifference rdf:type owl:NamedIndividual ,
-                               :SocioDemographicBiasMeasure ;
-                      rdfs:comment """They define p2c to be:
-
-sum_of s all values S, dec (s) = theta w(s) / sum_of s all values S w(s) 
-
-RDc not close to zero means that there is a bias in decision value due to group membership (causal discrimination) or to covariates that have not been accounted for in the analysis (omitted variable bias)."""@en ;
-                      rdfs:isDefinedBy "Causal Risk Difference"@en ;
-                      :formalization "RDc = p1 − p2c"@en .
-
-
-###  https://nobias-project.eu/nobias/DataCoverage
-:DataCoverage rdf:type owl:NamedIndividual ,
-                       :RepresentationBiasMeasure ;
-              rdfs:isDefinedBy "https://doi.org/10.1145/3588433"@en ;
-              rdfs:label "Data Coverage Measure"@en ;
-              skos:definition "To have enough similar entries (sub-categories) for a particular variable (categoy) in a dataset."@en ;
-              :formalization "cov(q,D) = |G_D(q)|, threshold value k, qu is covered iff cov (q, D) > k."@en .
-
-
-###  https://nobias-project.eu/nobias/Differential_Bias_Embeddings
-:Differential_Bias_Embeddings rdf:type owl:NamedIndividual ,
-                                       :SocioDemographicBiasMeasure ;
-                              rdfs:comment "A preprocessing method for the discovery of the problematic documents in the training corpus that have biases in them and tried to debias the system by perturbing or removing these documents efficiently from the training corpus."@en ;
-                              rdfs:isDefinedBy "http://proceedings.mlr.press/v97/brunet19a.html"@en ;
-                              skos:definition "Differential Bias Embeddings"@en ,
-                                              "Given a word embedding, this method reveals how perturbing the training corpus would affect the resulting embedding bias."@en ;
-                              :formalization "∆pB = B(w) − B( ˜w)"@en .
-
-
-###  https://nobias-project.eu/nobias/Direct_Bias_Embeddings
-:Direct_Bias_Embeddings rdf:type owl:NamedIndividual ,
-                                 :GenderBiasMeasure ,
-                                 [ rdf:type owl:Restriction ;
-                                   owl:onProperty :measures ;
-                                   owl:someValuesFrom :GenderBias
-                                 ] ;
-                        rdfs:isDefinedBy "https://papers.nips.cc/paper_files/paper/2016/hash/a486cd07e4ac3d270571622f4f316ec5-Abstract.html"@en ;
-                        rdfs:label "Direct Bias Embeddings"@en ;
-                        skos:definition "A method to debias word embeddings by proposing a method that respects the embeddings for gender-specific words but debiases embeddings for gender-neutral words."@en ;
-                        :formalization "1 / |N | sum_of w2N |cos( ~>w, g)|c"@en .
-
-
-###  https://nobias-project.eu/nobias/Elmo_Bias_Embeddings
-:Elmo_Bias_Embeddings rdf:type owl:NamedIndividual ,
-                               :GenderBiasMeasure ;
-                      rdfs:isDefinedBy "https://doi.org/10.18653/v1/N19-1064"@en ;
-                      rdfs:label "ELMo Bias Embeddings"@en ;
-                      skos:definition "A new intrinsic analysis of how ELMo represents gender in biased ways."@en .
-
-
-###  https://nobias-project.eu/nobias/ErrorType1Unweighted
-:ErrorType1Unweighted rdf:type owl:NamedIndividual ,
-                               :GenderBiasMeasure ;
-                      rdfs:isDefinedBy "https://doi.org/10.1145/3372923.3404804"@en ;
-                      rdfs:label "Error Type-1 Unweighted"@en ;
-                      skos:definition "This is a type of error that measures names that are tagged as non-PERSON, or not tagged at all. In other words, any name not tagged as a PERSON is considered to be an error"@en ;
-                      :formalization "∑ n∈Nf I(ntype ≠ PERSON ) / |Nf |"@en .
-
-
-###  https://nobias-project.eu/nobias/Error_Type-1_Weighted
-:Error_Type-1_Weighted rdf:type owl:NamedIndividual ,
-                                :GenderBiasMeasure ;
-                       rdfs:comment "Where f reqf (·) returns the frequency of a name in the female census data in a particular year. Similarly, f reqm(·) will yield the frequency of a name in the male census data. Type-1 errors can be sub-divided into Type-2 and Type-3 errors and serve as a super-set for the following types."@en ;
-                       rdfs:isDefinedBy "https://doi.org/10.1145/3372923.3404804"@en ;
-                       rdfs:label "Error Type-1 Weighted"@en ;
-                       skos:definition "This type of error is similar to Error Type-1 Unweighted; however, we considered how frequent the mistaken name is based on census data while calculating the error."@en ;
-                       :formalization "∑ n∈Nf f reqf (ntype ≠ PERSON )  / ∑ n∈Nf f reqf (n)"@en .
-
-
-###  https://nobias-project.eu/nobias/Error_Type-2_Unweighted
-:Error_Type-2_Unweighted rdf:type owl:NamedIndividual ,
-                                  :GenderBiasMeasure ;
-                         rdfs:comment "where ∅ indicates the name is not tagged."@en ;
-                         rdfs:isDefinedBy "https://doi.org/10.1145/3372923.3404804"@en ;
-                         rdfs:label "Error Type-2 Unweighted"@en ;
-                         skos:definition "This is a type of error in which only names that are tagged, but whose tags are non-PERSON are considered to be errors. This measure is similar to precision, where the model is only punished for incorrect retrieval. This error rate reports the percentage of names that are tagged as non-PERSON entities among all the names in a certain year."@en ;
-                         :formalization "∑ n∈Nf I(ntype /∈ {∅, PERSON }) , |Nf |"@en .
-
-
-###  https://nobias-project.eu/nobias/Error_Type-2_Weighted
-:Error_Type-2_Weighted rdf:type owl:NamedIndividual ,
-                                :GenderBiasMeasure ;
-                       rdfs:isDefinedBy "https://doi.org/10.1145/3372923.3404804"@en ;
-                       rdfs:label "Error Type-2 Weighted"@en ;
-                       skos:definition "This type of error is similar to Error Type-2 Unweighted; however, here we considered how frequent the mistaken name was while calculating the error."@en ;
-                       :formalization "∑ n∈Nf f reqf (ntype /∈ {∅, PERSON }), ∑ n∈Nf f reqf (n)"@en .
-
-
-###  https://nobias-project.eu/nobias/Error_Type-3_Unweighted
-:Error_Type-3_Unweighted rdf:type owl:NamedIndividual ,
-                                  :GenderBiasMeasure ;
-                         rdfs:isDefinedBy "https://doi.org/10.1145/3372923.3404804"@en ;
-                         rdfs:label "Error Type-3 Unweighted"@en ;
-                         skos:definition "This is a type of error in which only names that are not tagged are considered to be errors. We do not consider names that are wrongfully tagged to non-PERSON as an error, but only names that are not tagged are considered erroneous. This error rate reports the percentage of names that are not tagged at all among all the names in a certain year."@en ;
-                         :formalization "∑ n∈Nf I(ntype = ∅),  |Nf |"@en .
-
-
-###  https://nobias-project.eu/nobias/Error_Type-3_Weighted
-:Error_Type-3_Weighted rdf:type owl:NamedIndividual ,
-                                :GenderBiasMeasure ;
-                       rdfs:isDefinedBy "https://doi.org/10.1145/3372923.3404804"@en ;
-                       rdfs:label "Error Type-3 Weighted"@en ;
-                       skos:definition "This type of error is similar to Error Type-3 Unweighted; however, we considered how frequent the mistaken name was while calculating the error."@en ;
-                       :formalization "∑ n∈Nf f reqf (ntype = ∅) , ∑n∈Nf f reqf (n)"@en .
-
-
-###  https://nobias-project.eu/nobias/Gender_Bias_Score
-:Gender_Bias_Score rdf:type owl:NamedIndividual ,
-                            :GenderBiasMeasure ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :measures ;
-                              owl:someValuesFrom :GenderBias
-                            ] ;
-                   rdfs:comment "A metric for measuring gender bias in a generated text from a language model based on recurrent neural networks that is trained on a text corpus along with measuring the bias in the training text itself."@en ,
-                                "w is any word in the corpus, f is a set of gendered words (\"female\"), m is a sit of gendered words (\"male\"). The bias measure uses the mean absolute and the standard deviation."@en ;
-                   rdfs:isDefinedBy "https://doi.org/10.1145/3457607"@en ;
-                   rdfs:label "Gender Bias Score"@en ;
-                   :formalization "bias(w) = log ( P(w|f) / P(w|m) )"@en .
-
-
-###  https://nobias-project.eu/nobias/Gender_Bias_vSRL
-:Gender_Bias_vSRL rdf:type owl:NamedIndividual ,
-                           :GenderBiasMeasure ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty :measures ;
-                             owl:someValuesFrom :GenderBias
-                           ] ;
-                  rdfs:isDefinedBy "https://doi.org/10.18653/v1/D17-1323" ;
-                  rdfs:label "Gender Bias vSRL"@en ;
-                  skos:note "The goal is to identify the correlations that are potentially amplified by a learned model. To achieve this, a bias score is defined for a given output, o, with respect to a demographic variable, g; where c(o, g) is the number of occurrences of o and g in a corpus."@en ,
-                            "To evaluate the degree of bias amplification, we propose to compare bias scores on the training set, b∗(o, g), with bias scores on an unlabeled evaluation set of images ˜b(o, g) that has been annotated by a predictor. We assume that the evaluation set is identically distributed to the training set. Therefore, if o is positively correlated with g (i.e,b∗(o, g) > 1/‖G‖) and ˜b(o, g) is larger than b∗(o, g), we say bias has been amplified."@en ;
-                  :formalization "b(o, g) = c(o, g) / ∑ g′∈G c(o, g′) '"@en .
-
-
-###  https://nobias-project.eu/nobias/Gini_coefficient_of_the_in-degree_distribution
-:Gini_coefficient_of_the_in-degree_distribution rdf:type owl:NamedIndividual ,
-                                                         :PopularityBiasMeasure ;
-                                                rdfs:comment "The criteria followed to determine if there is presence of bias is the higher the Gini coefficient, the more skewed or unequal the in-degree distribution across all nodes."@en ;
-                                                rdfs:isDefinedBy "https://doi.org/10.1145/3501247.3531583"@en ;
-                                                rdfs:label "Gini coefficient of the in-degree distribution"@en ;
-                                                skos:definition """The Gini coefficient allows to demonstrate whether popularity bias is exacerbated by recommendation algorithms regardless of the initial conditions of the network structure, or whether certain types of networks are exempt from this bias.
-Gini coefficient of the in-degree distribution"""@en ;
-                                                :formalization "Gini(π^in ) = {sum_of_all  (2_i − n − 1)π_i^in} / {sum_of_all  π_i^in}"@en .
-
-
-###  https://nobias-project.eu/nobias/In-group_links
-:In-group_links rdf:type owl:NamedIndividual ,
-                         :PopularityBiasMeasure ;
-                rdfs:isDefinedBy "https://doi.org/10.1145/3501247.3531583"@en ;
-                rdfs:label "In-group links"@en ;
-                skos:definition "Measures the fraction of links within groups to determine what type of edges are being recommended more often by the recommendation algorithms."@en ;
-                :formalization "I_a = {e_aa} / {e_aa + e_ab}"@en .
-
-
-###  https://nobias-project.eu/nobias/Learned_Latent_Structure
-:Learned_Latent_Structure rdf:type owl:NamedIndividual ,
-                                   :UnderlyingDistributionSkewMeasure ;
-                          rdfs:comment """Consider the problem of binary classification in which we are presented with a set of paired training data samples Dt r ain = {(x(i), y(i))}n i=1 consisting of features x ∈ Rm and labels y ∈ Rd.
-Our goal is to find a functional mapping f : X → Y parameterized by θ which minimizes a certain loss L(θ ) over our entire training dataset."""@en ;
-                          rdfs:isDefinedBy "doi.org/10.1145/3306618.3314243"@en ;
-                          rdfs:label "Learned Latent Structure"@en ;
-                          skos:definition "A tunable algorithm for mitigating the hidden, and potentially unknown, biases within training data. The algorithm fuses the original learning task with a variational autoencoder to learn the latent structure within the dataset."@en ;
-                          :formalization "θ∗ = arg min_θ 1/ n sum_of  Li (θ)"@en .
-
-
-###  https://nobias-project.eu/nobias/LowDegreeNodeBias
-:LowDegreeNodeBias rdf:type owl:NamedIndividual ,
-                            :LinkingBiasMeasure ;
-                   rdfs:isDefinedBy "http://dx.doi.org/10.1145/3341161.3342915"@en ;
-                   rdfs:label "Low-Degree Node Bias"@en ;
-                   skos:definition "In the context of community detection, when theses methods ignore lowly connected users that have few links—by putting them into insignificant small or singleton communities which are then ignored in the study."@en ;
-                   skos:note "|ci| denotes the size of the community ci, and θ is athreshold value that can be treated as a hyperparameter and will be used in our proposed algorithm. We call node n an insignificantly labeled node if:∃ cinsig such that n ∈ cinsig where cinsig is an insignificant community."@en ;
-                   :formalization "C_insig = {ci| where |ci| < θ}"@en .
-
-
-###  https://nobias-project.eu/nobias/Nationality_Group_Bias
-:Nationality_Group_Bias rdf:type owl:NamedIndividual ,
-                                 :NationalityBiasMeasure ;
-                        rdfs:isDefinedBy """Nationality Bias in Text Generation https://aclanthology.org/2023.eacl-main.9
-Narayanan Venkit et al., EACL 2023"""@en ;
-                        rdfs:label "Nationality Group Bias"@en ;
-                        skos:definition "Demographic group bias is measured by using statistical inferences of different demographic synonym groups d_n and check for parity across all the groups and a standard control group C, using the story generation feature of the GPT-2 language model."@en .
-
-
-###  https://nobias-project.eu/nobias/RepresentationRate
-:RepresentationRate rdf:type owl:NamedIndividual ,
-                             :RepresentationBiasMeasure ;
-                    rdfs:isDefinedBy "https://doi.org/10.1145/3588433"@en ;
-                    rdfs:label "RepresentationRate"@en ;
-                    skos:definition "An equal base rate is defined as having an equal number of objects for different subgroups in the dataset."@en .
-
-
-###  https://nobias-project.eu/nobias/Situation_testing_causal_inference
-:Situation_testing_causal_inference rdf:type owl:NamedIndividual ,
-                                             :SocioDemographicBiasMeasure ;
-                                    rdfs:comment """Given a target tuple t with c = c  and e = e  ,  all the tuples are ranked according to their distances to t using a distance function defined on an appropriate subset of nonprotected attributes. Then,  the tuples that are within top-2K highest in the ranking for one-to-one pairing are selected. The selected tuples with c+ are added into set S+ , and the selected
-tuples with c are added into set S . The proportion p 1 of tuples with e+ among the tuples in S+, and the proportion p 2 of tuples with e+ among the tuples in S are compared. The dierence between p 1 and p2 , i.e., p 1  p2 reflects the bias due to the membership to the protected group. If p1  p2 is
-greater than a threshold tau, then t is considered as being discriminated. The value of threshold tau used for discrimination depends on the law."""@en ;
-                                    rdfs:isDefinedBy "https://dl.acm.org/doi/10.5555/3060832.3061001"@en ;
-                                    rdfs:label "Situation Testing Causal Inference"@en ;
-                                    skos:definition "A general technique to capture discrimination based on the legally grounded situation testing methodology."@en .
-
-
-###  https://nobias-project.eu/nobias/Uncovering_Simpson_paradox_for_trends
-:Uncovering_Simpson_paradox_for_trends rdf:type owl:NamedIndividual ,
-                                                :SimpsonsParadoxMeasure ;
-                                       rdfs:comment "The equations hold if the expected value of Y is a monotonically increasing (or decreasing) function of Xp alone, but conditioned on Xc is a monotonically decreasing (resp. increasing) function of Xp , or is constant."@en ,
-                                                    "Y is the dependent variable in the dataset, i.e., an outcome being measured, and as X = {X1, X2, . . . , Xm } the set of m independent variables or features. The goal of the method is to identify pairs of variables (Xp , Xc )—Simpson’s pairs— such that a trend in Y as a function of Xp disappears or reverses when the data is disaggregated by conditioning on Xc ."@en ;
-                                       rdfs:isDefinedBy "https://doi.org/10.1145/3159652.3159684"@en ;
-                                       rdfs:label "Uncovering Simpson paradox for trends"@en ;
-                                       skos:definition "A statistical method to systematically uncover instances of Simpson’s paradox in heterogeneous data."@en ;
-                                       :formalization "dE[Y |Xp = xp ]/dxp < 0, dE[Y |Xp = xp , Xc = xc ]/dxp ≥ 0"@en .
-
-
-###  https://nobias-project.eu/nobias/Visibility_of_the_minority_group
-:Visibility_of_the_minority_group rdf:type owl:NamedIndividual ,
-                                           :RepresentationBiasMeasure ;
-                                  rdfs:isDefinedBy "https://doi.org/10.1145/3501247.3531583"@en ;
-                                  rdfs:label "Visibility of the minority group"@en ;
-                                  skos:definition "Change in visibility by computing prediction{f_m} after and before the recommendations to verify whether the minority group is gaining or losing visibility."@en ;
-                                  :formalization "delta function_fm = prediction{f_m (after)} − prediction{f_m (before)}"@en .
-
-
-###  https://nobias-project.eu/nobias/Sentence_Encoder_Association_Test_(SEAT)
-<https://nobias-project.eu/nobias/Sentence_Encoder_Association_Test_(SEAT)> rdf:type owl:NamedIndividual ;
-                                                                            rdfs:label "Sentence Encoder Association Test (SEAT)"@en .
-
-
-###  https://nobias-project.eu/nobias/Simpson’s_Disaggregation
-<https://nobias-project.eu/nobias/Simpson’s_Disaggregation> rdf:type owl:NamedIndividual ,
-                                                                     :SimpsonsParadoxMeasure ;
-                                                            rdfs:comment """The method takes as input a set of observations of an outcome, Y , and a set of covariates, or features, X ={X1, X2, ..., Xm} associated with it. The approach has three steps. First, it disaggregates data into more homogenous subgroups based on some covariate Xc. Next, it uses a linear
-model to capture trends with respect to some other covariate Xj , both within the subgroups and within the aggregate data.
-Finally, it quantifies how well the models describe the disaggregated data compared to aggregate data to identify the important disaggregations."""@en ;
-                                                            rdfs:isDefinedBy "Nazanin Alipourfard, Peter G. Fennell, and Kristina Lerman. 2018. Using Simpson’s paradox to discover interesting patterns in behavioral data. In Proceedings of the 12th International AAAI Conference on Web and Social Media."@en ;
-                                                            rdfs:label "Simpson’s Disaggregation"@en ;
-                                                            skos:definition "A method for automatically uncovering interesting patterns in data based on Simpson's Paradox."@en .
 
 
 #################################################################

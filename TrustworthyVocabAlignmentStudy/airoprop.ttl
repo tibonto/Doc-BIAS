@@ -1,0 +1,440 @@
+@prefix : <https://w3id.org/airo#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/airo> a owl:Ontology ;
+	terms:contributor "Dave Lewis"^^xsd:string , "Harshvardhan J. Pandit"^^xsd:string ;
+	terms:creator "Delaram Golpayegani"^^xsd:string ;
+	terms:description "AIRO represents AI risk concepts and relations based on the EU AI Act proposal and ISO 31000 standard series."@en ;
+	terms:issued "2023-01-01T09:00:00"^^xsd:dateTime ;
+	terms:license <https://creativecommons.org/licenses/by/4.0/> ;
+	terms:modified "2021-07-01T17:01:00"^^xsd:dateTime ;
+	terms:publisher "ADAPT Centre, Trinity College Dublin"^^xsd:string ;
+	terms:title "AIRO"^^xsd:string ;
+	rdfs:label "AI Risk Ontology"@en ;
+	owl:versionInfo "0.3"^^xsd:decimal .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/dc/terms/contributor
+
+terms:contributor a owl:AnnotationProperty .
+# 
+# http://purl.org/dc/terms/creator
+
+terms:creator a owl:AnnotationProperty .
+# 
+# http://purl.org/dc/terms/description
+
+terms:description a owl:AnnotationProperty .
+# 
+# http://purl.org/dc/terms/issued
+
+terms:issued a owl:AnnotationProperty .
+# 
+# http://purl.org/dc/terms/license
+
+terms:license a owl:AnnotationProperty .
+# 
+# http://purl.org/dc/terms/modified
+
+terms:modified a owl:AnnotationProperty .
+# 
+# http://purl.org/dc/terms/publisher
+
+terms:publisher a owl:AnnotationProperty .
+# 
+# http://purl.org/dc/terms/title
+
+terms:title a owl:AnnotationProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# https://w3id.org/airo#affects
+
+:affects a owl:ObjectProperty ;
+	rdfs:domain :AISystem .
+
+:AISystem a owl:Class .
+
+:affects rdfs:range :AffectedStakeholder .
+
+:AffectedStakeholder a owl:Class .
+
+:affects rdfs:comment "Indicates the stakeholders affected by the AI system"@en ;
+	rdfs:label "affects"@en .
+# 
+# https://w3id.org/airo#conformsToStandard
+
+:conformsToStandard a owl:ObjectProperty ;
+	rdfs:range :Standard .
+
+:Standard a owl:Class .
+
+:conformsToStandard rdfs:comment "Indicates conformance of an entity to a standard"@en ;
+	rdfs:label "conforms to standard"@en .
+# 
+# https://w3id.org/airo#detectsEvent
+
+:detectsEvent a owl:ObjectProperty ;
+	rdfs:subPropertyOf :modifiesEvent ;
+	rdfs:domain :Control .
+
+:Control a owl:Class .
+
+:detectsEvent rdfs:range :Event .
+
+:Event a owl:Class .
+
+:detectsEvent rdfs:comment "Indicates the control used for detecting an event"@en ;
+	rdfs:label "detects event"@en .
+# 
+# https://w3id.org/airo#eliminatesEvent
+
+:eliminatesEvent a owl:ObjectProperty ;
+	rdfs:subPropertyOf :modifiesEvent ;
+	rdfs:domain :Control ;
+	rdfs:range :Event ;
+	rdfs:comment "Indicates the control used for eliminating an event"@en ;
+	rdfs:label "eliminates event"@en .
+# 
+# https://w3id.org/airo#hasAISubject
+
+:hasAISubject a owl:ObjectProperty ;
+	rdfs:comment "Indicates subject of an AI system"@en ;
+	rdfs:label "has AI subject"@en .
+# 
+# https://w3id.org/airo#hasCapability
+
+:hasCapability a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :AICapability .
+
+:AICapability a owl:Class .
+
+:hasCapability rdfs:comment "Specifies capabilities implemented within an AI system to materialise its purposes"@en ;
+	rdfs:label "has capability" .
+# 
+# https://w3id.org/airo#hasComponent
+
+:hasComponent a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :AIComponent .
+
+:AIComponent a owl:Class .
+
+:hasComponent rdfs:comment "Indicates components of an AI system"@en ;
+	rdfs:label "has component"@en .
+# 
+# https://w3id.org/airo#hasConsequence
+
+:hasConsequence a owl:ObjectProperty ;
+	rdfs:domain :Risk .
+
+:Risk a owl:Class .
+
+:hasConsequence rdfs:range :Consequence .
+
+:Consequence a owl:Class .
+
+:hasConsequence rdfs:comment "Specifies consequences caused by materialisation of a risk"@en ;
+	rdfs:label "has consequence" .
+# 
+# https://w3id.org/airo#hasDocumentation
+
+:hasDocumentation a owl:ObjectProperty ;
+	rdfs:range :Document .
+
+:Document a owl:Class .
+
+:hasDocumentation rdfs:comment "Indicates documents related to an entity, e.g. AI system"@en ;
+	rdfs:label "has documentation"@en .
+# 
+# https://w3id.org/airo#hasImpact
+
+:hasImpact a owl:ObjectProperty ;
+	rdfs:domain :Consequence ;
+	rdfs:range :Impact .
+
+:Impact a owl:Class .
+
+:hasImpact rdfs:comment "Specifies impacts caused by materialisation of a consequence"@en ;
+	rdfs:label "has impact"@en .
+# 
+# https://w3id.org/airo#hasImpactOnArea
+
+:hasImpactOnArea a owl:ObjectProperty ;
+	rdfs:domain :Impact ;
+	rdfs:range :AreaOfImpact .
+
+:AreaOfImpact a owl:Class .
+
+:hasImpactOnArea rdfs:comment "Specifies the area that is affected by an AI impact" ;
+	rdfs:label "has impact on area"@en .
+# 
+# https://w3id.org/airo#hasImpactOnStakeholder
+
+:hasImpactOnStakeholder a owl:ObjectProperty ;
+	rdfs:domain :Impact ;
+	rdfs:range :AffectedStakeholder ;
+	rdfs:comment "Specifies stakeholders that are affected by an AI impact"@en ;
+	rdfs:label "has impact on stakeholder"@en .
+# 
+# https://w3id.org/airo#hasLifecyclePhase
+
+:hasLifecyclePhase a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :AILifecyclePhase .
+
+:AILifecyclePhase a owl:Class .
+
+:hasLifecyclePhase rdfs:comment "Indicates the AI system's lifecycle phase"@en ;
+	rdfs:label "has lifecycle phase"@en .
+# 
+# https://w3id.org/airo#hasLikelihood
+
+:hasLikelihood a owl:ObjectProperty ;
+	rdfs:domain :Event ;
+	rdfs:range :Likelihood .
+
+:Likelihood a owl:Class .
+
+:hasLikelihood rdfs:comment "Indicates the probability of occurrence of an event"@en ;
+	rdfs:label "has likelihood"@en .
+# 
+# https://w3id.org/airo#hasPurpose
+
+:hasPurpose a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :Purpose .
+
+:Purpose a owl:Class .
+
+:hasPurpose rdfs:label "Indicates the intended purpose of an AI system."@en , "has purpose"@en .
+# 
+# https://w3id.org/airo#hasRisk
+
+:hasRisk a owl:ObjectProperty ;
+	rdfs:range :Risk ;
+	rdfs:comment "Indicates risks associated with an AI system, an AI component, etc."@en ;
+	rdfs:label "has risk"@en .
+# 
+# https://w3id.org/airo#hasSeverity
+
+:hasSeverity a owl:ObjectProperty ;
+	rdfs:domain _:genid1 .
+
+_:genid1 a owl:Class ;
+	owl:unionOf _:genid3 .
+
+_:genid3 a rdf:List ;
+	rdf:first :Consequence ;
+	rdf:rest _:genid2 .
+
+_:genid2 a rdf:List ;
+	rdf:first :Impact ;
+	rdf:rest rdf:nil .
+
+:hasSeverity rdfs:range :Severity .
+
+:Severity a owl:Class .
+
+:hasSeverity rdfs:comment "Indicates severity of a consequenve or an impact"@en ;
+	rdfs:label "has severity"@en .
+# 
+# https://w3id.org/airo#hasStakeholder
+
+:hasStakeholder a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :Stakeholder .
+
+:Stakeholder a owl:Class .
+
+:hasStakeholder rdfs:comment "Indicates stakeholders of an AI system"@en ;
+	rdfs:label "has stakeholder"@en .
+# 
+# https://w3id.org/airo#hasVersion
+
+:hasVersion a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :Version .
+
+:Version a owl:Class .
+
+:hasVersion rdfs:comment "Indicates the version of an AI system"@en ;
+	rdfs:label "has version"@en .
+# 
+# https://w3id.org/airo#isAppliedWithinDomain
+
+:isAppliedWithinDomain a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :Domain .
+
+:Domain a owl:Class .
+
+:isAppliedWithinDomain rdfs:comment "Specifies the domain an AI system is used within"@en ;
+	rdfs:label "is applied within domain"@en .
+# 
+# https://w3id.org/airo#isFollowedByControl
+
+:isFollowedByControl a owl:ObjectProperty ;
+	rdfs:domain :Control ;
+	rdfs:range :Control ;
+	rdfs:comment "Specifies the order of controls"@en ;
+	rdfs:label "is followed by control"@en .
+# 
+# https://w3id.org/airo#isPartOfControl
+
+:isPartOfControl a owl:ObjectProperty ;
+	rdfs:range :Control ;
+	rdfs:comment "Specifies composition of controls"@en ;
+	rdfs:label "is part of control"@en .
+# 
+# https://w3id.org/airo#isProvidedBy
+
+:isProvidedBy a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :AIProvider .
+
+:AIProvider a owl:Class .
+
+:isProvidedBy rdfs:comment "Indicates provider of an AI system"@en ;
+	rdfs:label "is provided by"@en .
+# 
+# https://w3id.org/airo#isRiskSourceFor
+
+:isRiskSourceFor a owl:ObjectProperty ;
+	rdfs:domain :RiskSource .
+
+:RiskSource a owl:Class .
+
+:isRiskSourceFor rdfs:range :Risk ;
+	rdfs:comment "Specifies risks caused by materialisation of a risk source"@en ;
+	rdfs:label "is risk source for"@en .
+# 
+# https://w3id.org/airo#isUsedBy
+
+:isUsedBy a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :AIUser .
+
+:AIUser a owl:Class .
+
+:isUsedBy rdfs:comment "Indicates user of an AI system"@en ;
+	rdfs:label "is used by"@en .
+# 
+# https://w3id.org/airo#mitigatesEvent
+
+:mitigatesEvent a owl:ObjectProperty ;
+	rdfs:subPropertyOf :modifiesEvent ;
+	rdfs:domain :Control ;
+	rdfs:range :Event ;
+	rdfs:comment "Indicates the control used for mitigating an event"@en ;
+	rdfs:label "mitigates event"@en .
+# 
+# https://w3id.org/airo#modifiesEvent
+
+:modifiesEvent a owl:ObjectProperty ;
+	rdfs:domain :Control ;
+	rdfs:range :Event ;
+	rdfs:comment "Indicates the control used for modification of an event"@en ;
+	rdfs:label "modifies event"@en .
+# 
+# https://w3id.org/airo#producesOutput
+
+:producesOutput a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :Output .
+
+:Output a owl:Class .
+
+:producesOutput rdfs:comment "Specifies an output generated by an AI system"@en ;
+	rdfs:label "produces output"@en .
+# 
+# https://w3id.org/airo#usesTechnique
+
+:usesTechnique a owl:ObjectProperty ;
+	rdfs:domain :AISystem ;
+	rdfs:range :AITechnique .
+
+:AITechnique a owl:Class .
+
+:usesTechnique rdfs:comment "Indicates the AI techniques used in an AI system"@en ;
+	rdfs:label "uses technique"@en .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# https://w3id.org/airo#AICapability
+# 
+# https://w3id.org/airo#AIComponent
+# 
+# https://w3id.org/airo#AILifecyclePhase
+# 
+# https://w3id.org/airo#AIProvider
+# 
+# https://w3id.org/airo#AISystem
+# 
+# https://w3id.org/airo#AITechnique
+# 
+# https://w3id.org/airo#AIUser
+# 
+# https://w3id.org/airo#AffectedStakeholder
+# 
+# https://w3id.org/airo#AreaOfImpact
+# 
+# https://w3id.org/airo#Consequence
+# 
+# https://w3id.org/airo#Control
+# 
+# https://w3id.org/airo#Document
+# 
+# https://w3id.org/airo#Domain
+# 
+# https://w3id.org/airo#Event
+# 
+# https://w3id.org/airo#Impact
+# 
+# https://w3id.org/airo#Likelihood
+# 
+# https://w3id.org/airo#Output
+# 
+# https://w3id.org/airo#Purpose
+# 
+# https://w3id.org/airo#Risk
+# 
+# https://w3id.org/airo#RiskSource
+# 
+# https://w3id.org/airo#Severity
+# 
+# https://w3id.org/airo#Stakeholder
+# 
+# https://w3id.org/airo#Standard
+# 
+# https://w3id.org/airo#Version
+# 
+# Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
